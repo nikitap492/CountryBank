@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="navbar-header">
+        <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        </button>
+        <a href="/" class="navbar-brand">Country Bank</a>
+    </div>
+    <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="/"><i class="fa fa-bank fa-2x"></i></a></li>
+            <li><a href="/personal"><i class="fa fa-home fa-2x"></i></a></li>
+            <li><a href="/business"><i class="fa fa-suitcase fa-2x"></i></a></li>
+            <li><a href="/contact"><i class="fa fa-telegram fa-2x"></i></a></li>
+            <li sec:authorize="isAnonymous()"><a href="/sign"><i class="fa fa-sign-in fa-2x"></i></a></li>
+            <li sec:authorize="isAuthenticated()"><a href="/private"><i class="fa fa-credit-card-alt fa-2x"></i></a>
+            </li>
+            <li sec:authorize="isAuthenticated()"><a href="/logout"><i class="fa fa-sign-out fa-2x"></i></a></li>
+        </ul>
+    </div>
+</div>

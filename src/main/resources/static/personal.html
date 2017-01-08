@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:include="included/head"></head>
+<body>
+
+<section class="navbar navbar-fixed-top custom-navbar" th:include="included/navbar"></section>
+
+<section id="offer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 text-center">
+                <div class="section-title">
+                    <h1 class="heading bold title">For Individual</h1>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="piece scale_animated color1">
+                    <div class="piece_title">
+                        <h1>CREDIT</h1>
+                    </div>
+                    <h2 class="title">Special offer</h2>
+                    <h3>Do you have no enough money to buy house or horse? In our bank you can take credit at low rate
+                        - only 9%.</h3>
+                    <h3><strong>Hurry up!</strong></h3>
+                    <h5>* this offer valid until 6 july</h5>
+                    <button class="btn btn-white scale_animated" id="credit_btn">Take this!</button>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="piece scale_animated color2">
+                    <div class="piece_title">
+                        <h1>SERVICES</h1>
+                    </div>
+                    <h3> Our bank offer assistance to clients for paying other services. Pay easy! </h3>
+                    <ul>
+                        <li><h2>Fines</h2></li>
+                        <li><h2>Debts</h2></li>
+                        <li><h2>Public services</h2></li>
+                    </ul>
+                    <button class="btn btn-on-white scale_animated" id="pay_btn">Pay</button>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="piece scale_animated color1">
+                    <div class="piece_title">
+                        <h1>MONEY TRANSFER</h1>
+                    </div>
+                    <h3> You can transfer your money or replenish current account. Country bank has created all
+                        conditions. </h3>
+                    <h3>It became easier to make transfers</h3>
+                    <button class="btn btn-white scale_animated" id="transfer_btn">Make transfer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section sec:authorize="isAuthenticated()" id="transfer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 text-center">
+                <div class="section-title">
+                    <h1 class="heading bold title">TRANSFER</h1>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <img src="images/transfer.png" class="main-img"/>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <form class="wow fadeInUp" data-wow-delay="0.6s">
+                    <h2 class="heading bold">Transfer information</h2>
+                    <p>Please, enter all information for transfer</p>
+                    <div class="col-md-12 col-sm-12">
+                        <input type="text" class="form-control" placeholder="Bill" name="bill" id="transfer_uuid"/>
+                    </div>
+                    <div class="col-md-12 col-sm-12 ">
+                        <input type="number" class="form-control" placeholder="Quantity" name="quantity"
+                               id="transfer_quantity"/>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <textarea class="form-control" placeholder="Message" rows="5" name="message"
+                                  id="transfer_message"></textarea>
+                    </div>
+                </form>
+                <div class="col-md-offset-4 col-md-8 col-sm-offset-4 col-sm-8">
+                    <button class="btn btn-on-white scale_animated" id="save_transfer">Save Transfer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section sec:authorize="isAuthenticated()" id="pay">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 text-center">
+                <div class="section-title">
+                    <h1 class="heading bold title">SERVICES</h1>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <img src="images/wanted.jpg" class="main-img"/>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <form class="wow fadeInUp" data-wow-delay="0.6s">
+                    <h2 class="heading bold">Payment information</h2>
+                    <h3>Do you want to stay alive? You should pay your debts</h3>
+                    <p>Money will be transferred on the central government bill. 1% commission</p>
+                    <div class="col-md-12 col-sm-12 ">
+                        <input type="number" class="form-control" placeholder="Quantity" name="quantity"
+                               id="pay_quantity"/>
+                    </div>
+                </form>
+                <div class="col-md-offset-4 col-md-8 col-sm-offset-4 col-sm-8">
+                    <button class="btn btn-on-white scale_animated" id="save_pay">Save Payment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="credit" th:include="included/credit"></section>
+
+
+<section id="sign_in" th:include="included/signin" sec:authorize="isAnonymous()"></section>
+<section id="sign_up" th:include="included/signup" sec:authorize="isAnonymous()"></section>
+<section id="congratulation" th:include="included/congratulation" sec:authorize="isAnonymous()"></section>
+<section id="error" th:include="included/error" sec:authorize="isAnonymous()"></section>
+
+<section id="result" th:include="included/result" sec:authorize="isAuthenticated()"></section>
+<section id="confirmation" th:include="included/confirm" sec:authorize="isAuthenticated()"></section>
+
+
+<footer id="footer" th:include="included/footer"></footer>
+
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script sec:authorize="isAnonymous()" src="js/auth.js"></script>
+<script sec:authorize="isAuthenticated()" src="js/personal.js"></script>
+<script src="js/footer.js"></script>
+
+
+</body>
+</html>

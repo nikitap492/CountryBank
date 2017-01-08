@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="row">
+        <div class="login col-md-offset-3 col-sm-12 col-md-8">
+            <div class="col-sm-10 col-md-10">
+                <h3 class="login-heading title" style="float: right"> Registration form</h3>
+            </div>
+            <form method="post" autocomplete="off">
+                <div class=" col-sm-10 col-md-10">
+                    <input type="text" id="email" placeholder="Email" required="required"
+                           onkeyup="validateUser(this.value, id)"/>
+                </div>
+                <div class="col-sm-2 col-md-2">
+                    <i id="email-hint" class="hints inv  fa fa-spinner fa-spin fa-3x"></i>
+                </div>
+                <div class=" col-sm-10 col-md-10">
+                    <input type="text" id="username" placeholder="Username" required="required"
+                           onkeyup="validateUser(this.value, id)"/>
+                </div>
+                <div class="col-sm-2 col-md-2">
+                    <i id="username-hint" class="hints inv  fa fa-spinner fa-spin fa-3x"></i>
+                </div>
+                <div class=" col-sm-10 col-md-10">
+                    <input type="password" id="password" placeholder="Password" required="required"
+                           onkeyup="validateText(this.value, id)"/>
+                </div>
+                <div class="col-sm-2 col-md-2">
+                    <i id="password-hint" class="hints inv  fa fa-close fa-3x"></i>
+                </div>
+
+                <div class="col-sm-12 col-md-12">
+                    <hr/>
+                </div>
+
+                <div class=" col-sm-10 col-md-10">
+                    <input type="text" id="name" placeholder="Name" required="required"
+                           onkeyup="validateText(this.value, id)"/>
+                </div>
+                <div class="col-sm-2 col-md-2">
+                    <i id="name-hint" class="hints inv  fa fa-close fa-3x"></i>
+                </div>
+
+                <div class=" col-sm-10 col-md-10">
+                    <input type="text" id="address" placeholder="Address" required="required"
+                           onkeyup="validateText(this.value, id)"/>
+                </div>
+                <div class="col-sm-2 col-md-2">
+                    <i id="address-hint" class="hints inv  fa fa-close fa-3x"></i>
+                </div>
+                <div class="login-footer">
+                    <div class=" col-md-offset-1 col-md-9">
+                        <a onclick="showLogInForm()" class="link">
+                            Do you have account? Log in
+                        </a>
+
+                        <button class="btn btn-on-white scale_animated btn-right" id="registration_btn">Register
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

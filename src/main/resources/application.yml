@@ -1,0 +1,27 @@
+server:
+  port: 8000
+spring:
+  thymeleaf:
+    cache: false
+    prefix: classpath:/static/
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: false
+    #database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+  mail:
+    host: "smtp.gmail.com"
+    port: 587
+    smtp:
+      auth: true
+    starttls:
+      enable: true
+    username: ${CONFIG_MAIL_USERNAME}
+    password: ${CONFIG_MAIL_PASSWORD}
+logging:
+  level:
+    com.bank: 'debug'
+    org.springframework: 'error'
+    org.hibernate: 'error'
+schedule:
+    check: 0 0 0 * * *

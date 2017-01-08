@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="included/head"></head>
+<body>
+
+<section class="navbar navbar-fixed-top custom-navbar" th:include="included/navbar"></section>
+
+<section id="account">
+    <div class="container wow animated bounceIn">
+        <div class="row">
+            <div class="col-sm-12 col-md-5">
+                <input type="text" id="name" th:placeholder="${account.name}" class="sign-input" readonly="readonly"/>
+            </div>
+            <div class="col-md-2">
+                <a href="/contact"><i class="fa-envelope-o fa fa-5x big_scale_animated"></i></a>
+            </div>
+            <div class="col-sm-12 col-md-5">
+                <input type="text" id="address" th:placeholder="${account.address}" class="sign-input"
+                       readonly="readonly"/>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section id="bills">
+    <div class="container">
+        <div class="row">
+            <div class="wow bounceInRight animated ">
+                <ul th:each="bill : ${bills}">
+                    <li class="col-sm-8 col-sm-offset-2 col-md-offset-1 col-md-4 col-md-offset-1 scale_animated">
+                        <div class="bill"
+                             th:onclick="'lookupMovements(\'' + ${bill.uuid} + '\', ' + ${bill.getCurrent()} + ')'">
+                            <img src="images/credit-card.png" class="main-img"/>
+                            <div>
+                                <h4 class="num" th:text="'Bill : ' + ${bill.uuid}"></h4>
+                            </div>
+                            <h4><strong th:text="${bill.money}"></strong></h4>
+                            <i th:if="${bill.getCurrent()}" class="fa fa-check fa-5x current"></i>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-12 col-md-offset-4 col-md-4">
+                <i class="fa fa-plus-circle fa-5x bill_controller big_scale_animated" id="open-bill-btn"></i>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="result" th:include="included/result"></section>
+
+<section id="movements">
+    <div>
+        <h1>Bill</h1>
+        <hr/>
+        <h2 class="title" id="bill-uuid"></h2>
+        <div>
+            <button id="current-setter-btn" class="btn btn-white" onclick="setCurrent()">Set As Current</button>
+        </div>
+        <hr/>
+    </div>
+    <div id="mov" class="container"></div>
+</section>
+
+<section id="confirmation" th:include="included/confirm"></section>
+<footer id="footer" th:include="included/footer"></footer>
+
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/personal.js"></script>
+<script src="js/footer.js"></script>
+
+</body>
+</html>

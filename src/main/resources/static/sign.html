@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="included/head"></head>
+<body onload="loadPage()">
+
+<section class="navbar navbar-fixed-top custom-navbar" th:include="included/navbar"></section>
+
+<section id="result" th:include="included/result"></section>
+<section id="sign_up" th:include="included/signup"></section>
+<section id="congratulation" th:include="included/congratulation"></section>
+<section id="error" th:include="included/error"></section>
+<section id="forget" th:include="included/forget"></section>
+<section id="sign_in" th:include="included/signin"></section>
+<footer id="footer" th:include="included/footer"></footer>
+
+
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/footer.js"></script>
+
+</body>
+</html>

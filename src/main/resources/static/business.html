@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:include="included/head"></head>
+<body>
+
+<section id="navbar" class="navbar navbar-fixed-top custom-navbar" th:include="included/navbar"></section>
+
+
+<section id="offer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="section-title title">
+                    <h1 class="heading bold title">For business</h1>
+                </div>
+                <div class="col-md-6 col-sm-12" id="deposit_btn">
+                    <div class="b_offer color1 scale_animated">
+                        <div class="b_title">Deposit</div>
+                        <div class="num"> 4<span class="per">   %</span></div>
+                        <div class="descr">
+                            <p>Are you looking for place where you can save your money?</p>
+                            <p>We have the best security system</p>
+                            <h4>Create deposit and EARN! Put your money in country bank </h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-12" id="credit_btn">
+                    <div class="b_offer color2 scale_animated">
+                        <div class="b_title">Credit</div>
+                        <div class="num"> 15<span class="per">  %</span></div>
+                        <div class="descr">
+                            <p>Your company is losing dollars?</p>
+                            <p>You could change situation. </p>
+                            <h3>Take a credit!</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6 wow fadeInDown animated"
+                     data-wow-delay="0.6s"
+                     style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp;">
+                    <h2 class="title">For investors</h2>
+                    <hr/>
+                    <h4>If you have any question, please contact us </h4>
+                    <form action="/contact" style="padding-top: 10px">
+                        <button class="btn btn-on-white scale_animated">Contact</button>
+                    </form>
+                </div>
+
+                <div sec:authorize="isAuthenticated()" class="col-md-5 col-sm-5 wow fadeInDown animated"
+                     data-wow-delay="0.6s"
+                     style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp;">
+                    <h2 class="title">Subscribe</h2>
+                    <hr/>
+                    <h4>We are going to expand our offers in this area</h4>
+                    <h4>Bank will make more services for companies</h4>
+                    <button class="btn btn-on-white scale_animated" id="subscribe-btn">Subscribe</button>
+                    <button class="btn btn-on-white scale_animated" id="unfollow-btn">Unfollow</button>
+                </div>
+                <div class="col-md-1 hint-img-container">
+                    <i class="subscribed animated fadeIn  fa fa-check fa-5x" style="display: none"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section sec:authorize="isAuthenticated()" id="credit" th:include="included/credit"></section>
+
+<section sec:authorize="isAuthenticated()" id="deposit">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 text-center">
+                <div class="section-title">
+                    <h1 class="heading bold title">DEPOSIT</h1>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <img src="images/Save_money-updated.png" class="main-img"/>
+            </div>
+
+            <div class="col-md-6  col-sm-12">
+                <h2>The most protected bank in the world!</h2>
+                <h4>Put your money and do not worry that you may be robbed</h4>
+                <input type="number" class="form-control" placeholder="Money" id="deposit_quantity"/>
+                <input type="number" class="form-control" placeholder="Number of months" id="deposit_months"/>
+                <button class="btn btn-on-white scale_animated" id="save_deposit">Save Deposit</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section id="sign_in" th:include="included/signin" sec:authorize="isAnonymous()"></section>
+<section id="sign_up" th:include="included/signup" sec:authorize="isAnonymous()"></section>
+<section id="congratulation" th:include="included/congratulation" sec:authorize="isAnonymous()"></section>
+<section id="error" th:include="included/error" sec:authorize="isAnonymous()"></section>
+<section id="result" th:include="included/result" sec:authorize="isAuthenticated()"></section>
+
+<section id="confirmation" th:include="included/confirm" sec:authorize="isAuthenticated()"></section>
+<footer id="footer" th:include="included/footer"></footer>
+
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/subscribe.js"></script>
+<script sec:authorize="isAuthenticated()" src="js/business.js"></script>
+<script sec:authorize="isAnonymous()" src="js/auth.js"></script>
+<script src="js/footer.js"></script>
+
+</body>
+</html>

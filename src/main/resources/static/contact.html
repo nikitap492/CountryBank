@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      lang="en">
+<head th:include="included/head"></head>
+<body>
+
+<section class="navbar navbar-fixed-top custom-navbar" th:include="included/navbar"></section>
+
+<section id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 text-center">
+                <div class="section-title">
+                    <h1 class="heading bold title">Contact information</h1>
+                    <h3>If you want to invest in country bank or you need support, please contact us</h3>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 contact-info wow fadeInUpBig animated">
+                <h2 class="heading bold title">CONTACT INFO</h2>
+                <p>You can contact with us by phone or email</p>
+                <div class="col-md-6 col-sm-4">
+                    <p>CountryBank@company.com</p>
+                </div>
+                <div class="col-md-6 col-sm-4">
+                    <p>001-122-2221 | 001-001-2000</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 wow fadeInDownBig animated">
+                <form action="#" method="get" class="wow fadeInUp" data-wow-delay="0.6s">
+                    <div class="col-md-6 col-sm-6">
+                        <input sec:authorize="isAnonymous()" type="text" class="form-control" placeholder="Name"
+                               name="name" id="contact-name"/>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <input sec:authorize="isAnonymous()" type="email" class="form-control" placeholder="Email"
+                               name="email" id="contact-email"/>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <textarea class="form-control" placeholder="Message" rows="7" name="message"
+                                  id="contact-text"></textarea>
+                    </div>
+                    <div class="col-md-offset-4 col-md-8 col-sm-offset-4 col-sm-8">
+                    </div>
+                </form>
+                <button id="contact-msg" class="btn btn-on-white scale_animated">Send Message</button>
+            </div>
+        </div>
+        <div>
+            <h2 id="error-msg"></h2>
+        </div>
+        <div id="contact-success" class="fadeInUpBig wow animated" style="display: none">
+            <img src="images/index.png"/>
+            <h1>Successful!</h1>
+        </div>
+    </div>
+</section>
+<footer id="footer" th:include="included/footer"></footer>
+
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/contact.js"></script>
+<script src="js/footer.js"></script>
+
+</body>
+</html>

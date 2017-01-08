@@ -1,0 +1,724 @@
+/* ==========================================================================
+common
+========================================================================== */
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    background: #ffffff;
+    font-weight: 400;
+    position: relative;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+h1, h2 {
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+h1 {
+    font-size: 52px;
+}
+
+h2 {
+    font-size: 38px;
+}
+
+h3 {
+    font-size: 24px;
+}
+
+p {
+    line-height: 28px;
+    font-size: 15px;
+}
+
+a {
+    outline: none !important;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.item img {
+    width: 100%;
+}
+
+.section-title {
+    padding-bottom: 32px;
+}
+
+section {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    text-align: center;
+}
+
+#credit, #transfer, #pay, #result, #sign_up, #congratulation,
+#error, #movements, #confirmation, #deposit, #sign_in, #forget {
+    display: none;
+}
+
+.btn {
+    background: #00c3ff;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 16px 60px;
+    transition: all 0.4s ease-in-out;
+    margin-top: 20px;
+    letter-spacing: 1px;
+}
+
+.btn:focus {
+    background-color: #00a7ff;
+    border-color: #0083cc;
+}
+
+.btn:active {
+    background-color: #0083cc;
+    border-color: #0083cc;
+}
+
+.btn:hover {
+    background-color: #fff;
+    color: #00c3ff;
+    border-color: #00c3ff;
+}
+
+.btn:not(:hover), .btn:not(:focus), .btn:not(:active) {
+    color: #fff;
+    background: #00c3ff;
+}
+
+.btn-on-white {
+    border: 2px solid #00c3ff;
+}
+
+.btn-on-white:hover {
+    border: 2px solid #00c3ff;
+}
+
+.btn-white, .btn-white:not(:hover), .btn-white:not(:focus), .btn-white:not(:active) {
+    color: #00c3ff;
+    background: #fff;
+}
+
+form {
+    padding-top: 60px;
+}
+
+.form-control {
+    box-shadow: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    transition: all 0.4s ease-in-out;
+    border: 1px solid #6c7c6e !important;
+}
+
+#subscribe, #movements, footer {
+    background-color: #121116;
+    color: #ffffff;
+}
+
+#personal .img_per {
+    width: 255px;
+    height: 155px;
+}
+
+.title {
+    text-transform: uppercase;
+    font-weight: 800;
+}
+
+.title-color {
+    color: #00c3ff;
+    font-weight: 900;
+}
+
+#confirmation {
+    z-index: 20;
+    padding: 0px;
+}
+
+.confirmation {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -300px;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+}
+
+.main-img {
+    height: 400px;
+    width: auto;
+}
+
+input[type='text'], input[type='password'], input[type='email'], input[type='number'] {
+    background: #fff;
+    border: 2px solid #121116;
+    color: #121116;
+    letter-spacing: 1px;
+    text-indent: 5%;
+    border-radius: 5px 5px 5px 5px;
+    width: 100%;
+    padding: 20px 7px;
+    margin-top: 3px;
+    font-size: 18px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -moz-transition: background-color 0.5s ease-in-out;
+    -o-transition: background-color 0.5s ease-in-out;
+    -webkit-transition: background-color 0.5s ease-in-out;
+    transition: background-color 0.5s ease-in-out;
+}
+
+input[type='number'] {
+    padding: 0px;
+}
+
+input[type='text']:hover, input[type='password']:hover,
+input[type='text']:focus, input[type='password']:focus,
+input[type='email']:focus, input[type='email']:focus,
+input[type='number']:focus, input[type='number']:focus {
+    background: rgba(16, 255, 253, 0.32);
+}
+
+input[type=checkbox] {
+    display: none
+}
+
+input[type=checkbox] + label:before {
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f096";
+    letter-spacing: 10px;
+}
+
+input[type=checkbox]:checked + label:before {
+    content: "\f046";
+    letter-spacing: 10px;
+}
+
+@font-face {
+    font-family: JosefinSlab-SemiBoldItalic;
+    src: url(../fonts/JosefinSlab-SemiBoldItalic.ttf);
+}
+
+@font-face {
+    font-family: JosefinSlab-Bold;
+    src: url(../fonts/JosefinSlab-Bold.ttf);
+}
+
+@font-face {
+    font-family: JosefinSlab-Regular;
+    src: url(../fonts/JosefinSlab-Regular.ttf);
+}
+
+body {
+    font-family: JosefinSlab-Bold;
+}
+
+h2, h3 {
+    font-family: JosefinSlab-Regular;
+}
+
+h4, h5, h6, a {
+    font-family: JosefinSlab-SemiBoldItalic;
+}
+
+body::-webkit-scrollbar {
+    width: 1em;
+}
+
+body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #1a1a1a;
+    outline: 1px solid slategrey;
+}
+
+/* ==========================================================================
+navigation section
+========================================================================== */
+
+#homeCarousel {
+    margin-top: 70px;
+}
+
+.navbar {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.custom-navbar {
+    background-color: #121116;
+    border-bottom-color: #323135;
+    border-bottom-width: 3px;
+}
+
+.custom-navbar * {
+    color: #fff;
+    font-weight: 600;
+}
+
+.navbar i {
+    background-color: transparent;
+    color: #fff;
+}
+
+.custom-navbar .navbar-brand {
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.custom-navbar .navbar-brand:hover {
+    color: #00a7ff;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.custom-navbar .nav li a {
+    font-size: 14px;
+    -moz-transition: width, 0.2s;
+    -o-transition: width, 0.2s;
+    -webkit-transition: width, 0.2s;
+    transition: width, 0.2s;
+}
+
+.nav li a:hover, .nav li a:focus {
+    background-color: #00a7ff;
+}
+
+.nav li a:after {
+    background-color: #0083cc;
+}
+
+.navbar-brand {
+    -moz-transition: width, 0.3s;
+    -o-transition: width, 0.3s;
+    -webkit-transition: width, 0.3s;
+    transition: width, 0.3s;
+}
+
+/* ==========================================================================
+Footer
+========================================================================== */
+
+#footer {
+    width: 100%;
+}
+
+.social i {
+    color: #fff;
+    -moz-transition: width, 0.3s;
+    -o-transition: width, 0.3s;
+    -webkit-transition: width, 0.3s;
+    transition: width, 0.3s;
+}
+
+.social i:hover, .social i:focus {
+    color: #00a7ff;
+}
+
+/* ==========================================================================
+offer section
+========================================================================== */
+
+#offer .piece {
+    box-shadow: 0px 2px 8px 0px rgba(50, 50, 50, 0.20);
+    padding-top: 40px;
+    padding-bottom: 80px;
+    margin-bottom: 32px;
+    border-radius: 2px;
+    border-color: #323135;
+    border: 2px solid;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #ffffff;
+}
+
+#offer .piece span {
+    font-size: 16px;
+}
+
+#offer .piece .piece_title {
+    font-weight: 300;
+    letter-spacing: 2px;
+    padding: 30px;
+    margin-bottom: 20px;
+}
+
+#offer h2 {
+    font-size: 30px;
+    padding: 0;
+}
+
+#offer .piece ul {
+    padding: 0px;
+}
+
+#offer .piece ul li {
+    display: block;
+    font-weight: 500;
+}
+
+#offer .piece h5 {
+    padding: 15px;
+}
+
+/* ==========================================================================
+Contact section
+========================================================================== */
+
+.special {
+    color: #f12323;
+}
+
+@media (min-width: 768px) {
+    .piece {
+        height: 600px;
+    }
+}
+
+#contact h2 {
+    padding-bottom: 20px;
+}
+
+#contact h3 {
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+#contact .medium-icon {
+    padding-top: 10px;
+    padding-right: 10px;
+}
+
+#contact .contact-info div {
+    padding-top: 14px;
+    padding-bottom: 14px;
+}
+
+/* ==========================================================================
+Carousel section
+========================================================================== */
+
+.carousel-indicators li {
+    height: 15px;
+    width: 15px;
+    border-radius: 15px;
+    margin: 0px;
+}
+
+.carousel-indicators .active {
+    height: 15px;
+    margin: 0px;
+    width: 15px;
+    border-radius: 15px;
+    background-color: #00a7ff;
+}
+
+.carousel-home .carousel-control {
+    background: #121116;
+    height: 300px;
+    width: 80px;
+    top: 50%;
+    margin-top: -140px;
+    -moz-transition: width, 0.3s;
+    -o-transition: width, 0.3s;
+    -webkit-transition: width, 0.3s;
+    transition: width, 0.3s;
+}
+
+.carousel-home .carousel-control .fa {
+    font-size: 2.5em;
+    padding-top: 110px;
+}
+
+.carousel-home .carousel-control:hover {
+    margin-top: -165px;
+    width: 100px;
+    height: 350px;
+    padding-top: 30px;
+}
+
+/* ==========================================================================
+Result section
+========================================================================== */
+
+#result_container {
+    top: 50%;
+}
+
+/* ==========================================================================
+Sign in  section
+========================================================================== */
+
+input:-moz-placeholder, textarea:-moz-placeholder {
+    font-family: JosefinSlab-Regular;
+    color: #323135;
+    font-size: 18px;
+}
+
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+    font-family: JosefinSlab-Regular;
+    color: #323135;
+    font-size: 18px;
+}
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+    font-family: JosefinSlab-Regular;
+    color: #323135;
+    font-size: 18px;
+}
+
+.login-footer {
+    margin: 20px 0;
+    width: 100%;
+    text-align: left;
+}
+
+.btn-right {
+    float: right;
+}
+
+.link {
+    font-size: 12px;
+    font-weight: 800;
+    color: #323135;
+    text-decoration: none;
+}
+
+.link:hover {
+    color: #323135;
+}
+
+.inv {
+    display: none !important;
+}
+
+.sign-msg {
+    display: none;
+}
+
+.fa-close {
+    color: red;
+}
+
+.fa-check {
+    color: green;
+}
+
+/* ==========================================================================
+Subscribe section
+========================================================================== */
+
+.subscribe {
+    border: 3px solid #fff;
+    color: #fff;
+    height: 50px;
+    text-indent: 40px;
+    width: 60%;
+}
+
+#subscribe-email {
+    width: 70%;
+    padding: 10px 7px;
+    height: 56px;
+    border: none;
+    border-radius: 5px 0 0 5px;
+}
+
+#subscribe-email:focus {
+    background: #fff;
+}
+
+.subscribe-btn {
+    height: 56px;
+    padding: 10px 15px;
+    width: 25%;
+    margin: 0px;
+    border-radius: 0 5px 5px 0;
+}
+
+.hint-img-container {
+    overflow: hidden;
+}
+
+.hint-img {
+    float: right;
+    display: none;
+}
+
+#subscribe .fa {
+    display: none;
+    color: #ffffff;
+}
+
+/* ==========================================================================
+Result section
+========================================================================== */
+.b_offer {
+    padding: 25px;
+    color: #FFF;
+    text-align: center;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.b_offer .b_title {
+    text-transform: uppercase;
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.b_offer .num {
+    font-size: 52px;
+    font-weight: 400;
+    margin: 10px 0;
+}
+
+.b_offer .descr {
+    color: #FFF;
+    opacity: 0.8;
+}
+
+.b_offer .num .per {
+    display: inline-block;
+    font-size: 30px;
+    vertical-align: baseline;
+}
+
+.color2 {
+    background-color: #121116;
+}
+
+.color1 {
+    background-color: #009bcd;
+    color: #ffffff;
+}
+
+/* Animation */
+
+.scale_animated {
+    -moz-transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.scale_animated:hover {
+    -moz-transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+    -o-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+    transform: scale(1.02);
+    z-index: 2;
+}
+
+.big_scale_animated {
+    -moz-transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.big_scale_animated:hover {
+    -moz-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+    z-index: 2;
+}
+
+/* ==========================================================================
+Private section
+========================================================================== */
+#bills div,
+#account div {
+    animation-duration: 2s;
+    -webkit-animation-duration: 2s;
+}
+
+#account {
+    padding-bottom: 0px;
+}
+
+#bills {
+    padding-top: 0px;
+}
+
+.bill {
+    padding: 10px;
+    position: relative;
+    padding-bottom: 300px;
+}
+
+.bill img {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.bill h4 {
+    position: absolute;
+    z-index: 10;
+    top: 220px;
+    left: 20px;
+}
+
+.bill h4 strong {
+    font-weight: 700;
+    font-size: 50px;
+}
+
+.bill .num {
+    color: #fff;
+    top: 120px;
+    left: 15px
+}
+
+.bill .current {
+    color: #2b2b2b;
+    position: absolute;
+    top: 205px;
+    left: 275px;
+}
+
+.movement {
+    background: #121116;
+    border-radius: 30px;
+}
+
+.bill_controller {
+    cursor: pointer;
+    padding-top: 100px;
+}
+
+.fa-envelope-o {
+    color: #323135;
+}
+
+.fa-envelope-o:hover {
+    color: #121116;
+}

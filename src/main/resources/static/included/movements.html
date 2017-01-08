@@ -1,0 +1,31 @@
+<div th:fragment="movementsList">
+    <div th:unless="${#lists.isEmpty(movements)}">
+        <h2 class="title">Bill's transactions</h2>
+        <ul th:each="movement : ${movements}">
+            <li>
+                <div class="row">
+                    <div class="movement">
+                        <div th:switch="${movement.direction}" class="col-md-2">
+                            <img th:case="${T(com.bank.domain.services.Direction).OUT}"
+                                 src="../images/arrow-down_red.png"/>
+                            <img th:case="${T(com.bank.domain.services.Direction).IN}"
+                                 src="../images/arrow-up_green.png"/>
+                        </div>
+                        <div class="col-md-2">
+                            <h4 th:text="'Quantity : ' + ${movement.quantity}"></h4>
+                        </div>
+                        <div class="col-md-3">
+                            <h4 th:text="${#dates.format(movement.date, 'dd MMMM yyyy HH:mm:ss')}"></h4>
+                        </div>
+                        <div class="col-md-5">
+                            <h4 th:text="${movement.message}"></h4>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div th:if="${#lists.isEmpty(movements)}">
+        <h2 class="title">Bill has no transaction</h2>
+    </div>
+</div>

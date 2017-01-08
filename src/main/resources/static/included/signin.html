@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row">
+        <div class="login col-md-offset-3 col-sm-12 col-md-6">
+            <h3 class="login-heading title" style="float: right"> Please, log in</h3>
+            <form method="post" action="/sign" autocomplete="off">
+                <input type="text" name="login" id="login" placeholder="Username" required="required"/>
+                <input type="password" name="pass" id="pass" placeholder="Password" required="required"/>
+                <div class="login-footer">
+                    <div class="col-sm-6">
+                        <div><a onclick="showForget()" class="link"> Forget? </a></div>
+                        <div>
+                            <a onclick="showRegistration()" class="link">
+                                Click the link for registration
+                            </a>
+                        </div>
+                        <div class="remember-me">
+                            <input name="remember-me" id="remember-me" type="checkbox"/><label class="link"
+                                                                                               for="remember-me">Remember
+                            me</label>
+                        </div>
+                    </div>
+                    <button class="btn btn-right btn-on-white scale_animated">Log in</button>
+                </div>
+            </form>
+            <div id="error-login-msg" class="col-md-12 col-sm-12 animated sign-msg slideInDown">
+                <h3 class="login-heading title">Wrong password or login</h3>
+            </div>
+        </div>
+    </div>
+</div>
