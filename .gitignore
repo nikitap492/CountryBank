@@ -1,4 +1,4 @@
 
-Будет удалено .gradle/
-Будет удалено .idea/
-Будет удалено build/
+/.gradle/
+/.idea/
+build/
