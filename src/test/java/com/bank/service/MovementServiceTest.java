@@ -30,14 +30,16 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-
+@SpringBootTest
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = Application.class, initializers = ConfigFileApplicationContextInitializer.class)
+@TestPropertySource("classpath:test.properties")
 public class MovementServiceTest {
 
-    static Bill bankBill;
-    static Bill govBill;
+    private static Bill bankBill;
+    private static Bill govBill;
 
     @Autowired
-    @Spy
     private MovementService movementService;
 
     @Autowired
@@ -82,15 +84,6 @@ public class MovementServiceTest {
         assertEquals(bartMov, movementService.findById(bartMov.getId()));
     }
 
-
-    @Test(expected = IllegalArgumentException.class)
-    public void shouldThrowException() {
-        Double money = jimmyBill.getMoney();
-        Double expensive = 2 * money;
-        Movement movement = new Movement(jimmyBill, OUT, expensive);
-        movementService.save(movement);
-    }
-
     @Test
     public void shouldMakeTransfer() {
         double money = 200.0;
@@ -111,8 +104,16 @@ public class MovementServiceTest {
         movementService.makePay(bartBill, money);
         System.out.println(govBill.getMoney() - govMoneyBefore);
         assertTrue(compare(bartMoneyBefore - bartBill.getMoney(), money + 0.01 * money) == 0);
-        assertTrue(compare(bankBill.getMoney() - bankMoneyBefore, 0.01 * money) == 0);
-        assertTrue(compare(govBill.getMoney() - govMoneyBefore, money) == 0);
+        assertTrue(compare(billService.findByUuid(BillService.bankUUID).getMoney()
+                - bankMoneyBefore, 0.01 * money) == 0);
+        assertTrue(compare(billService.findByUuid(BillService.governmentUUID).getMoney()
+                - govMoneyBefore, money) == 0);
+    }
+
+    @Test
+    public void shouldFindById(){
+        Movement byId = movementService.findById(bartMov.getId());
+        assertEquals(bartMov, byId);
     }
 
 }

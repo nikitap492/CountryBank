@@ -17,15 +17,26 @@ public class CreditValidator {
     /**
      * Constants of personal and business crediting.
      */
-    private static final double PERSONAL_MAX = 500d;
-    private static final double PERSONAL_MIN = 20d;
-    private static final double BUSINESS_MAX = 2300d;
-    private static final double BUSINESS_MIN = 500d;
-
+    static final double PERSONAL_MAX = 500d;
+    static final double PERSONAL_MIN = 20d;
+    static final double BUSINESS_MAX = 2300d;
+    static final double BUSINESS_MIN = 500d;
     /**
      * Credit maximum in month
      */
-    private static final int MAX_MONTHS = 40;
+    static final int MAX_MONTHS = 40;
+    /**
+     * Errors
+     */
+    static final String INCORRECT_WITHDRAWS =  "Incorrect input of withdraws";
+    static final String INCORRECT_TYPE= "Incorrect type of credit";
+    static final String NOT_ENOUGH_MONEY = "You do not have enough money";
+    static final String LESS_THEN_PERSONAL_MIN = "Please enter more money than " + PERSONAL_MIN;
+    static final String LESS_THEN_BUSINESS_MIN = "Too small sum for business credit. You should take personal credit";
+    static final String MORE_THEN_PERSONAL_MAX = String.format("Maximum credit money is %1$,.2f .\n May be you already have many credits", PERSONAL_MAX);
+    static final String MORE_THEN_BUSINESS_MAX = String.format("Maximum credit money is %1$,.2f .\n May be you already have many credits", BUSINESS_MAX);
+    static final String MORE_THEN_MAX_MONTHS = "Maximum of months is " + MAX_MONTHS;
+
 
     @Autowired
     private CreditService service;
@@ -41,10 +52,10 @@ public class CreditValidator {
         try {
             int i = Integer.parseInt(num);
             if (i > MAX_MONTHS)
-                result.setError("Maximum of months is " + MAX_MONTHS);
+                result.setError(MORE_THEN_MAX_MONTHS);
             else result.setEntity(i);
         } catch (IllegalArgumentException e) {
-            result.setError("Incorrect input of withdraws ");
+            result.setError(INCORRECT_WITHDRAWS);
         }
         return result;
     }
@@ -61,7 +72,7 @@ public class CreditValidator {
             Integer i = Integer.parseInt(type);
             result.setEntity(CreditType.getType(i));
         } catch (IllegalArgumentException e) {
-            result.setError("Incorrect type of credit");
+            result.setError(INCORRECT_TYPE);
         }
         return result;
     }
@@ -69,7 +80,7 @@ public class CreditValidator {
     /**
      * {@link Double} type validation for money
      */
-    public ValidationResult<Double> validateMoney(String money) {
+    ValidationResult<Double> validateMoney(String money) {
         return validateDouble(money, "money");
     }
 
@@ -105,19 +116,19 @@ public class CreditValidator {
         }
         switch (creditType.getEntity()) {
             case CREDIT_FOR_PERSONAL:
-                if (m.getEntity() < PERSONAL_MIN) credit.setError("Please enter more money than " + PERSONAL_MIN);
+                if (m.getEntity() < PERSONAL_MIN) credit.setError(LESS_THEN_PERSONAL_MIN);
                 else if (service.sumAllCreditsByAccount(bill.getAccount()) > PERSONAL_MAX || m.getEntity() > PERSONAL_MAX)
-                    credit.setError("Maximum credit money is " + PERSONAL_MAX + ".\n May be you already have many credits ");
+                    credit.setError(MORE_THEN_PERSONAL_MAX);
                 break;
             case CREDIT_FOR_BUSINESS:
                 if (m.getEntity() < BUSINESS_MIN)
-                    credit.setError("Too small sum for business credit. You should take personal credit");
+                    credit.setError(LESS_THEN_BUSINESS_MIN);
                 if (service.sumAllCreditsByAccount(bill.getAccount()) > BUSINESS_MAX || m.getEntity() > BUSINESS_MAX)
-                    credit.setError("Maximum credit money is " + BUSINESS_MAX + ".\n May be you already have many credits ");
+                    credit.setError(MORE_THEN_BUSINESS_MAX);
                 break;
             case DEPOSIT_FOR_BUSINESS:
                 if (m.getEntity() > bill.getMoney()) {
-                    credit.setError("You do not have enough money");
+                    credit.setError(NOT_ENOUGH_MONEY);
                 }
         }
         if (!credit.hasError()) {

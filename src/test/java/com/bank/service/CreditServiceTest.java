@@ -30,7 +30,10 @@ import static java.time.LocalDate.*;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-
+@SpringBootTest
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = Application.class, initializers = ConfigFileApplicationContextInitializer.class)
+@TestPropertySource("classpath:test.properties")
 public class CreditServiceTest {
 
     private static final Logger log = LoggerFactory.getLogger(CreditServiceTest.class);

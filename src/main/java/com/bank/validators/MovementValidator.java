@@ -16,17 +16,21 @@ public class MovementValidator {
     @Autowired
     private BillService service;
 
+    static final String INCORRECT_UUID = "You have inputted incorrect bill's UUID";
+    static final String NOT_ENOUGH_MONEY = "Your have not enough money for this transaction";
+    private static final String BILL_NOT_EXIST = "Bill was not found by UUID";
+
     /**
      * @param current is current bill of account
      *                Methods validateResetPasswordToken {@code validateMoney} for
      * @param money   is less or equal than @param current has
-     * @return {@link ValidationResult<>}
+     * @return {@link ValidationResult<Double>}
      */
     public ValidationResult<Double> validatePay(Bill current, String money) {
         ValidationResult<Double> result = validateMoney(money);
         if (!result.hasError() && !diffValidation(current, result.getEntity())) {
-            String err = "Your have not enough money for this transaction";
-            result.setError(err);
+            result.setError(NOT_ENOUGH_MONEY);
+            log.debug(NOT_ENOUGH_MONEY + " for bill " + current);
         }
         return result;
     }
@@ -65,9 +69,8 @@ public class MovementValidator {
                 result.setEntity(new MovementValidationAnswer(billResult.getEntity(), m));
                 log.debug("Data have no errors");
             } else {
-                String err = "Your have not enough money for this transaction";
-                result.setError(err);
-                log.debug(err);
+                result.setError(NOT_ENOUGH_MONEY);
+                log.debug(NOT_ENOUGH_MONEY + " for bill " + current);
             }
         }
         return result;
@@ -76,23 +79,23 @@ public class MovementValidator {
     /**
      * Method trying to find bill by
      *
-     * @param uuid
+     * @param uuid is bill identifier
      * @return {@link ValidationResult<Bill>}
      */
-    public ValidationResult<Bill> validateBill(String uuid) {
+    ValidationResult<Bill> validateBill(String uuid) {
         ValidationResult<Bill> result = new ValidationResult<>();
         try {
             Bill bill = service.findByUuid(uuid);
             if (bill != null) {
                 result.setEntity(bill);
-            } else result.setError("Bill was not found by UUID");
+            } else result.setError(BILL_NOT_EXIST);
         } catch (IllegalArgumentException e) {
-            result.setError("You have inputted incorrect bill's UUID");
+            result.setError(INCORRECT_UUID);
         }
         return result;
     }
 
-    public ValidationResult<Double> validateMoney(String money) {
+    ValidationResult<Double> validateMoney(String money) {
         return Validator.validateDouble(money, "money");
     }
 
@@ -103,7 +106,7 @@ public class MovementValidator {
      * @param money for transaction
      */
 
-    public boolean diffValidation(Bill bill, Double money) {
+    boolean diffValidation(Bill bill, Double money) {
         return bill.getMoney() - money >= 0;
     }
 }

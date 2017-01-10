@@ -23,6 +23,14 @@ public class UserValidator {
     private static final String USERNAME_REGEX = "^(?=.*[a-z])[a-z0-9]{3,}";
     private static final Pattern pattern = Pattern.compile(USERNAME_REGEX);
 
+    static final String NULL = "You have not entered username or email";
+    static final String SMALL_PASSWORD = "Your password has small length";
+    static final String INCORRECT_USERNAME = "Incorrect username";
+    static final String INCORRECT_EMAIL = "Incorrect email";
+    static final String USERNAME_ALREADY_EXIST = "Username already had been registered";
+    static final String EMAIL_ALREADY_EXIST = "Email already had been registered";
+    static final String SMALL_ADDRESS_OR_NAME = "Address or Name has small length";
+
     @Autowired
     private UserService userService;
 
@@ -36,33 +44,21 @@ public class UserValidator {
         String username = user.getUsername();
         String email = user.getEmail();
         if (username == null || email == null)
-            return "You have not entered username or email";
-        if (!validatePassword(user.getPassword())) {
-            return "Your password has small length";
-        }
-        if (!validateUsername(username)) {
-            return "Incorrect username";
-        }
-        if (!isUserNotExist(username)) {
-            return "Username already had been registered";
-        }
-        if (!validateEmail(email)) {
-            return "Incorrect email";
-        }
-        if (!isUserNotExist(email)) {
-            return "Email already had been registered";
-        }
-        if (!validateAccount(userRegister.getAccount())) {
-            return "Address or Name has small length";
-        }
+            return NULL;
+        if (!validatePassword(user.getPassword()))  return SMALL_PASSWORD;
+        if (!validateUsername(username)) return INCORRECT_USERNAME;
+        if (!isUserNotExist(username)) return USERNAME_ALREADY_EXIST;
+        if (!validateEmail(email)) return INCORRECT_EMAIL;
+        if (!isUserNotExist(email))  return EMAIL_ALREADY_EXIST;
+        if (!validateAccount(userRegister.getAccount()))  return SMALL_ADDRESS_OR_NAME;
         return null;
     }
 
-    public boolean validatePassword(String password) {
+    boolean validatePassword(String password) {
         return hasLength(password) && password.length() >= 5;
     }
 
-    public boolean validateUsername(String username) {
+    boolean validateUsername(String username) {
         Matcher matcher = pattern.matcher(username);
         return matcher.matches();
     }
@@ -71,11 +67,10 @@ public class UserValidator {
      * Checking whether user is exist
      * method looking for user by email or username
      *
-     * @param usernameOrEmail
+     * @param usernameOrEmail is user identifier
      */
-    public boolean isUserNotExist(String usernameOrEmail) {
-        UserDetails byUsername = userService.findByUsername(usernameOrEmail);
-        return byUsername == null;
+    boolean isUserNotExist(String usernameOrEmail) {
+        return !userService.findByUsernameOrEmail(usernameOrEmail);
     }
 
 
