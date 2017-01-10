@@ -6,14 +6,16 @@ import static com.bank.domain.services.Direction.*;
 
 
 public enum CreditType {
-    CREDIT_FOR_PERSONAL(9, IN), CREDIT_FOR_BUSINESS(15, IN), DEPOSIT_FOR_BUSINESS(4, OUT);
+    CREDIT_FOR_PERSONAL(9, IN, 0), CREDIT_FOR_BUSINESS(15, IN, 1), DEPOSIT_FOR_BUSINESS(4, OUT, 2);
 
     private final int per;
     private final Direction direction;
+    private final int type;
 
-    CreditType(int per, Direction direction) {
+    CreditType(int per, Direction direction, int type) {
         this.per = per;
         this.direction = direction;
+        this.type = type;
     }
 
     public int getPer() {
@@ -35,5 +37,9 @@ public enum CreditType {
     public static CreditType getType(Integer i) {
         if (i < 0 || i > 2) throw new IllegalArgumentException("Wrong credit type");
         return values()[i];
+    }
+
+    public int getType() {
+        return type;
     }
 }

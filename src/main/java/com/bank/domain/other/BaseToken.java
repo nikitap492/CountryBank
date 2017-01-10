@@ -23,11 +23,18 @@ public class BaseToken {
     public BaseToken() {
     }
 
-    public BaseToken(User user) {
+    BaseToken(User user) {
         this.user = user;
         this.validity = true;
         this.tokenDateTime = LocalDateTime.now();
         this.token = UUID.randomUUID().toString();
+    }
+
+    BaseToken(User user, LocalDateTime tokenDateTime) {
+        this.user = user;
+        this.tokenDateTime = tokenDateTime;
+        this.token = UUID.randomUUID().toString();
+        this.validity = true;
     }
 
     public String getToken() {

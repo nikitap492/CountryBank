@@ -8,6 +8,7 @@ import com.bank.service.UserService;
 import com.bank.validators.TokenValidator;
 import com.bank.validators.UserValidator;
 import com.bank.validators.ValidationResult;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,16 +72,17 @@ public class UserController {
         return service.findByUsernameOrEmail(usernameOrEmail);
     }
 
-    @RequestMapping(value = "/reset_password", method = POST)
-    public ResponseEntity<String> resetProcess(@RequestParam("token") String token, @RequestBody String pass) {
+    @RequestMapping(value = "/reset_password", method = POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<String> resetProcess(@RequestParam("token") String token,  @RequestBody UserRegister us) {
+        String password = us.getUser().getPassword();
         ValidationResult<ResetPasswordToken> result = tokenValidator.validateResetPasswordToken(token);
         if (result.hasError()) {
             return ResponseEntity.badRequest().body(result.getError());
         }
-        if (pass.length() < 4) {
+        if (password.length() < 4) {
             return ResponseEntity.badRequest().body("Password is too short");
         }
-        service.resetPassword(result.getEntity(), pass);
+        service.resetPassword(result.getEntity(), password);
         return ResponseEntity.ok().body("Password has changed for user " + result.getEntity().getUser().getUsername());
     }
 

@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -45,28 +46,28 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/sign").anonymous()
-                .antMatchers("/private").authenticated()
-                .antMatchers("/api/bill/**").authenticated()
-                .antMatchers("/api/movement/**").authenticated()
-                .antMatchers("/api/account/**").authenticated()
-                .antMatchers("/api/credit/**").authenticated()
-                .and()
+                    .antMatchers("/").permitAll()
+                    .antMatchers("/sign").anonymous()
+                    .antMatchers("/private").authenticated()
+                    .antMatchers("/api/bill/**").authenticated()
+                    .antMatchers("/api/movement/**").authenticated()
+                    .antMatchers("/api/account/**").authenticated()
+                    .antMatchers("/api/credit/**").authenticated()
+                    .and()
                 .formLogin()
-                .loginPage("/sign")
-                .usernameParameter("login")
-                .passwordParameter("pass")
-                .defaultSuccessUrl("/")
-                .failureHandler(authFailureHandler)
+                    .loginPage("/sign")
+                    .usernameParameter("login")
+                    .passwordParameter("pass")
+                    .defaultSuccessUrl("/")
+                    .failureHandler(authFailureHandler)
                 .and()
-                .logout()
-                .logoutSuccessUrl("/")
+                    .logout()
+                    .logoutSuccessUrl("/")
                 .and()
-                .rememberMe()
-                .tokenRepository(tokenRepository)
-                .tokenValiditySeconds(TOKEN_VALIDITY_SEC)
-                .and()
+                    .rememberMe()
+                    .tokenRepository(tokenRepository)
+                    .tokenValiditySeconds(TOKEN_VALIDITY_SEC)
+                    .and()
                 .csrf().disable();
     }
 

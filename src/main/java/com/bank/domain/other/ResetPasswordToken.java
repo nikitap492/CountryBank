@@ -18,4 +18,8 @@ public class ResetPasswordToken extends BaseToken {
     public ResetPasswordToken(User user) {
         super(user);
     }
+
+    public ResetPasswordToken(User user, LocalDateTime time) {
+        super(user, time);
+    }
 }

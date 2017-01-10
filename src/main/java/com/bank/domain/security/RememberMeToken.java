@@ -46,8 +46,30 @@ public class RememberMeToken {
         return date;
     }
 
-    public PersistentRememberMeToken getToken() {
+    public PersistentRememberMeToken getPersistentToken() {
         return new PersistentRememberMeToken(username, series, tokenValue, date);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        RememberMeToken token = (RememberMeToken) o;
+
+        if (!series.equals(token.series)) return false;
+        if (!username.equals(token.username)) return false;
+        if (!tokenValue.equals(token.tokenValue)) return false;
+        return date.equals(token.date);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = series.hashCode();
+        result = 31 * result + username.hashCode();
+        result = 31 * result + tokenValue.hashCode();
+        result = 31 * result + date.hashCode();
+        return result;
+    }
 }
