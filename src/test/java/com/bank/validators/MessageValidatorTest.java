@@ -12,15 +12,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-/**
- * @author Poshivalov Nikita
- * @since 08.12.2016.
- */
+
 @SpringBootTest
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = Application.class, initializers = ConfigFileApplicationContextInitializer.class)
@@ -28,9 +24,12 @@ import static org.mockito.Mockito.verify;
 public class MessageValidatorTest {
 
 
-    @Autowired
-    @Spy
+    @Autowired @Spy
     private MessageValidator messageValidator;
+
+    private static final String NAME = "tester";
+    private static final String EMAIL = "test@EMAIL.test";
+    private static final String MESSAGE_TEXT = "test message";
 
     @Test
     public void messageNameValidatorTest() {
@@ -41,12 +40,32 @@ public class MessageValidatorTest {
     }
 
     @Test
-    public void messageValidatorTest() {
-        String name = "tester";
-        String email = "test@email.test";
-        Message message = new Message(email, name, "");
+    public void messageValidatorWithEmptyMessageTest() {
+        Message message = new Message(EMAIL, NAME, "");
         String validated = messageValidator.validate(message);
-        assertTrue(validated != null);
-        verify(messageValidator, times(1)).validateName(name);
+        assertEquals(MessageValidator.EMPTY_MESSAGE, validated);
+        verify(messageValidator, times(1)).validateName(NAME);
+    }
+
+    @Test
+    public void messageValidatorWithIncorrectEmailTest() {
+        Message message = new Message("incorrect@email", NAME, MESSAGE_TEXT);
+        String validated = messageValidator.validate(message);
+        assertEquals(MessageValidator.INCORRECT_EMAIL, validated);
+    }
+
+    @Test
+    public void messageValidatorEmptyNameTest() {
+        Message message = new Message(EMAIL, "", MESSAGE_TEXT);
+        String validated = messageValidator.validate(message);
+        assertEquals(MessageValidator.EMPTY_NAME, validated);
+        verify(messageValidator, times(1)).validateName("");
+    }
+
+    @Test
+    public void messageTest() {
+        Message message = new Message(EMAIL, NAME, MESSAGE_TEXT);
+        String validated = messageValidator.validate(message);
+        assertNull(validated);
     }
 }

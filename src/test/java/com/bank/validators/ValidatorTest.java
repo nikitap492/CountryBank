@@ -19,15 +19,7 @@ import static com.bank.validators.Validator.*;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-/**
- * @author Poshivalov Nikita
- * @since 06.12.2016.
- */
 
-@SpringBootTest
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = Application.class, initializers = ConfigFileApplicationContextInitializer.class)
-@TestPropertySource("classpath:test.properties")
 public class ValidatorTest {
 
 
