@@ -24,7 +24,10 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
-
+@SpringBootTest
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = Application.class, initializers = ConfigFileApplicationContextInitializer.class)
+@TestPropertySource("classpath:test.properties")
 public class BillServiceTest {
 
     @Autowired

@@ -16,10 +16,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import static com.bank.DataTest.*;
 import static org.junit.Assert.*;
 
-
+@SpringBootTest
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = Application.class, initializers = ConfigFileApplicationContextInitializer.class)
+@TestPropertySource("classpath:test.properties")
 public class SubscribeServiceTest {
-
-    private static final Logger log = LoggerFactory.getLogger(SubscribeServiceTest.class);
 
     @Autowired
     private SubscribeService subscribeService;
