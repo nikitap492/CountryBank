@@ -21,6 +21,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 /**
  * Implementation of {@link UserService}
  * {@link UserService} is wrapper on {@link org.springframework.security.core.userdetails.UserDetailsService}
@@ -32,7 +36,7 @@ public class PersistenceUserDetailService implements UserService {
     private static final Logger log = LoggerFactory.getLogger(PersistenceUserDetailService.class);
 
     @Autowired
-    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    private BCryptPasswordEncoder encoder;
 
     @Autowired
     private UserRepository repository;
@@ -65,7 +69,7 @@ public class PersistenceUserDetailService implements UserService {
 
     /**
      * Method for saving users
-     * There are {@value encoder} for encoding password in database
+     * There are encoder for encoding password in database
      */
     @Override
     public void save(User... users) {
@@ -125,13 +129,15 @@ public class PersistenceUserDetailService implements UserService {
     }
 
     @Override
-    @Scheduled(cron = "${schedule.check}")
+    @Scheduled(cron = "${schedule.cron}")
     @Transactional
-    public void checkTokens() {
+    public int checkTokens() {
         log.debug("Schedule check for tokens");
-        int j = resetPasswordTokenRepository.checkNonValidity();
-        int i = registrationTokenRepository.checkNonValidity();
+        LocalDateTime time = LocalDateTime.now().minusDays(1);
+        int j = resetPasswordTokenRepository.checkNonValidity(time);
+        int i = registrationTokenRepository.checkNonValidity(time);
         log.debug((i + j) + " tokens has been updated");
+        return i + j;
     }
 
     @Override
@@ -148,9 +154,8 @@ public class PersistenceUserDetailService implements UserService {
     public void setEnabled(RegistrationToken token) {
         User user = token.getUser();
         user.setEnabled(true);
-        token.setValidity(false);
+        setNonValidityToken(token);
         repository.save(user);
-        registrationTokenRepository.save(token);
         log.debug(user.getUsername() + " was confirmed by token " + token.getToken());
     }
 

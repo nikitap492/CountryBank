@@ -62,7 +62,7 @@ public class CreditServiceImpl implements CreditService {
      * if credit is not updated, then {@code updateStateAndDate(credit)} is called.
      */
     @Override
-    @Scheduled(cron = "${schedule.check}")
+    @Scheduled(cron = "${schedule.cron}")
     public void check() {
         log.debug("Scheduled credit checking");
         List<Credit> credits = repository.findByState(CreditState.OPENED);
@@ -72,12 +72,12 @@ public class CreditServiceImpl implements CreditService {
             double money = credit.getMoney() * credit.getType().getPer() / credit.getNumOfWithdraws();
             switch (credit.getType()) {
                 case DEPOSIT_FOR_BUSINESS:
-                    /**Make new income for {@value credit.getBill()}*/
+                    /**Make new income for {@code credit.getBill()}*/
                     movementService.makeTransfer(credit.getBill(), bankBill, money, credit.getFrequency().getFreq() + " payment according to deposit contact");
                     break;
                 case CREDIT_FOR_PERSONAL:
                 case CREDIT_FOR_BUSINESS:
-                    /**Make new expense for {@value credit.getBill()}*/
+                    /**Make new expense for {@code credit.getBill()}*/
                     movementService.makeTransfer(bankBill, credit.getBill(), money, credit.getFrequency().getFreq() + " payment according to credit contact");
                     break;
             }
@@ -103,7 +103,7 @@ public class CreditServiceImpl implements CreditService {
     public boolean checkDate(Credit credit) {
         //Get current date
         LocalDate now = LocalDate.now();
-        /**Converting {@link java.sql.Date} to  {@link LocalDate} */
+
         LocalDate creditDate = dateConverter.convertToEntityAttribute(credit.getLastUpdateDate());
         //Temporary variable keeps days difference.
         LocalDate tmp = now.minusYears(creditDate.getYear()).minusDays(creditDate.getDayOfYear());

@@ -28,7 +28,7 @@ public interface UserService extends UserDetailsService {
 
     RegistrationToken findRegistrationToken(String token);
 
-    void checkTokens();
+    int checkTokens();
 
     void resetPassword(ResetPasswordToken token, String password);
 

@@ -2,7 +2,9 @@ package com.bank;
 
 import com.bank.domain.Bill;
 import com.bank.domain.services.Movement;
+import com.bank.repositories.RememberMeTokenRepositoryTest;
 import com.bank.service.*;
+import com.bank.validators.ValidatorSuiteTest;
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.RunWith;
@@ -19,15 +21,10 @@ import javax.swing.*;
  * Common test suite
  */
 
-@SpringBootTest
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = Application.class, initializers = ConfigFileApplicationContextInitializer.class)
-@TestPropertySource("classpath:test.properties")
+@RunWith(Suite.class)
+@Suite.SuiteClasses({ServiceSuiteTest.class, ValidatorSuiteTest.class, RememberMeTokenRepositoryTest.class})
 public class MainTestSuite {
 
-    @Test
-    public void run() {
-        JUnitCore.runClasses(ServiceSuiteTest.class);
-    }
+
 
 }

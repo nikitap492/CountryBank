@@ -86,30 +86,8 @@ public class DataTest {
         billService.save(jimmyBill);
 
         bartMov = new Movement(bartBill, IN, 300.0);
+
         movementService.save(bartMov);
-
-
-        User bankUser = new User("country_bank", "Uf!3aaV55qSkbLLh92112k4mQACa", "CountryBank@company.com");
-        User govUser = new User("government", "qwerty)", "gov@gov.gov");
-        userService.save(bankUser);
-        userService.save(govUser);
-        Account government = new Account(govUser, "Government", "Washington D.C");
-        Account countryBank = new Account(bankUser, "Country Bank", "Wild West");
-        accountService.save(government);
-        accountService.save(countryBank);
-        Bill governmentBill = new Bill(government, BillService.governmentUUID, 1_000_000_000.0);
-        Bill countryBankBill = new Bill(countryBank, BillService.bankUUID, 10_000_000.0);
-        billService.save(governmentBill);
-        billService.save(countryBankBill);
-
-        log.debug("Creation of test user");
-        String test = "test";
-        User testUser = new User(test, test, test + "@" + test + ".us");
-        Account testAcc = new Account(testUser, test, test + "_home");
-        Bill testBill = new Bill(testAcc, 1000.0);
-        userService.save(testUser);
-        accountService.save(testAcc);
-        billService.save(testBill);
 
         log.info("************************* End of Initialization **********************");
     }

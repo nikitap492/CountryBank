@@ -25,8 +25,12 @@ public class MessageServiceImpl implements MessageService {
     @Autowired
     private JavaMailSender mailSender;
 
+    public void setMailSender(JavaMailSender mailSender) {
+        this.mailSender = mailSender;
+    }
+
     @Value("${spring.mail.username}")
-    String from;
+    private String from;
 
     @Override
     public void save(Message message) {
