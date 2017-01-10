@@ -46,7 +46,7 @@
                     <div class="piece_title">
                         <h1>MONEY TRANSFER</h1>
                     </div>
-                    <h3> You can transfer your money or replenish current account. Country bank has created all
+                    <h3> You can transfer your money or replenish current account. Country bank created all
                         conditions. </h3>
                     <h3>It became easier to make transfers</h3>
                     <button class="btn btn-white scale_animated" id="transfer_btn">Make transfer</button>
@@ -124,10 +124,12 @@
 <section id="credit" th:include="included/credit"></section>
 
 
-<section id="sign_in" th:include="included/signin" sec:authorize="isAnonymous()"></section>
-<section id="sign_up" th:include="included/signup" sec:authorize="isAnonymous()"></section>
-<section id="congratulation" th:include="included/congratulation" sec:authorize="isAnonymous()"></section>
-<section id="error" th:include="included/error" sec:authorize="isAnonymous()"></section>
+<section id="result" th:include="included/result"></section>
+<section id="sign_up" th:include="included/signup"></section>
+<section id="congratulation" th:include="included/congratulation"></section>
+<section id="error" th:include="included/error"></section>
+<section id="forget" th:include="included/forget"></section>
+<section id="sign_in" th:include="included/signin"></section>
 
 <section id="result" th:include="included/result" sec:authorize="isAuthenticated()"></section>
 <section id="confirmation" th:include="included/confirm" sec:authorize="isAuthenticated()"></section>
@@ -137,9 +139,9 @@
 
 <script src="js/jquery-1.11.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script sec:authorize="isAnonymous()" src="js/auth.js"></script>
-<script sec:authorize="isAuthenticated()" src="js/personal.js"></script>
-<script src="js/footer.js"></script>
+<script sec:authorize="isAnonymous()" src="js/anon.js"></script>
+<script sec:authorize="isAuthenticated()" src="js/auth.js"></script>
+<script src="js/common.js"></script>
 
 
 </body>

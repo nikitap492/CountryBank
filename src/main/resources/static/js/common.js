@@ -1,4 +1,5 @@
 var $footer = $("#footer");
+var sec = 1000;
 
 $(window).bind("load", function () {
     positionFooter();
@@ -24,4 +25,26 @@ function resize() {
     $(window)
         .scroll(positionFooter)
         .resize(positionFooter);
+}
+
+function animate(item, time, anim, delay) {
+    if(arguments.length == 3){
+        start(0);
+    }else if (arguments.length == 4) {
+        start(delay)
+    }
+    function start(delay){
+        $.when(anim(item, time, delay)).then(function () {
+            positionFooter();
+            resize();
+        });
+    }
+}
+
+function fadeOut(item, time, delay) {
+    item.delay(delay).fadeOut(time);
+}
+
+function fadeIn(item, time, delay) {
+    item.delay(delay).fadeIn(time);
 }

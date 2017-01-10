@@ -94,11 +94,12 @@
 </section>
 
 
-<section id="sign_in" th:include="included/signin" sec:authorize="isAnonymous()"></section>
-<section id="sign_up" th:include="included/signup" sec:authorize="isAnonymous()"></section>
-<section id="congratulation" th:include="included/congratulation" sec:authorize="isAnonymous()"></section>
-<section id="error" th:include="included/error" sec:authorize="isAnonymous()"></section>
-<section id="result" th:include="included/result" sec:authorize="isAuthenticated()"></section>
+<section id="result" th:include="included/result"></section>
+<section id="sign_up" th:include="included/signup"></section>
+<section id="congratulation" th:include="included/congratulation"></section>
+<section id="error" th:include="included/error"></section>
+<section id="forget" th:include="included/forget"></section>
+<section id="sign_in" th:include="included/signin"></section>
 
 <section id="confirmation" th:include="included/confirm" sec:authorize="isAuthenticated()"></section>
 <footer id="footer" th:include="included/footer"></footer>
@@ -106,9 +107,9 @@
 <script src="js/jquery-1.11.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/subscribe.js"></script>
-<script sec:authorize="isAuthenticated()" src="js/business.js"></script>
-<script sec:authorize="isAnonymous()" src="js/auth.js"></script>
-<script src="js/footer.js"></script>
+<script sec:authorize="isAuthenticated()" src="js/auth.js"></script>
+<script sec:authorize="isAnonymous()" src="js/anon.js"></script>
+<script src="js/common.js"></script>
 
 </body>
 </html>

@@ -1,216 +1,195 @@
-var s_up = $("#sign_up");
-var s_in = $("#sign_in");
-var err = $("#error");
-var con = $("#congratulation");
-var forget = $("#forget");
-var s_f = true;
-
-function loadPage() {
-    if (s_f) s_in.show();
-}
-
-function showSignIn(time) {
-    setTimeout(function () {
-        s_f = true;
-        s_in.fadeIn(1000);
-    }, time);
-}
-
-$("#registration_btn").bind("click", function (e) {
-    e.preventDefault();
-    var username = $("#username").val();
-    var password = $("#password").val();
-    var email = $("#email").val();
-    var name = $("#name").val();
-    var address = $("#address").val();
-    $.ajax({
-        url: '/registration',
-        contentType: 'application/json',
-        type: 'post',
-        data: JSON.stringify({
-            username: username,
-            password: password,
-            email: email,
-            name: name,
-            address: address
-        }),
-        success: function () {
-            s_up.fadeOut(1000);
-            con.delay(1000).fadeIn(1000);
-            con.delay(8000).fadeOut(1000);
-            showSignIn(11000);
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-            s_up.fadeOut(1000);
-            showError(xhr.responseText)
-        }
-    });
-
-});
-
-$("#forget_btn").bind("click", function () {
-    var loginOrEmail = $("#email_or_login").val();
-    var info = $("#info-message");
-    $.ajax({
-        url: '/api/user/forget?loginOrEmail=' + loginOrEmail,
-        type: 'post',
-        success: function (text) {
-            showResult("#forget", text);
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-            showResult("#forget", xhr.responseText);
-        }
-    });
-});
-
-$("#reset_btn").bind("click", function () {
-    var password = $("#password").val();
-    $.ajax({
-        url: window.location.href,
-        contentType: 'application/json',
-        type: 'post',
-        data: JSON.stringify({
-            password: password
-        }),
-        success: function (text) {
-            showResult("#reset", text);
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-            showResult("#reset", xhr.responseText);
-        }
-    });
-});
-
-$("#confirm_btn").bind("click", function () {
-    $.ajax({
-        url: window.location.href,
-        contentType: 'application/json',
-        type: 'post',
-        success: function (text) {
-            showResult("#confirm", text);
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-            showResult("#confirm", xhr.responseText);
-        }
-    });
-});
-
-function showResult(id, text) {
-    var result = $("#result");
-    $(id).fadeOut(1000);
-    result.delay(1000).fadeIn(1000);
-    $("#result_ans").html(text);
-    result.click(function () {
-        window.location.replace('/sign');
-    });
-}
-
-function showError(text) {
-    err.delay(1000).fadeIn(1000);
-    $("#error-text").text(text);
-}
-
-function showForget() {
-    hideSignIn()
-    forget.delay(1000).fadeIn(1000);
-}
-
-function showRegistration() {
-    hideSignIn()
-    s_up.delay(1000).fadeIn(1000);
-}
-
-function hideSignIn() {
-    s_in.fadeOut(1000);
-    s_f = false;
-}
-
-function showLogInForm() {
-    s_up.fadeOut(1000);
-    forget.fadeOut(1000);
-    showSignIn(1000);
-}
-
-$("#error-btn-yes").bind("click", function () {
-    err.fadeOut(1000);
-    s_up.delay(1000).fadeIn(1000);
-});
-
-function validateText(val, id) {
-    var hint = $('#' + id + '-hint');
-    hint.removeClass("inv");
-    if (val.length >= 5) {
-        hint.removeClass("fa-close");
-        hint.addClass("fa-check");
-    } else {
-        hint.removeClass("fa-check");
-        hint.addClass("fa-close");
-    }
-}
-
-function validateConfirmPass() {
-    var hint = $("#confirm-password-hint");
-    hint.removeClass("inv");
-    if ($("#password").val() == $("#confirm-password").val()) {
-        hint.removeClass("fa-close");
-        hint.addClass("fa-check");
-    } else {
-        hint.removeClass("fa-check");
-        hint.addClass("fa-close");
-    }
-}
-
-function validateUser(val, id) {
-    var hint = $('#' + id + '-hint');
-    hint.removeClass("inv");
-    hint.removeClass("fa-check");
-    hint.removeClass("fa-close");
-    hint.addClass("fa-spinner fa-spin")
-    if (val.length >= 4) {
-        $.ajax({
-            url: '/api/user/check?val=' + val,
-            type: 'get',
-            contentType: 'application/json',
-            dataType: 'json',
-            success: function (ans) {
-                if (ans) {
-                    hint.addClass("fa-close");
-                } else hint.addClass("fa-check");
-                hint.removeClass("fa-spinner fa-spin")
-
-            }
-        });
-    } else {
-        hint.addClass("fa-close");
-        hint.removeClass("fa-spinner fa-spin")
-    }
-}
-
-/**
- * For wrong authentication
- */
-
-$(document).ready(function () {
-    var str = window.location.search.substring(1);
-    var pair = str.split("=")
-    if (pair[0] == 'error' && pair[1] == 'true') {
-        $("#error-login-msg").show();
-    }
-});
-
-$(".btn").bind("click", function () {
-    openSignForm();
-});
-
 $("#credit_btn").bind("click", function () {
-    openSignForm();
+    detailOffer("#credit");
 });
 
 $("#deposit_btn").bind("click", function () {
-    openSignForm();
+    detailOffer("#deposit");
 });
 
-function openSignForm() {
-    $("#offer").fadeOut(1000);
-    if (s_f) s_in.show();
+$("#pay_btn").bind("click", function () {
+    detailOffer("#pay");
+});
+
+$("#transfer_btn").bind("click", function () {
+    detailOffer("#transfer");
+});
+
+function detailOffer(id) {
+    $("#offer").fadeOut(sec);
+    $(id).delay(1000).fadeIn(sec, positionFooter);
+}
+
+$("#save_transfer").bind("click", function () {
+
+    var f = function () {
+        var uuid = $("#transfer_uuid").val();
+        var quantity = $("#transfer_quantity").val();
+        var message = $("#transfer_message").val();
+        $.ajax({
+            url: "/api/movement/transfer",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify({
+                quantity: quantity,
+                uuid: uuid,
+                message: message
+            }),
+            type: "post",
+            success: function (data) {
+                showResult("#transfer", data);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                showResult("#transfer", xhr.responseText);
+            }
+        });
+    };
+    showConfirmation(f);
+});
+
+function showConfirmation(func) {
+    $(id).fadeIn(sec / 2);
+    $("#confirm-btn-yes").bind("click", func);
+}
+
+$("#save_pay").bind("click", function () {
+    var f = function () {
+        var quantity = $("#pay_quantity").val();
+        $.ajax({
+            url: "/api/movement/pay",
+            contentType: "application/json",
+            data: JSON.stringify({
+                quantity: quantity
+            }),
+            type: "post",
+            success: function (data) {
+                showResult("#pay", data);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                showResult("#pay", xhr.responseText);
+            }
+        })
+    };
+    showConfirmation(f);
+});
+
+
+$("#save_credit").bind("click", function () {
+    var full = window.location.href;
+    var url = full.substr(full.lastIndexOf("/") + 1);
+    if (url.toLowerCase() == "personal")
+        showConfirmation(credit(0));
+    if (url.toLowerCase() == "business")
+        showConfirmation(credit(1));
+});
+
+$("#save_deposit").bind("click", function () {
+    showConfirmation(deposit());
+});
+
+
+function credit(type) {
+    return function () {
+        var money = $("#credit_quantity").val();
+        var months = $("#credit_months").val();
+        $.ajax({
+            url: "/api/credit/save",
+            contentType: "application/json",
+            data: JSON.stringify({
+                num: months,
+                money: money,
+                type: type
+            }),
+            type: "post",
+            success: function () {
+                showResult("#credit", 'Successful!');
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                showResult("#credit", xhr.responseText);
+            }
+        })
+    };
+}
+
+function deposit() {
+    return function () {
+        var money = $("#deposit_quantity").val();
+        var months = $("#deposit_months").val();
+        $.ajax({
+            url: "/api/credit/save",
+            contentType: "application/json",
+            data: JSON.stringify({
+                num: months,
+                money: money,
+                type: 2
+            }),
+            type: "post",
+            success: function () {
+                showResult("#deposit", 'Successful!');
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                showResult("#deposit", xhr.responseText);
+            }
+        })
+    };
+}
+
+
+function showResult(id, text) {
+    $(id).fadeOut(sec);
+    confirmHide();
+    $("#result").delay(1000).fadeIn(sec, positionFooter);
+    $("#result_ans").html(text);
+}
+
+function confirmHide() {
+    $("#confirmation").fadeOut(sec / 2);
+}
+
+// /private client api
+
+$("#open-bill-btn").bind("click", function () {
+    var f = function () {
+        $.ajax({
+            url: "/api/bill/new",
+            type: "post",
+            contentType: "application/json",
+            success: function (data) {
+                window.location.replace('/private');
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                showResult("#bills", xhr.responseText);
+            }
+        })
+    };
+    showConfirmation(f);
+});
+
+
+function lookupMovements(uuid, flag) {
+    var movements = $('#movements');
+    var setter = $("#current-setter-btn");
+    $("#footer").addClass("footer");
+    $("#mov").load("/api/movement/list?uuid=" + uuid);
+    if (flag) {
+        setter.hide();
+    } else setter.show();
+    $("#bill-uuid").text(uuid);
+    movements.fadeIn(100);
+    $("html, body").animate({scrollTop: movements.offset().top}, 'slow');
+}
+
+function setCurrent() {
+    var f = function () {
+        $.ajax({
+            url: "/api/bill/set_as_current?uuid=" + $("#bill-uuid").text(),
+            type: "post",
+            success: function () {
+                window.location.replace('/private');
+            },
+            error: function () {
+                window.location.replace('/error');
+            }
+        })
+    };
+    showConfirmation(f);
 }
