@@ -10,12 +10,12 @@ spring:
     show-sql: false
     #database-platform: org.hibernate.dialect.PostgreSQL9Dialect
   mail:
-    host: "smtp.gmail.com"
-    port: 587
+    host: ${CONFIG_MAIL_HOST}
+    port: ${CONFIG_MAIL_PORT}
     smtp:
-      auth: true
+      auth: ${CONFIG_MAIL_SMTP_AUTH}
     starttls:
-      enable: true
+      enable: ${CONFIG_MAIL_STARTTLS}
     username: ${CONFIG_MAIL_USERNAME}
     password: ${CONFIG_MAIL_PASSWORD}
 logging:

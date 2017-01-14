@@ -11,6 +11,7 @@ buildscript {
 }
 
 apply plugin: 'java'
+apply plugin: 'jacoco'
 apply plugin: 'spring-boot'
 
 bootRun {
@@ -35,16 +36,19 @@ dependencies {
     compile 'com.h2database:h2:1.4.193'
     compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4:2.1.2.RELEASE'
 }
+check.dependsOn jacocoTestReport
 
-/*processResources{
-    filesMatching("**//*application.yml"){
-        expand(project.properties);
-    }
+// The option below includes only main test suite
+test {
+    exclude '**/com/bank/service/*'
+    exclude '**/com/bank/repositories/*'
+    exclude '**/com/bank/validators/*'
 }
 
-processTestResources{
-    filesMatching("**//*application.yml"){
-        expand(project.properties);
+jacocoTestReport {
+    reports {
+        html.enabled = true
+        xml.enabled = true
     }
-}*/
+}
 
