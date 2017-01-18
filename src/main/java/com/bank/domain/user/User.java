@@ -22,6 +22,7 @@ public class User implements UserDetails {
     @Column(unique = true)
     private String email;
     private boolean enabled = false;
+    private boolean nonLocked = true;
 
     public User() {
     }
@@ -31,6 +32,7 @@ public class User implements UserDetails {
         this.password = password;
         this.email = email;
         this.enabled = false;
+        this.nonLocked = true;
     }
 
     @Override
@@ -59,7 +61,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return nonLocked;
     }
 
     @Override
@@ -78,6 +80,10 @@ public class User implements UserDetails {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setNonLocked(boolean nonLocked) {
+        this.nonLocked = nonLocked;
     }
 
     @Override

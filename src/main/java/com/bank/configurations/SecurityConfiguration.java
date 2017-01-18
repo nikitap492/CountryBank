@@ -76,9 +76,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(service).passwordEncoder(encoder);
     }
 
-    @Bean
-    public RedirectStrategy redirectStrategy() {
-        return new DefaultRedirectStrategy();
-    }
-
 }

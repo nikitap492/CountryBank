@@ -35,4 +35,6 @@ public interface UserService extends UserDetailsService {
     void setEnabled(RegistrationToken token);
 
     void setNonValidityToken(BaseToken token);
+
+    void setLocked(User user);
 }

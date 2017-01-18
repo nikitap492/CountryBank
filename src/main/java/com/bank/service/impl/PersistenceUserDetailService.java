@@ -171,4 +171,12 @@ public class PersistenceUserDetailService implements UserService {
         }
     }
 
+
+    @Override
+    public void setLocked(User user) {
+        log.debug("Blocking user "  + user.getUsername() );
+        user.setNonLocked(false);
+        repository.save(user);
+    }
+
 }

@@ -38,7 +38,7 @@ $("#registration_btn").bind("click", function (e) {
             con.delay(8 * sec).fadeOut(sec, 8 * sec);
             showSignIn(11 * sec);
         },
-        error: function (xhr, ajaxOptions, thrownError) {
+        error: function (xhr) {
             s_up.fadeOut(sec);
             showError(xhr.responseText)
         }
@@ -55,7 +55,7 @@ $("#forget_btn").bind("click", function () {
         success: function (text) {
             showResult("#forget", text);
         },
-        error: function (xhr, ajaxOptions, thrownError) {
+        error: function (xhr) {
             showResult("#forget", xhr.responseText);
         }
     });
@@ -87,7 +87,7 @@ $("#confirm_btn").bind("click", function () {
         success: function (text) {
             showResult("#confirm", text);
         },
-        error: function (xhr, ajaxOptions, thrownError) {
+        error: function (xhr) {
             showResult("#confirm", xhr.responseText);
         }
     });
@@ -191,8 +191,11 @@ function validateUser(val, id) {
 $(document).ready(function () {
     var str = window.location.search.substring(1);
     var pair = str.split("=");
-    if (pair[0] == 'error' && pair[1] == 'true') {
+    if (pair[0] == 'error' && pair[1].toLowerCase() == 'wrong') {
         $("#error-login-msg").show();
+    }
+    if (pair[0] == 'error' && pair[1].toLowerCase() == 'block') {
+        $("#error-block-msg").show();
     }
 });
 
