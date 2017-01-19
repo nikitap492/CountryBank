@@ -67,6 +67,6 @@ public class MovementServiceImpl implements MovementService {
         Bill bankBill = billService.findByUuid(BillService.bankUUID);
         Bill govBill = billService.findByUuid(BillService.governmentUUID);
         makeTransfer(govBill, curBill, pay, "Payment");
-        makeTransfer(bankBill, curBill, commission, "Commission for pay");
+        makeTransfer(bankBill, curBill, commission, "Commission for payment");
     }
 }

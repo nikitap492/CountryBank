@@ -61,7 +61,6 @@ public class CreditController {
             return ResponseEntity.badRequest().body(validated.getError());
         }
         creditService.save(validated.getEntity());
-        log.debug("Saved");
         return ResponseEntity.ok().body(null);
     }
 

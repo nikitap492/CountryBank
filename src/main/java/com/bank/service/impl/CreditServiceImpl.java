@@ -128,12 +128,12 @@ public class CreditServiceImpl implements CreditService {
         switch (credit.getType()) {
             case DEPOSIT_FOR_BUSINESS:
                 // Expense for deposit
-                movementService.makeTransfer(getBankBill(), credit.getBill(), credit.getMoney(), "Deposit was opened");
+                movementService.makeTransfer(getBankBill(), credit.getBill(), credit.getMoney(), "Deposit has opened");
                 break;
             case CREDIT_FOR_PERSONAL:
             case CREDIT_FOR_BUSINESS:
                 // Incomes for credit
-                movementService.makeTransfer(credit.getBill(), getBankBill(), credit.getMoney(), "Credit was opened");
+                movementService.makeTransfer(credit.getBill(), getBankBill(), credit.getMoney(), "Credit has opened");
                 break;
         }
         repository.save(credit);
