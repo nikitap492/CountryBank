@@ -38,7 +38,7 @@ $("#save_transfer").bind("click", function () {
             success: function (data) {
                 showResult("#transfer", data);
             },
-            error: function (xhr, ajaxOptions, thrownError) {
+            error: function (xhr) {
                 showResult("#transfer", xhr.responseText);
             }
         });
@@ -47,7 +47,7 @@ $("#save_transfer").bind("click", function () {
 });
 
 function showConfirmation(func) {
-    $(id).fadeIn(sec / 2);
+    $("#confirmation").fadeIn(sec / 2);
     $("#confirm-btn-yes").bind("click", func);
 }
 
@@ -64,7 +64,7 @@ $("#save_pay").bind("click", function () {
             success: function (data) {
                 showResult("#pay", data);
             },
-            error: function (xhr, ajaxOptions, thrownError) {
+            error: function (xhr) {
                 showResult("#pay", xhr.responseText);
             }
         })
@@ -103,7 +103,7 @@ function credit(type) {
             success: function () {
                 showResult("#credit", 'Successful!');
             },
-            error: function (xhr, ajaxOptions, thrownError) {
+            error: function (xhr) {
                 showResult("#credit", xhr.responseText);
             }
         })
@@ -126,7 +126,7 @@ function deposit() {
             success: function () {
                 showResult("#deposit", 'Successful!');
             },
-            error: function (xhr, ajaxOptions, thrownError) {
+            error: function (xhr) {
                 showResult("#deposit", xhr.responseText);
             }
         })
@@ -153,10 +153,10 @@ $("#open-bill-btn").bind("click", function () {
             url: "/api/bill/new",
             type: "post",
             contentType: "application/json",
-            success: function (data) {
+            success: function () {
                 window.location.replace('/private');
             },
-            error: function (xhr, ajaxOptions, thrownError) {
+            error: function (xhr) {
                 showResult("#bills", xhr.responseText);
             }
         })

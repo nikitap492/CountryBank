@@ -11,7 +11,7 @@ function loadPage() {
 
 function showSignIn(time) {
         s_f = true;
-        s_in.fadeIn(sec, positionFooter);
+        s_in.delay(time).fadeIn(sec, positionFooter);
 }
 
 $("#registration_btn").bind("click", function (e) {
@@ -35,8 +35,6 @@ $("#registration_btn").bind("click", function (e) {
         success: function () {
             s_up.fadeOut(sec);
             con.delay(sec).fadeIn(sec, positionFooter);
-            con.delay(8 * sec).fadeOut(sec, 8 * sec);
-            showSignIn(11 * sec);
         },
         error: function (xhr) {
             s_up.fadeOut(sec);
@@ -126,7 +124,7 @@ function hideSignIn() {
 function showLogInForm() {
     s_up.fadeOut(sec);
     forget.fadeOut(sec);
-    showSignIn(sec);
+    showSignIn(sec, sec);
 }
 
 $("#error-btn-yes").bind("click", function () {
@@ -214,4 +212,10 @@ $("#deposit_btn").bind("click", function () {
 function openSignForm() {
     $("#offer").fadeOut(sec);
     if (s_f) s_in.delay(sec).fadeIn(sec, positionFooter);
+}
+
+
+function hideCongratulation() {
+    con.fadeOut(sec / 2);
+    s_in.delay(sec).fadeIn(sec, positionFooter)
 }

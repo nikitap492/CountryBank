@@ -148,7 +148,7 @@ form {
 
 #confirmation {
     z-index: 20;
-    padding: 0px;
+    padding: 0;
 }
 
 .dialog {
@@ -158,6 +158,7 @@ form {
     margin-top: -100px;
     margin-left: -300px;
     border: 1px solid rgba(255, 255, 255, 0.24);
+    z-index: 100;
 }
 
 .main-img {
@@ -186,7 +187,7 @@ input[type='text'], input[type='password'], input[type='email'], input[type='num
 }
 
 input[type='number'] {
-    padding: 0px;
+    padding: 0;
 }
 
 input[type='text']:hover, input[type='password']:hover,
@@ -321,6 +322,8 @@ Footer
 
 #footer {
     width: 100%;
+    position: absolute;
+    bottom: 0;
 }
 
 .social i {
@@ -340,15 +343,12 @@ offer section
 ========================================================================== */
 
 #offer .piece {
-    box-shadow: 0px 2px 8px 0px rgba(50, 50, 50, 0.20);
-    padding-top: 40px;
-    padding-bottom: 80px;
-    margin-bottom: 32px;
+    box-shadow: 0 2px 8px 0 rgba(50, 50, 50, 0.20);
+    padding: 40px 10px;
+    margin-bottom: 80px;
     border-radius: 2px;
     border-color: #323135;
     border: 2px solid;
-    padding-left: 10px;
-    padding-right: 10px;
     color: #ffffff;
 }
 
@@ -369,7 +369,7 @@ offer section
 }
 
 #offer .piece ul {
-    padding: 0px;
+    padding: 0;
 }
 
 #offer .piece ul li {
@@ -423,12 +423,12 @@ Carousel section
     height: 15px;
     width: 15px;
     border-radius: 15px;
-    margin: 0px;
+    margin: 0;
 }
 
 .carousel-indicators .active {
     height: 15px;
-    margin: 0px;
+    margin: 0;
     width: 15px;
     border-radius: 15px;
     background-color: #00a7ff;
@@ -464,6 +464,9 @@ Result section
 
 #result_container {
     top: 50%;
+    left: 10%;
+    width: 80%;
+    margin: -150px 0;
 }
 
 /* ==========================================================================
@@ -553,7 +556,7 @@ Subscribe section
     height: 56px;
     padding: 10px 15px;
     width: 25%;
-    margin: 0px;
+    margin: 0;
     border-radius: 0 5px 5px 0;
 }
 
@@ -661,11 +664,11 @@ Private section
 }
 
 #account {
-    padding-bottom: 0px;
+    padding-bottom: 0;
 }
 
 #bills {
-    padding-top: 0px;
+    padding-top: 0;
 }
 
 .bill {
