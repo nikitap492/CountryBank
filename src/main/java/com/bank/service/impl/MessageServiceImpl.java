@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class MessageServiceImpl implements MessageService {
 
-    private static final Logger log = LoggerFactory.getLogger(MessageService.class);
+    private static final Logger log = LoggerFactory.getLogger(MessageServiceImpl.class);
 
     @Autowired
     private MessageRepository messageRepository;

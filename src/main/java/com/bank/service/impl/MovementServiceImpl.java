@@ -22,7 +22,7 @@ import static com.bank.domain.services.Direction.OUT;
 @Service
 public class MovementServiceImpl implements MovementService {
 
-    private static final Logger log = LoggerFactory.getLogger(MovementService.class);
+    private static final Logger log = LoggerFactory.getLogger(MovementServiceImpl.class);
 
     @Autowired
     private MovementRepository repository;

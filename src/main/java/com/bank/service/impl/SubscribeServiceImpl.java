@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SubscribeServiceImpl implements SubscribeService {
 
-    private static final Logger log = LoggerFactory.getLogger(SubscribeService.class);
+    private static final Logger log = LoggerFactory.getLogger(SubscribeServiceImpl.class);
 
     @Autowired
     private SubscriberRepository repository;

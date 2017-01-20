@@ -20,7 +20,7 @@ import java.util.UUID;
 public class BillServiceImpl implements BillService {
 
 
-    private static final Logger log = LoggerFactory.getLogger(BillService.class);
+    private static final Logger log = LoggerFactory.getLogger(BillServiceImpl.class);
 
     @Autowired
     private BillRepository billRepository;

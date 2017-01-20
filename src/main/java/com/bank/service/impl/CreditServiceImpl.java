@@ -31,7 +31,7 @@ import static java.time.LocalDate.now;
 @Service
 public class CreditServiceImpl implements CreditService {
 
-    private static final Logger log = LoggerFactory.getLogger(CreditService.class);
+    private static final Logger log = LoggerFactory.getLogger(CreditServiceImpl.class);
 
     private static Bill bankBill;
     private static final Jsr310JpaConverters.LocalDateConverter dateConverter
@@ -49,7 +49,7 @@ public class CreditServiceImpl implements CreditService {
     /**
      * @return bank bill
      */
-    public Bill getBankBill() {
+    private Bill getBankBill() {
         if (bankBill == null) {
             bankBill = billService.findByUuid(BillService.bankUUID);
         }
