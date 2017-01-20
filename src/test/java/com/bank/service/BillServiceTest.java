@@ -28,7 +28,6 @@ import static org.mockito.Mockito.verify;
 public class BillServiceTest {
 
     @Autowired
-    @Spy
     private BillService billService;
 
     @Autowired
@@ -53,8 +52,8 @@ public class BillServiceTest {
 
     @Test
     public void shouldFindByUUIDString() {
-        billService.findByUuid(bartBill.getUuid().toString());
-        verify(billService, times(1)).findByUuid(bartBill.getUuid());
+        Bill found = billService.findByUuid(bartBill.getUuid().toString());
+        assertEquals(bartBill, found);
     }
 
     @Test
@@ -73,7 +72,6 @@ public class BillServiceTest {
     public void shouldSaveByAccount() {
         Double before = billService.getCurrentForAccount(bartAcc).getMoney();
         billService.saveByAccount(bartAcc);
-        verify(billService, times(2)).getCurrentForAccount(bartAcc);
         Double after = billService.getCurrentForAccount(bartAcc).getMoney();
         Double sum = 5.0 + after;
         assertEquals(before, sum);
@@ -130,9 +128,8 @@ public class BillServiceTest {
 
     @Test
     public void shouldSetBillAsCurrentByUUIDString() {
-        billService.setCurrent(BillService.governmentUUID.toString());
-        Bill gov = billService.findByUuid(BillService.governmentUUID);
-        verify(billService, times(1)).setCurrent(gov);
+        billService.setCurrent(jimmyBill.getUuid().toString());
+        assertTrue(jimmyBill.getCurrent());
     }
 
 

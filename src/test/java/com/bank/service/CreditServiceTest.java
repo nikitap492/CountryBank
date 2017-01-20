@@ -40,7 +40,6 @@ public class CreditServiceTest {
     private static final Logger log = LoggerFactory.getLogger(CreditServiceTest.class);
 
     @Autowired
-    @Spy
     private CreditService creditService;
 
     @Autowired
@@ -115,8 +114,8 @@ public class CreditServiceTest {
         creditService.save(credit);
         creditService.save(deposit);
         creditService.check();
-        verify(creditService, times(1)).checkDate(credit);
-        verify(creditService, times(1)).checkDate(deposit);
+        assertTrue(creditService.checkDate(credit));
+        assertTrue(creditService.checkDate(deposit));
     }
 
 }

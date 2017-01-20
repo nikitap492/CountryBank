@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/nikitap492/country-bank.svg?branch=master)](https://travis-ci.org/nikitap492/country-bank)
+[![codecov.io](https://codecov.io/github/nikitap492/country-bank/coverage.svg?branch=master)](https://travis-ci.org/nikitap492/country-bank?branch=master)
 # Country Bank
 **Simple bank application with Spring Boot and Spring Data**
 
