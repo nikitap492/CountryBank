@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -32,6 +33,7 @@ public class MovementServiceImpl implements MovementService {
 
 
     @Override
+    @Transactional
     public void save(Movement... movements) {
         for (Movement movement : movements) {
             Bill bill = movement.getBill();
@@ -55,12 +57,14 @@ public class MovementServiceImpl implements MovementService {
     }
 
     @Override
+    @Transactional
     public void makeTransfer(Bill in, Bill out, Double money, String reason) {
         save(new Movement(out, OUT, money, reason));
         save(new Movement(in, IN, money, reason));
     }
 
     @Override
+    @Transactional
     public void makePay(Bill curBill, Double pay) {
         double commission = pay * 0.01;
         log.debug("Pay :" + pay + ", commission :" + commission);

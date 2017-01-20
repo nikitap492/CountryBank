@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -64,11 +65,10 @@ public class BillServiceImpl implements BillService {
      * Operation costs 5.0 $
      */
     @Override
+    @Transactional
     public void saveByAccount(Account account) {
         Bill newBill = new Bill(account);
-        System.out.println("step 1");
         Bill curBill = getCurrentForAccount(account);
-        System.out.println("step 2");
         log.debug("Current bill : " + curBill + " for account:" + account);
         if (curBill != null) {
             movementService.makeTransfer(billRepository.findByUuid(bankUUID), curBill, 5.0, "You opened new bill");
@@ -96,6 +96,7 @@ public class BillServiceImpl implements BillService {
      * return {@param bill} as current
      */
     @Override
+    @Transactional
     public void setCurrent(Bill bill) {
         billRepository.cleanCurrentStatusByAccount(bill.getAccount());
         bill.setCurrent(true);

@@ -70,6 +70,7 @@ public class PersistenceUserDetailService implements UserService {
      * There are encoder for encoding password in database
      */
     @Override
+    @Transactional
     public void save(User... users) {
         for (User user : users) {
             User check = repository.findOne(user.getUsername());
@@ -139,6 +140,7 @@ public class PersistenceUserDetailService implements UserService {
     }
 
     @Override
+    @Transactional
     public void resetPassword(ResetPasswordToken token, String password) {
         log.debug("Attempt to reset password by token " + token.getToken());
         User user = token.getUser();
@@ -149,6 +151,7 @@ public class PersistenceUserDetailService implements UserService {
     }
 
     @Override
+    @Transactional
     public void setEnabled(RegistrationToken token) {
         User user = token.getUser();
         user.setEnabled(true);
