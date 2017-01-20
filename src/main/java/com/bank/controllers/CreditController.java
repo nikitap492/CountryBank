@@ -2,8 +2,6 @@ package com.bank.controllers;
 
 import com.bank.domain.Bill;
 import com.bank.domain.services.credit.Credit;
-import com.bank.domain.services.credit.CreditFrequency;
-import com.bank.domain.services.credit.CreditType;
 import com.bank.service.BillService;
 import com.bank.service.CreditService;
 import com.bank.validators.CreditValidator;
@@ -15,13 +13,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
-
-import static org.springframework.web.bind.annotation.RequestMethod.*;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 
 @RestController

@@ -1,7 +1,6 @@
 package com.bank.service;
 
 import com.bank.domain.Account;
-import com.bank.domain.Bill;
 import com.bank.domain.services.credit.Credit;
 
 /**

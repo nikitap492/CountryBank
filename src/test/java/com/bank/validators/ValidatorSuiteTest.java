@@ -1,6 +1,5 @@
 package com.bank.validators;
 
-import com.bank.service.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 

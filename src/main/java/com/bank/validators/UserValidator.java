@@ -4,13 +4,13 @@ import com.bank.domain.user.User;
 import com.bank.domain.user.UserRegister;
 import com.bank.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.bank.validators.Validator.*;
+import static com.bank.validators.Validator.validateAccount;
+import static com.bank.validators.Validator.validateEmail;
 import static org.springframework.util.StringUtils.hasLength;
 
 

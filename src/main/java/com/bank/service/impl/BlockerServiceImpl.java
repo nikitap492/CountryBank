@@ -6,14 +6,14 @@ import com.bank.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.bank.service.BlockerService.UserFailStatus.*;
+import static com.bank.service.BlockerService.UserFailStatus.BLOCK;
+import static com.bank.service.BlockerService.UserFailStatus.WRONG;
 
 @Service
 public class BlockerServiceImpl implements BlockerService{

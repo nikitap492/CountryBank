@@ -6,7 +6,6 @@ import com.bank.domain.services.credit.CreditFrequency;
 import com.bank.domain.services.credit.CreditType;
 import com.bank.service.CreditService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.parser.Part;
 import org.springframework.stereotype.Component;
 
 import static com.bank.validators.Validator.validateDouble;

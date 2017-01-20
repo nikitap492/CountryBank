@@ -2,7 +2,8 @@ package com.bank.domain.services.credit;
 
 import com.bank.domain.services.Direction;
 
-import static com.bank.domain.services.Direction.*;
+import static com.bank.domain.services.Direction.IN;
+import static com.bank.domain.services.Direction.OUT;
 
 
 public enum CreditType {

@@ -6,7 +6,6 @@ import com.bank.domain.services.credit.Credit;
 import com.bank.repositories.BillRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,18 +16,20 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-
 import java.sql.Date;
-import java.util.ArrayList;
 
-import static com.bank.domain.services.credit.Credit.CreditBuilder.*;
-import static com.bank.domain.services.credit.CreditFrequency.*;
-import static com.bank.domain.services.credit.CreditState.*;
-import static com.bank.domain.services.credit.CreditType.*;
 import static com.bank.DataTest.*;
-import static java.time.LocalDate.*;
+import static com.bank.domain.services.credit.Credit.CreditBuilder.of;
+import static com.bank.domain.services.credit.CreditFrequency.MONTH;
+import static com.bank.domain.services.credit.CreditFrequency.WEAK;
+import static com.bank.domain.services.credit.CreditState.CLOSED;
+import static com.bank.domain.services.credit.CreditState.OPENED;
+import static com.bank.domain.services.credit.CreditType.CREDIT_FOR_PERSONAL;
+import static com.bank.domain.services.credit.CreditType.DEPOSIT_FOR_BUSINESS;
+import static java.time.LocalDate.now;
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @SpringBootTest
 @RunWith(SpringJUnit4ClassRunner.class)

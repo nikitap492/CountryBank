@@ -5,8 +5,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.regex.Pattern;
 
-import static com.bank.validators.Validator.*;
-import static org.springframework.util.StringUtils.*;
+import static com.bank.validators.Validator.validateEmail;
+import static org.springframework.util.StringUtils.hasLength;
 
 @Component
 public class MessageValidator {

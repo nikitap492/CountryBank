@@ -1,12 +1,10 @@
 package com.bank.validators;
 
 import com.bank.Application;
-import com.bank.DataTest;
 import com.bank.domain.other.RegistrationToken;
 import com.bank.domain.other.ResetPasswordToken;
 import com.bank.repositories.ResetPasswordTokenRepository;
 import com.bank.service.UserService;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.time.LocalDateTime;
 
-import static com.bank.DataTest.*;
+import static com.bank.DataTest.bartUser;
 import static org.junit.Assert.*;
 
 @SpringBootTest

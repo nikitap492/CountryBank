@@ -2,7 +2,6 @@ package com.bank.service;
 
 import com.bank.domain.Account;
 import com.bank.domain.Bill;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
@@ -14,7 +13,7 @@ import java.util.UUID;
 public interface BillService {
 
     /**
-     * {@value bankUUID} and {@value governmentUUID} is important entity in application
+     * {@code bankUUID} and {@code governmentUUID} is important entity in application
      */
     UUID bankUUID = UUID.fromString("276fc627-9947-4c84-9fe0-054231a2ca8b");
     UUID governmentUUID = UUID.fromString("772e6147-1f32-4154-b8da-3f8cd120a8e2");

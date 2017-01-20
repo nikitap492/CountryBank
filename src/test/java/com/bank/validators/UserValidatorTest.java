@@ -1,7 +1,6 @@
 package com.bank.validators;
 
 import com.bank.Application;
-import com.bank.controllers.NavigationController;
 import com.bank.domain.Account;
 import com.bank.domain.user.User;
 import com.bank.domain.user.UserRegister;
@@ -11,18 +10,12 @@ import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.ConfigFileApplicationContextInitializer;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.stereotype.Service;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
-
-import javax.print.attribute.standard.MediaSize;
 
 import static com.bank.validators.UserValidator.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 

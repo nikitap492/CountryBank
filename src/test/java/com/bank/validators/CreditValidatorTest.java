@@ -1,9 +1,7 @@
 package com.bank.validators;
 
 import com.bank.Application;
-import com.bank.DataTest;
 import com.bank.domain.services.credit.Credit;
-import com.bank.domain.services.credit.CreditType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.xml.crypto.Data;
-
-import static com.bank.DataTest.*;
+import static com.bank.DataTest.bartBill;
 import static com.bank.domain.services.credit.CreditType.*;
 import static com.bank.validators.CreditValidator.*;
 import static org.junit.Assert.*;

@@ -5,9 +5,6 @@ import com.bank.domain.Bill;
 import com.bank.domain.services.Movement;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Spy;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.ConfigFileApplicationContextInitializer;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,16 +16,11 @@ import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.UUID;
 
-import static com.bank.domain.services.Direction.IN;
-import static com.bank.domain.services.Direction.OUT;
 import static com.bank.DataTest.*;
-import static com.bank.DataTest.jimmyBill;
-import static java.lang.Double.*;
+import static com.bank.domain.services.Direction.IN;
+import static java.lang.Double.compare;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
 @SpringBootTest
 @RunWith(SpringJUnit4ClassRunner.class)

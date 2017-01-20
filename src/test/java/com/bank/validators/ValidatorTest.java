@@ -1,23 +1,13 @@
 package com.bank.validators;
 
-import com.bank.Application;
 import com.bank.domain.Account;
-import com.bank.domain.other_services.Message;
 import com.bank.domain.user.User;
-import com.bank.domain.user.UserRegister;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Spy;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.ConfigFileApplicationContextInitializer;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static com.bank.validators.Validator.*;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static com.bank.validators.Validator.validateAccount;
+import static com.bank.validators.Validator.validateEmail;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 
 public class ValidatorTest {

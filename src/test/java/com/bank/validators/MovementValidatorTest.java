@@ -1,14 +1,11 @@
 package com.bank.validators;
 
 import com.bank.Application;
-import com.bank.DataTest;
 import com.bank.domain.Account;
 import com.bank.domain.Bill;
-import com.bank.domain.user.User;
 import com.bank.service.BillService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.ConfigFileApplicationContextInitializer;
@@ -21,7 +18,8 @@ import java.util.UUID;
 
 import static com.bank.DataTest.*;
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 
 @SpringBootTest

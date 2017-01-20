@@ -11,18 +11,12 @@ import com.bank.service.MovementService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
-
-import static com.bank.domain.services.credit.CreditState.CLOSED;
-import static java.time.LocalDate.now;
 
 /**
  * Implementation of {@link CreditService}

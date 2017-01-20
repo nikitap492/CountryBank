@@ -11,9 +11,10 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static com.bank.DataTest.*;
-import static com.bank.service.BlockerService.*;
-import static com.bank.service.BlockerService.UserFailStatus.*;
-import static org.junit.Assert.*;
+import static com.bank.service.BlockerService.MAX_ATTEMPTS;
+import static com.bank.service.BlockerService.UserFailStatus.BLOCK;
+import static com.bank.service.BlockerService.UserFailStatus.WRONG;
+import static org.junit.Assert.assertEquals;
 
 @SpringBootTest
 @RunWith(SpringJUnit4ClassRunner.class)

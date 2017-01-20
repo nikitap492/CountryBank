@@ -1,8 +1,6 @@
 package com.bank.domain.services.credit;
 
 import com.bank.domain.Bill;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,9 +9,9 @@ import javax.persistence.ManyToOne;
 import java.sql.Date;
 import java.time.LocalDate;
 
-import static com.bank.domain.services.credit.CreditFrequency.*;
-import static com.bank.domain.services.credit.CreditState.*;
-import static java.time.LocalDate.*;
+import static com.bank.domain.services.credit.CreditState.CLOSED;
+import static com.bank.domain.services.credit.CreditState.OPENED;
+import static java.time.LocalDate.now;
 
 
 @Entity
