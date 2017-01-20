@@ -39,22 +39,19 @@ public class DataTest {
 
 
     //Test data
+    public static String bart = "Bart Black";
+    public static String kurt = "Kurt Black";
+    public static String susie = "Susie Black";
 
-    public static String jimmy = "Jimmy Willing";
-    public static String susie = "Susie Willing";
-    public static String bart = "Bart Willing";
-    public static String kurt = "Kurt Willing";
-
-
-    public static User jimmyUser;
-    public static User susieUser;
     public static User bartUser;
     public static User kurtUser;
+    public static User susieUser;
+
 
     public static Account jimmyAcc;
     public static Account susieAcc;
     public static Account bartAcc;
-
+    public static Account aliceAcc;
 
     public static Bill bartBill;
     public static Bill jimmyBill;
@@ -64,20 +61,23 @@ public class DataTest {
     @PostConstruct
     void init() {
         log.info("************************* Initialization **********************");
+        String jimmy = "Jimmy Black";
+        String alice = "Alice Black";
 
-
-        jimmyUser = new User(jimmy, jimmy, jimmy + "@" + jimmy + ".us");
+        User jimmyUser = new User(jimmy, jimmy, jimmy + "@" + jimmy + ".us");
         susieUser = new User(susie, susie, jimmy + "@" + susie + ".us");
         bartUser = new User(bart, bart, bart + "@" + bart + ".us");
         kurtUser = new User(kurt, kurt, kurt + "@" + kurt + ".us");
+        User aliceUser = new User(alice, alice, alice + "@" + alice + ".us");
 
-        userService.save(jimmyUser, susieUser, bartUser, kurtUser);
+        userService.save(jimmyUser, susieUser, bartUser, kurtUser, aliceUser);
 
         jimmyAcc = new Account(jimmyUser, jimmy, jimmy + "_home");
         bartAcc = new Account(bartUser, bart, bart + "_home");
         susieAcc = new Account(susieUser, susie, susie + "_home");
+        aliceAcc = new Account(aliceUser, alice, alice + "_home");
 
-        accountService.save(jimmyAcc, susieAcc, bartAcc);
+        accountService.save(jimmyAcc, susieAcc, bartAcc, aliceAcc);
 
         bartBill = new Bill(bartAcc, 1200.0);
         jimmyBill = new Bill(jimmyAcc, 1200.0);

@@ -4,6 +4,7 @@ import com.bank.Application;
 import com.bank.DataTest;
 import com.bank.domain.Account;
 import com.bank.domain.Bill;
+import com.bank.domain.user.User;
 import com.bank.service.BillService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,7 +35,7 @@ public class MovementValidatorTest {
     private MovementValidator validator;
 
     @Test
-    public void validatePayTest() throws Exception {
+    public void validatePayTest(){
         String money = "30.0";
         ValidationResult<Double> result = validator.validatePay(jimmyBill, money);
         assertFalse(result.hasError());
@@ -43,7 +44,7 @@ public class MovementValidatorTest {
     }
 
     @Test
-    public void validateTransferTest() throws Exception {
+    public void validateTransferTest()  {
         String money = "10.0";
         String uuid = bartBill.getUuid().toString();
         ValidationResult<MovementValidationAnswer> result = validator.validateTransfer(jimmyBill, uuid, money);
@@ -54,14 +55,14 @@ public class MovementValidatorTest {
     }
 
     @Test
-    public void validateBillTest() throws Exception {
+    public void validateBillTest(){
         assertTrue(validator.validateBill("invalid UUID").hasError());
         assertTrue(validator.validateBill(UUID.randomUUID().toString()).hasError());
         assertFalse(validator.validateBill(BillService.bankUUID.toString()).hasError());
     }
 
     @Test
-    public void validateMoneyTest() throws Exception {
+    public void validateMoneyTest() {
         assertFalse(validator.validateMoney("30.0").hasError());
         assertFalse(validator.validateMoney("100").hasError());
         assertTrue(validator.validateMoney("30dd").hasError());
@@ -69,7 +70,7 @@ public class MovementValidatorTest {
     }
 
     @Test
-    public void diffValidationTest() throws Exception {
+    public void diffValidationTest() {
         Bill bill = new Bill(new Account(), UUID.randomUUID(), 40.0);
         assertTrue(validator.diffValidation(bill, 20.0));
         assertTrue(validator.diffValidation(bill, 40.0));
@@ -127,6 +128,11 @@ public class MovementValidatorTest {
         Double money = 10_000_000.0;
         ValidationResult<Double> result = validator.validatePay(bartBill, money.toString());
         assertEquals(MovementValidator.NOT_ENOUGH_MONEY, result.getError());
+    }
+
+    @Test
+    public void createNewBill(){
+        assertTrue(validator.validatePayForNewBill(aliceAcc));
     }
 
 }

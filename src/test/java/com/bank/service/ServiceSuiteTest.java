@@ -8,7 +8,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({AccountServiceTest.class, BillServiceTest.class,
         CreditServiceTest.class, MessageServiceTest.class,
         MovementServiceTest.class, SubscribeServiceTest.class,
-        UserServiceTest.class})
+        UserServiceTest.class, BlockerServiceTest.class})
 public class ServiceSuiteTest {
 
 }

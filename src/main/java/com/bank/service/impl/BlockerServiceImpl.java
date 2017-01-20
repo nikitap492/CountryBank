@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -19,7 +20,6 @@ public class BlockerServiceImpl implements BlockerService{
 
     private static final Logger log = LoggerFactory.getLogger(BlockerService.class);
     private static final Map<String , Integer> attemptsRepository = new HashMap<>();
-    private static final int MAX_ATTEMPTS = 3;
 
 
     @Autowired
@@ -27,8 +27,8 @@ public class BlockerServiceImpl implements BlockerService{
 
     @Override
     public UserFailStatus failed(String loginOrEmail) {
-        User user = (User) service.loadUserByUsername(loginOrEmail);
-        if(user != null){
+        try{
+            User user = (User) service.loadUserByUsername(loginOrEmail);
             String login = user.getUsername();
             Integer attempt = attemptsRepository.get(login);
             if(attempt == null){
@@ -43,6 +43,8 @@ public class BlockerServiceImpl implements BlockerService{
                 log.debug("Authentication was failed. Remains " + (MAX_ATTEMPTS + 1 - attempt) + " attempts for " + loginOrEmail);
                 attemptsRepository.put(login, attempt);
             }
+        }catch (UsernameNotFoundException e){
+            return WRONG;
         }
         return WRONG;
     }
