@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/nikitap492/country-bank.svg?branch=master)](https://travis-ci.org/nikitap492/country-bank)
-[![codecov.io](https://codecov.io/github/nikitap492/country-bank/coverage.svg?branch=master)](https://travis-ci.org/nikitap492/country-bank?branch=master)
+[![Build Status](https://travis-ci.org/nikitap492/CountryBank.svg?branch=master)](https://travis-ci.org/nikitap492/CountryBank)
+[![codecov.io](https://codecov.io/github/nikitap492/CountryBank/coverage.svg?branch=master)](https://travis-ci.org/nikitap492/CountryBank?branch=master)
 # Country Bank
 **Simple bank application with Spring Boot and Spring Data**
 
@@ -34,9 +34,14 @@ After authentication you can use other features, as
 ![layers](https://cloud.githubusercontent.com/assets/18111582/22162519/13a2dc90-df60-11e6-8bc3-b5effc15f4c0.gif)
 Controllers are receiving all requests, after checking by validators. If request are valid then services process this interaction with database.
 ##How To Install?
+###By gradle
+- You must have jdk 8 and gradle
+- Download sources from github
 - You need export environment variables for mail provider: `CONFIG_MAIL_HOST`, `CONFIG_MAIL_PORT`, `CONFIG_MAIL_SMTP_AUTH`, `CONFIG_MAIL_STARTTLS`, `CONFIG_MAIL_USERNAME`, `CONFIG_MAIL_PASSWORD` or override these variable in `Application.yml` in classpath.  
 - Run `gradle bootRun`, then  server starts on port `8000`
 
-
-
+###By docker
+- Install docker and docker-compose
+- You need export environment variables for mail provider: `CONFIG_MAIL_HOST`, `CONFIG_MAIL_PORT`, `CONFIG_MAIL_SMTP_AUTH`, `CONFIG_MAIL_STARTTLS`, `CONFIG_MAIL_USERNAME`, `CONFIG_MAIL_PASSWORD`.
+- In your terminal run `docker-compose up`, then  server starts on port `8000`
 
