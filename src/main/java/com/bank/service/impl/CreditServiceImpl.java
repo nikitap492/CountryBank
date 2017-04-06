@@ -68,12 +68,12 @@ public class CreditServiceImpl implements CreditService {
             double money = credit.getMoney() * credit.getType().getPer() / credit.getNumOfWithdraws();
             switch (credit.getType()) {
                 case DEPOSIT_FOR_BUSINESS:
-                    /**Make new income for {@code credit.getBill()}*/
+                    /*Make new income for {@code credit.getBill()}*/
                     movementService.makeTransfer(credit.getBill(), bankBill, money, credit.getFrequency().getFreq() + " payment according to deposit contact");
                     break;
                 case CREDIT_FOR_PERSONAL:
                 case CREDIT_FOR_BUSINESS:
-                    /**Make new expense for {@code credit.getBill()}*/
+                    /*Make new expense for {@code credit.getBill()}*/
                     movementService.makeTransfer(bankBill, credit.getBill(), money, credit.getFrequency().getFreq() + " payment according to credit contact");
                     break;
             }
@@ -106,11 +106,11 @@ public class CreditServiceImpl implements CreditService {
         switch (credit.getFrequency()) {
             case MONTH:
                 //if more then month
-                if (tmp.getDayOfYear() >= now.lengthOfMonth()) return true;
+                if (tmp.getDayOfYear() > now.lengthOfMonth()) return true;
                 break;
             case WEAK:
                 //if more then weak
-                if (tmp.getDayOfYear() >= 7) return true;
+                if (tmp.getDayOfYear() > 7) return true;
         }
         return false;
     }
