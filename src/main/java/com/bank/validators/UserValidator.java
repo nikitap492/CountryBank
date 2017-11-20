@@ -3,6 +3,7 @@ package com.bank.validators;
 import com.bank.domain.user.User;
 import com.bank.domain.user.UserRegister;
 import com.bank.service.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,7 @@ import static org.springframework.util.StringUtils.hasLength;
 
 
 @Component
+@AllArgsConstructor
 public class UserValidator {
 
     /**
@@ -31,8 +33,7 @@ public class UserValidator {
     static final String EMAIL_ALREADY_EXIST = "Email already had been registered";
     static final String SMALL_ADDRESS_OR_NAME = "Address or Name has small length";
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     /**
      * @param userRegister is special entity for ajax

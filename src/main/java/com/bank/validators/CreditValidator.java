@@ -5,12 +5,14 @@ import com.bank.domain.services.credit.Credit;
 import com.bank.domain.services.credit.CreditFrequency;
 import com.bank.domain.services.credit.CreditType;
 import com.bank.service.CreditService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import static com.bank.validators.Validator.validateDouble;
 
 @Component
+@AllArgsConstructor
 public class CreditValidator {
 
     /**
@@ -37,8 +39,7 @@ public class CreditValidator {
     static final String MORE_THEN_MAX_MONTHS = "Maximum of months is " + MAX_MONTHS;
 
 
-    @Autowired
-    private CreditService service;
+    private final CreditService service;
 
     /**
      * Validation that num is able to transform into {@link Integer} and value less then {@value MAX_MONTHS}

@@ -5,6 +5,8 @@ import com.bank.domain.other.BaseToken;
 import com.bank.domain.other.RegistrationToken;
 import com.bank.domain.other.ResetPasswordToken;
 import com.bank.service.UserService;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,22 +16,22 @@ import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.util.function.Function;
 
+@Slf4j
 @Component
+@AllArgsConstructor
 public class TokenValidator {
 
-    private static final Logger log = LoggerFactory.getLogger(TokenValidator.class);
     static final String NOT_VALIDITY = "Token is not validity";
     static final String NOT_FOUND = "Token was not found";
     private static Function<String, ResetPasswordToken> RESET_PASSWORD_TOKEN;
     private static Function<String, RegistrationToken> REGISTRATION_TOKEN;
 
-    @Autowired
-    private UserService service;
+    private final UserService service;
 
     @PostConstruct
     public void init() {
-        REGISTRATION_TOKEN = (uuid) -> service.findRegistrationToken(uuid);
-        RESET_PASSWORD_TOKEN = (uuid) -> service.findResetPasswordToken(uuid);
+        REGISTRATION_TOKEN = service::findRegistrationToken;
+        RESET_PASSWORD_TOKEN = service::findResetPasswordToken;
     }
 
     public ValidationResult<ResetPasswordToken> validateResetPasswordToken(String uuid) {

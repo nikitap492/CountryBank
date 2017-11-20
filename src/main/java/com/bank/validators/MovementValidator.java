@@ -3,15 +3,15 @@ package com.bank.validators;
 import com.bank.domain.Account;
 import com.bank.domain.Bill;
 import com.bank.service.BillService;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 public class MovementValidator {
-
-    private static final Logger log = LoggerFactory.getLogger(MovementValidator.class);
 
     @Autowired
     private BillService service;
