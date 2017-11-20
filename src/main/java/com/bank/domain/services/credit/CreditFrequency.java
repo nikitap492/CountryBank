@@ -1,6 +1,9 @@
 package com.bank.domain.services.credit;
 
 
+import lombok.Getter;
+
+@Getter
 public enum CreditFrequency {
     MONTH("Monthly"), WEAK("Weakly");
 
@@ -10,7 +13,4 @@ public enum CreditFrequency {
         this.freq = s;
     }
 
-    public String getFreq() {
-        return freq;
-    }
 }

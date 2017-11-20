@@ -1,6 +1,10 @@
 package com.bank.domain.other;
 
 import com.bank.domain.user.User;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
@@ -9,19 +13,18 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @MappedSuperclass
+@NoArgsConstructor
+@Getter
+@ToString
 public class BaseToken {
     @Id
     private String token;
 
     @OneToOne
     private User user;
-
     private LocalDateTime tokenDateTime;
-
+    @Setter
     private Boolean validity;
-
-    public BaseToken() {
-    }
 
     BaseToken(User user) {
         this.user = user;
@@ -37,33 +40,11 @@ public class BaseToken {
         this.validity = true;
     }
 
-    public String getToken() {
-        return token;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public LocalDateTime getTokenDateTime() {
-        return tokenDateTime;
-    }
-
-    public Boolean getValidity() {
-        return validity;
-    }
-
-    public void setValidity(Boolean validity) {
-        this.validity = validity;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         BaseToken token1 = (BaseToken) o;
-
         return token.equals(token1.token);
 
     }
@@ -71,16 +52,5 @@ public class BaseToken {
     @Override
     public int hashCode() {
         return token.hashCode();
-    }
-
-
-    @Override
-    public String toString() {
-        return "ResetPasswordToken{" +
-                "token='" + token + '\'' +
-                ", user=" + user +
-                ", tokenDateTime=" + tokenDateTime +
-                ", validity=" + validity +
-                '}';
     }
 }

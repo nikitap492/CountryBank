@@ -1,11 +1,19 @@
 package com.bank.domain.services;
 
 import com.bank.domain.Bill;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@NoArgsConstructor
+@Getter
+@EqualsAndHashCode(exclude = "id")
+@ToString
 public class Movement {
 
     private static final String NO_MESSAGE = "NO MESSAGE";
@@ -13,18 +21,19 @@ public class Movement {
     @Id
     @GeneratedValue
     private Long id;
+
     @ManyToOne
     private Bill bill;
+
     @Enumerated
     private Direction direction;
     private Double quantity;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
+
     @Column(length = 4000)
     private String message;
-
-    public Movement() {
-    }
 
     public Movement(Bill bill, Direction direction, Double quantity) {
         this(bill, direction, quantity, NO_MESSAGE);
@@ -40,61 +49,5 @@ public class Movement {
         this.quantity = quantity;
         this.date = date;
         this.message = message;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Bill getBill() {
-        return bill;
-    }
-
-    public Direction getDirection() {
-        return direction;
-    }
-
-    public Double getQuantity() {
-        return quantity;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Movement movement = (Movement) o;
-
-        return bill.equals(movement.bill) && direction == movement.direction && quantity.equals(movement.quantity) && date.equals(movement.date);
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = bill.hashCode();
-        result = 31 * result + direction.hashCode();
-        result = 31 * result + quantity.hashCode();
-        result = 31 * result + date.hashCode();
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Movement{" +
-                "id=" + id +
-                ", bill=" + bill +
-                ", direction=" + direction +
-                ", quantity=" + quantity +
-                ", date=" + date +
-                ", message='" + message + '\'' +
-                '}';
     }
 }

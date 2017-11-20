@@ -2,16 +2,14 @@ package com.bank.domain.other;
 
 
 import com.bank.domain.user.User;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import java.time.LocalDateTime;
 
 @Entity
+@NoArgsConstructor
 public class RegistrationToken extends BaseToken {
-
-    public RegistrationToken() {
-        super();
-    }
 
     public RegistrationToken(User user) {
         super(user);

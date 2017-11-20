@@ -1,16 +1,14 @@
 package com.bank.domain.other;
 
 import com.bank.domain.user.User;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import java.time.LocalDateTime;
 
 @Entity
+@NoArgsConstructor
 public class ResetPasswordToken extends BaseToken {
-
-    public ResetPasswordToken() {
-        super();
-    }
 
     public ResetPasswordToken(User user) {
         super(user);

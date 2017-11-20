@@ -1,6 +1,8 @@
 package com.bank.domain.services.credit;
 
 import com.bank.domain.Bill;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +16,9 @@ import static com.bank.domain.services.credit.CreditState.OPENED;
 import static java.time.LocalDate.now;
 
 
+@Data
 @Entity
+@EqualsAndHashCode(exclude = "id")
 public class Credit {
 
     @Id
@@ -57,101 +61,8 @@ public class Credit {
         return new Credit(id, bill, frequency, type, money, beginDate, date, state, endDate, numOfWithdraws);
     }
 
-    public Bill getBill() {
-        return bill;
-    }
-
-    public CreditFrequency getFrequency() {
-        return frequency;
-    }
-
-    public CreditType getType() {
-        return type;
-    }
-
-    public Double getMoney() {
-        return money;
-    }
-
-    public Date getBeginDate() {
-        return beginDate;
-    }
-
-    public Date getLastUpdateDate() {
-        return lastUpdateDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public CreditState getState() {
-        return state;
-    }
-
     private static Date convertDate(LocalDate date) {
         return Date.valueOf(date);
-    }
-
-    public Integer getNumOfWithdraws() {
-        return numOfWithdraws;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Credit credit = (Credit) o;
-
-        if (!bill.equals(credit.bill)) return false;
-        if (frequency != credit.frequency) return false;
-        if (type != credit.type) return false;
-        if (!money.equals(credit.money)) return false;
-        if (!beginDate.equals(credit.beginDate)) return false;
-        if (!lastUpdateDate.equals(credit.lastUpdateDate)) return false;
-        if (state != credit.state) return false;
-        if (!endDate.equals(credit.endDate)) return false;
-        return numOfWithdraws.equals(credit.numOfWithdraws);
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = bill.hashCode();
-        result = 31 * result + frequency.hashCode();
-        result = 31 * result + type.hashCode();
-        result = 31 * result + money.hashCode();
-        result = 31 * result + beginDate.hashCode();
-        result = 31 * result + lastUpdateDate.hashCode();
-        result = 31 * result + state.hashCode();
-        result = 31 * result + endDate.hashCode();
-        result = 31 * result + numOfWithdraws.hashCode();
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Credit{" +
-                "id=" + id +
-                ", bill=" + bill +
-                ", frequency=" + frequency +
-                ", type=" + type +
-                ", money=" + money +
-                ", beginDate=" + beginDate +
-                ", lastUpdateDate=" + lastUpdateDate +
-                ", state=" + state +
-                ", endDate=" + endDate +
-                ", numOfWithdraws=" + numOfWithdraws +
-                '}';
     }
 
     /**
