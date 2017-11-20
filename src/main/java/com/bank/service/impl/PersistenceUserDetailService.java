@@ -10,6 +10,8 @@ import com.bank.repositories.ResetPasswordTokenRepository;
 import com.bank.repositories.UserRepository;
 import com.bank.service.AccountService;
 import com.bank.service.UserService;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,25 +29,15 @@ import java.time.LocalDateTime;
  * Implementation of {@link UserService}
  * {@link UserService} is wrapper on {@link org.springframework.security.core.userdetails.UserDetailsService}
  */
-
+@Slf4j
 @Service
+@AllArgsConstructor
 public class PersistenceUserDetailService implements UserService {
 
-    private static final Logger log = LoggerFactory.getLogger(PersistenceUserDetailService.class);
-
-    @Autowired
     private BCryptPasswordEncoder encoder;
-
-    @Autowired
     private UserRepository repository;
-
-    @Autowired
     private AccountService accountService;
-
-    @Autowired
     private ResetPasswordTokenRepository resetPasswordTokenRepository;
-
-    @Autowired
     private RegistrationTokenRepository registrationTokenRepository;
 
     /**

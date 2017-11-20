@@ -5,6 +5,8 @@ import com.bank.domain.services.Movement;
 import com.bank.repositories.MovementRepository;
 import com.bank.service.BillService;
 import com.bank.service.MovementService;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,15 +22,12 @@ import static com.bank.domain.services.Direction.OUT;
  * @author Poshivalov Nikita
  * @since 28.11.2016.
  */
+@Slf4j
 @Service
+@AllArgsConstructor
 public class MovementServiceImpl implements MovementService {
 
-    private static final Logger log = LoggerFactory.getLogger(MovementServiceImpl.class);
-
-    @Autowired
     private MovementRepository repository;
-
-    @Autowired
     private BillService billService;
 
 

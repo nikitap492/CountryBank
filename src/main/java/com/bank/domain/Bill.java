@@ -1,10 +1,15 @@
 package com.bank.domain;
 
+import lombok.Data;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.util.UUID;
 
 
 @Entity
+@Data
+@ToString
 public class Bill {
 
     private static final Double ZERO = 0.0;
@@ -24,7 +29,7 @@ public class Bill {
     /**
      * If this flag is true, all transactions expense money form current bill for account
      */
-    private Boolean isCurrent;
+    private Boolean current;
 
     public Bill(Account account) {
         this(account, ZERO);
@@ -47,41 +52,7 @@ public class Bill {
         this.account = account;
         this.uuid = uuid;
         this.money = money;
-        this.isCurrent = isCurrent;
-    }
-
-
-    //for JPA
-    public Bill() {
-    }
-
-    //for JSON
-    public Bill(String uuid) {
-        this.uuid = UUID.fromString(uuid);
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public Double getMoney() {
-        return money;
-    }
-
-    public UUID getUuid() {
-        return uuid;
-    }
-
-    public Boolean getCurrent() {
-        return isCurrent;
-    }
-
-    public void setCurrent(Boolean current) {
-        this.isCurrent = current;
+        this.current = isCurrent;
     }
 
     @Override
@@ -94,18 +65,9 @@ public class Bill {
     }
 
     @Override
+    //todo to BigDecimal
     public int hashCode() {
         return uuid.hashCode();
-    }
-
-    @Override
-    public String toString() {
-        return "Bill{" +
-                "id=" + id +
-                ", account=" + account +
-                ", uuid=" + uuid +
-                ", money=" + money +
-                '}';
     }
 
     public void income(Double d) {

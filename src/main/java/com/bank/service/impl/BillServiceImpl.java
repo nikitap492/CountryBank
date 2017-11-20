@@ -5,6 +5,8 @@ import com.bank.domain.Bill;
 import com.bank.repositories.BillRepository;
 import com.bank.service.BillService;
 import com.bank.service.MovementService;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,17 +19,12 @@ import java.util.UUID;
 /**
  * Implementation for {@link BillService}
  */
+@Slf4j
 @Service
+@AllArgsConstructor
 public class BillServiceImpl implements BillService {
-
-
-    private static final Logger log = LoggerFactory.getLogger(BillServiceImpl.class);
-
-    @Autowired
-    private BillRepository billRepository;
-
-    @Autowired
-    private MovementService movementService;
+    private final BillRepository billRepository;
+    private final MovementService movementService;
 
     /**
      * Method for saving {@param bill}

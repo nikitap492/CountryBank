@@ -3,6 +3,8 @@ package com.bank.service.impl;
 import com.bank.domain.other_services.Message;
 import com.bank.repositories.MessageRepository;
 import com.bank.service.MessageService;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +16,11 @@ import org.springframework.stereotype.Service;
 /**
  * Implementation of {@link MessageService}
  */
+@Slf4j
 @Service
+@AllArgsConstructor
 public class MessageServiceImpl implements MessageService {
-
-    private static final Logger log = LoggerFactory.getLogger(MessageServiceImpl.class);
-
-    @Autowired
     private MessageRepository messageRepository;
-
-    @Autowired
     private JavaMailSender mailSender;
 
     public void setMailSender(JavaMailSender mailSender) {

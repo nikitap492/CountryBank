@@ -8,6 +8,8 @@ import com.bank.repositories.CreditRepository;
 import com.bank.service.BillService;
 import com.bank.service.CreditService;
 import com.bank.service.MovementService;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,24 +24,18 @@ import java.util.List;
 /**
  * Implementation of {@link CreditService}
  */
-
+@Slf4j
 @Service
+@AllArgsConstructor
 public class CreditServiceImpl implements CreditService {
-
-    private static final Logger log = LoggerFactory.getLogger(CreditServiceImpl.class);
 
     private static Bill bankBill;
     private static final Jsr310JpaConverters.LocalDateConverter dateConverter
             = new Jsr310JpaConverters.LocalDateConverter();
 
-    @Autowired
-    private CreditRepository repository;
-
-    @Autowired
-    private MovementService movementService;
-
-    @Autowired
-    private BillService billService;
+    private final CreditRepository repository;
+    private final MovementService movementService;
+    private final BillService billService;
 
     /**
      * @return bank bill

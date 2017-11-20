@@ -4,6 +4,8 @@ import com.bank.domain.Account;
 import com.bank.repositories.AccountRepository;
 import com.bank.service.AccountService;
 import com.bank.service.UserService;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,16 +17,13 @@ import java.util.List;
 /**
  * Implementation on {@link AccountService}
  */
+@Slf4j
 @Service
+@AllArgsConstructor
 public class AccountServiceImpl implements AccountService {
 
-    private static final Logger log = LoggerFactory.getLogger(AccountServiceImpl.class);
-
-    @Autowired
-    private AccountRepository accountRepository;
-
-    @Autowired
-    private UserService service;
+    private final AccountRepository accountRepository;
+    private final UserService service;
 
     /**
      * Method for saving

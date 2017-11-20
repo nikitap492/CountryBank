@@ -3,6 +3,7 @@ package com.bank.service.impl;
 import com.bank.domain.user.User;
 import com.bank.service.BlockerService;
 import com.bank.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +16,10 @@ import java.util.Map;
 import static com.bank.service.BlockerService.UserFailStatus.BLOCK;
 import static com.bank.service.BlockerService.UserFailStatus.WRONG;
 
+@Slf4j
 @Service
 public class BlockerServiceImpl implements BlockerService{
-
-    private static final Logger log = LoggerFactory.getLogger(BlockerService.class);
     private static final Map<String , Integer> attemptsRepository = new HashMap<>();
-
 
     @Autowired
     private UserService service;

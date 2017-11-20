@@ -4,6 +4,8 @@ import com.bank.domain.Account;
 import com.bank.domain.other_services.Subscriber;
 import com.bank.repositories.SubscriberRepository;
 import com.bank.service.SubscribeService;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +14,10 @@ import org.springframework.stereotype.Service;
 /**
  * Implementation of {@link SubscribeService}
  */
+@Slf4j
 @Service
+@AllArgsConstructor
 public class SubscribeServiceImpl implements SubscribeService {
-
-    private static final Logger log = LoggerFactory.getLogger(SubscribeServiceImpl.class);
-
-    @Autowired
     private SubscriberRepository repository;
 
     @Override
