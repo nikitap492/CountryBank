@@ -6,6 +6,8 @@ import com.bank.service.AccountService;
 import com.bank.service.BillService;
 import com.bank.service.MovementService;
 import com.bank.validators.MovementValidator;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,23 +28,14 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 /**
  * Contains API for private room
  */
-
+@Slf4j
 @Controller
+@AllArgsConstructor
 public class PrivateController {
-
-    private static final Logger log = LoggerFactory.getLogger(PrivateController.class);
-
-    @Autowired
-    private BillService billService;
-
-    @Autowired
-    private MovementService movementService;
-
-    @Autowired
-    private AccountService accountService;
-
-    @Autowired
-    private MovementValidator validator;
+    private final BillService billService;
+    private final MovementService movementService;
+    private final AccountService accountService;
+    private final MovementValidator validator;
 
     @ModelAttribute("account")
     private Account account(Principal principal) {

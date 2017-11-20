@@ -8,6 +8,8 @@ import com.bank.validators.CreditValidator;
 import com.bank.validators.ValidationResult;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,19 +23,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
-
+@Slf4j
 @RestController
+@AllArgsConstructor
 public class CreditController {
-    private static final Logger log = LoggerFactory.getLogger(CreditController.class);
-
-    @Autowired
-    private CreditService creditService;
-
-    @Autowired
-    private BillService billService;
-
-    @Autowired
-    private CreditValidator validator;
+    private final CreditService creditService;
+    private final BillService billService;
+    private final CreditValidator validator;
 
     /**
      * @param authentication needs for username

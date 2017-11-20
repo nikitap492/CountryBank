@@ -35,8 +35,10 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-mail:1.4.1.RELEASE'
     compile 'com.h2database:h2:1.4.193'
     compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4:2.1.2.RELEASE'
+    compileOnly 'org.projectlombok:lombok:1.16.18'
 }
 check.dependsOn jacocoTestReport
+
 
 // The option below includes only main test suite
 test {

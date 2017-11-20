@@ -5,6 +5,8 @@ import com.bank.domain.other_services.Message;
 import com.bank.service.AccountService;
 import com.bank.service.MessageService;
 import com.bank.validators.MessageValidator;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,20 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
-
+@Slf4j
 @RestController
+@AllArgsConstructor
 public class MessageController {
-
-    private static final Logger log = LoggerFactory.getLogger(MessageController.class);
-
-    @Autowired
-    private AccountService accountService;
-
-    @Autowired
-    private MessageService messageService;
-
-    @Autowired
-    private MessageValidator validator;
+    private final AccountService accountService;
+    private final MessageService messageService;
+    private final MessageValidator validator;
 
     /**
      * @param message will be saved in database

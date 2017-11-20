@@ -8,6 +8,8 @@ import com.bank.service.UserService;
 import com.bank.validators.TokenValidator;
 import com.bank.validators.UserValidator;
 import com.bank.validators.ValidationResult;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,22 +29,15 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
  * @since 16.11.2016.
  */
 
-@PreAuthorize("isAnonymous()")
+@Slf4j
 @RestController
+@PreAuthorize("isAnonymous()")
+@AllArgsConstructor
 public class UserController {
-    private static final Logger log = LoggerFactory.getLogger(UserController.class);
-
-    @Autowired
-    private UserService service;
-
-    @Autowired
-    private UserValidator validator;
-
-    @Autowired
-    private MessageService messageService;
-
-    @Autowired
-    private TokenValidator tokenValidator;
+    private final UserService service;
+    private final UserValidator validator;
+    private final MessageService messageService;
+    private final TokenValidator tokenValidator;
 
     /**
      * Creating new user

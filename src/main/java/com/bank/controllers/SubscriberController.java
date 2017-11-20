@@ -4,6 +4,8 @@ import com.bank.domain.Account;
 import com.bank.domain.other_services.Subscriber;
 import com.bank.service.AccountService;
 import com.bank.service.SubscribeService;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,17 +23,12 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
-
+@Slf4j
 @RestController
+@AllArgsConstructor
 public class SubscriberController {
-
-    private static final Logger log = LoggerFactory.getLogger(SubscriberController.class);
-
-    @Autowired
-    private AccountService accountService;
-
-    @Autowired
-    private SubscribeService subscribeService;
+    private final AccountService accountService;
+    private final SubscribeService subscribeService;
 
     /**
      * @param authentication needs for username
