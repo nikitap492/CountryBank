@@ -1,28 +1,15 @@
 package com.cbank.controllers;
 
-import com.bank.domain.Bill;
-import com.bank.service.BillService;
-import com.bank.service.MovementService;
-import com.bank.validators.MovementValidationAnswer;
-import com.bank.validators.MovementValidator;
-import com.bank.validators.ValidationResult;
 import com.cbank.domain.Account;
-import com.cbank.domain.Transaction;
-import com.cbank.services.AccountService;
+import com.cbank.domain.transaction.Transaction;
 import com.cbank.services.TransactionService;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import lombok.val;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
-
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Slf4j
 @RestController

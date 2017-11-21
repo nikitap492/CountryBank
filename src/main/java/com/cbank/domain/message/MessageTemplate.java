@@ -1,7 +1,6 @@
 package com.cbank.domain.message;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 
 /**

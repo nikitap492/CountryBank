@@ -1,6 +1,5 @@
 package com.cbank.domain.transaction;
 
-import com.bank.domain.services.Direction;
 import com.cbank.domain.Persistable;
 import lombok.Builder;
 import lombok.Data;
@@ -25,11 +24,13 @@ public class Transaction extends Persistable {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Direction direction = Direction.OUT;
+    @Builder.Default
+    private TransactionDirection direction = TransactionDirection.OUT;
 
     @Column(nullable = false)
     private BigDecimal amount;
 
+    @Builder.Default
     private LocalDateTime createAt = LocalDateTime.now();
 
     private String details;

@@ -1,7 +1,6 @@
 package com.cbank.controllers;
 
 
-import com.bank.domain.Bill;
 import com.cbank.domain.Account;
 import com.cbank.domain.Client;
 import com.cbank.services.AccountService;

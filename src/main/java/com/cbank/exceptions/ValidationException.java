@@ -1,6 +1,5 @@
 package com.cbank.exceptions;
 
-import lombok.Data;
 import lombok.Getter;
 
 /**

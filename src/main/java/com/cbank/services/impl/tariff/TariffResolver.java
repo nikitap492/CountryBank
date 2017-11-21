@@ -1,6 +1,6 @@
 package com.cbank.services.impl.tariff;
 
-import com.cbank.domain.Transaction;
+import com.cbank.domain.transaction.Transaction;
 import com.cbank.services.AccountService;
 import com.cbank.services.TariffService;
 import lombok.AllArgsConstructor;

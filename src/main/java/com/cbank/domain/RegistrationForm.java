@@ -1,6 +1,5 @@
 package com.cbank.domain;
 
-import com.cbank.domain.user.User;
 import lombok.Data;
 import lombok.ToString;
 

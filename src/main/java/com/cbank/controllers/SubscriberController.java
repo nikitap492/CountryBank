@@ -3,15 +3,12 @@ package com.cbank.controllers;
 
 import com.cbank.domain.Client;
 import com.cbank.domain.Subscriber;
-import com.cbank.services.ClientService;
 import com.cbank.services.SubscribeService;
-import com.cbank.validators.ValidationUtils;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;

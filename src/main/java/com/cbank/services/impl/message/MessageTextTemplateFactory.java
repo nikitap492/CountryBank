@@ -4,7 +4,6 @@ import com.cbank.domain.message.MessageTemplate;
 import lombok.AllArgsConstructor;
 import lombok.val;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 

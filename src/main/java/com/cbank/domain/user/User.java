@@ -1,9 +1,6 @@
 package com.cbank.domain.user;
 
-import com.google.common.hash.Hashing;
-import com.google.common.io.BaseEncoding;
 import lombok.Data;
-import lombok.val;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.keygen.KeyGenerators;
@@ -13,9 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.nio.charset.StandardCharsets;
 import java.util.Collection;
-import java.util.Random;
 
 /**
  * Wrapper of UserDetails
@@ -27,7 +22,7 @@ import java.util.Random;
 public class User implements UserDetails {
     private static final StringKeyGenerator keyGenerator = KeyGenerators.string();
 
-    @Column(nullable = false, unique = true, updatable = false)
+    @Id
     private String username;
 
     @Column(nullable = false)

@@ -1,16 +1,13 @@
 package com.cbank.domain.message;
 
-import com.bank.domain.Account;
 import com.cbank.domain.Persistable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
-import org.springframework.mail.MailMessage;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.val;
 import org.springframework.mail.SimpleMailMessage;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 

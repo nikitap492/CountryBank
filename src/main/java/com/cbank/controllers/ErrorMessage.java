@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @RequiredArgsConstructor(staticName = "create")
-class ErrorMessage{
+public class ErrorMessage{
     private final String message;
     private LocalDateTime timestamps = LocalDateTime.now();
 }
