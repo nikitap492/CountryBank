@@ -27,9 +27,6 @@ import java.util.Random;
 public class User implements UserDetails {
     private static final StringKeyGenerator keyGenerator = KeyGenerators.string();
 
-    @Id
-    private Long id;
-
     @Column(nullable = false, unique = true, updatable = false)
     private String username;
 

@@ -1,11 +1,9 @@
 package com.cbank.services.impl;
 
-import com.bank.repositories.UserRepository;
 import com.cbank.domain.Account;
 import com.cbank.domain.RegistrationForm;
 import com.cbank.domain.message.MessageTemplate;
 import com.cbank.domain.security.BaseTokenType;
-import com.cbank.domain.user.UserProjection;
 import com.cbank.services.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,28 +23,22 @@ public class RegistrationServiceImpl implements RegistrationService {
     private final UserService userService;
     private final TokenService tokenService;
     private final ClientService clientService;
-    private final ContactService contactService;
     private final AccountService accountService;
     private final MessageService messageService;
 
 
     @Override
     public Account register(RegistrationForm form) {
-        val user = form.toUser();
-        userService.save(user);
-
+        val user = userService.save(form.getUsername(), form.getPassword());
         val token = tokenService.create(user.getUsername(), BaseTokenType.REGISTRATION);
 
-        val client  = form.toClient(user.getId());
+        val client  = form.toClient();
         clientService.save(client);
-
-        val contact = form.toContact(client.getId());
-        contactService.save(contact);
 
         val account = new Account(client.getId());
         accountService.save(account);
 
-        messageService.send(contact, MessageTemplate.REGISTRATION_CONFIRMATION,
+        messageService.send(client.getEmail(), MessageTemplate.REGISTRATION_CONFIRMATION,
                 Map.of("user", user, "client", client,
                         "account", account,
                         "token", token) );
