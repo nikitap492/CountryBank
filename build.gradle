@@ -22,8 +22,8 @@ repositories {
     mavenCentral()
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 9
+targetCompatibility = 9
 
 
 dependencies {
@@ -36,6 +36,7 @@ dependencies {
     compile 'com.h2database:h2:1.4.193'
     compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4:2.1.2.RELEASE'
     compileOnly 'org.projectlombok:lombok:1.16.18'
+    compile 'com.google.guava:guava:23.4-jre'
 }
 check.dependsOn jacocoTestReport
 
