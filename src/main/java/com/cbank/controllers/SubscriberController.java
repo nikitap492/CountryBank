@@ -19,17 +19,10 @@ import java.util.Optional;
 @Slf4j
 @RestController
 @AllArgsConstructor
+@AggregationModel
 @RequestMapping("/subscribers")
 public class SubscriberController {
     private SubscribeService subscribeService;
-    private ClientService clientService;
-
-    @ModelAttribute
-    public Client client(Authentication authentication) {
-        return Optional.ofNullable(authentication)
-                    .flatMap(auth -> clientService.byUserId(auth.getName()))
-                    .orElse(null);
-    }
 
     /**
      * Saving new anonymous subscribed or  {@param account}
@@ -43,13 +36,7 @@ public class SubscriberController {
                 .map(Subscriber::of)
                 .orElse(subscriber);
 
-        return ValidationUtils.email(subscriber.getEmail())
-                .getError()
-                .map(error ->  ResponseEntity.badRequest().build())
-                .orElseGet(() -> {
-                            subscribeService.subscribe(toSave);
-                            return ResponseEntity.ok().build();
-                        });
+        return ResponseEntity.ok(subscribeService.subscribe(toSave));
     }
 
     /**

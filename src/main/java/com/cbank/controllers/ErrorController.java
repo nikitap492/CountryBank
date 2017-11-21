@@ -1,5 +1,6 @@
 package com.cbank.controllers;
 
+import com.cbank.exceptions.InsufficientFundsException;
 import com.cbank.exceptions.TokenExpiredException;
 import com.cbank.exceptions.ValidationException;
 import lombok.Data;
@@ -32,6 +33,11 @@ public class ErrorController {
     @ExceptionHandler(TokenExpiredException.class)
     public ResponseEntity<?> handle(TokenExpiredException ex){
         return ResponseEntity.badRequest().body(ErrorMessage.create("The token is expired. Get new token again, please"));
+    }
+
+    @ExceptionHandler(InsufficientFundsException.class)
+    public ResponseEntity<?> handle(InsufficientFundsException ex){
+        return ResponseEntity.badRequest().body(ErrorMessage.create("Insufficient funds. Please, fund money on your account"));
     }
 
     @Data

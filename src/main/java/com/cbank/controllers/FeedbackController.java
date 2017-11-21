@@ -21,13 +21,6 @@ public class FeedbackController {
     private final MessageService messageService;
     private ClientService clientService;
 
-    @ModelAttribute
-    public Client client(Authentication authentication) {
-        return Optional.ofNullable(authentication)
-                .flatMap(auth -> clientService.byUserId(auth.getName()))
-                .orElse(null);
-    }
-
     @PostMapping
     public ResponseEntity<?> persist(@RequestBody Feedback feedback,
                                      @ModelAttribute Client client) {
