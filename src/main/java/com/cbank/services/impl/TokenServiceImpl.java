@@ -3,6 +3,7 @@ package com.cbank.services.impl;
 
 import com.cbank.domain.security.BaseToken;
 import com.cbank.domain.security.BaseTokenType;
+import com.cbank.exceptions.TokenExpiredException;
 import com.cbank.repositories.BaseTokenRepository;
 import com.cbank.services.TokenService;
 import lombok.AllArgsConstructor;
@@ -12,6 +13,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -33,15 +35,9 @@ public class TokenServiceImpl implements TokenService {
         return token;
     }
 
-    @Override
-    public Optional<BaseToken> byId(String id) {
-        return Optional.ofNullable(baseTokenRepository.findOne(id));
-    }
-
-    @Override
-    public BaseToken invalidate(BaseToken token) {
+    private void invalidate(BaseToken token) {
         token.setValid(false);
-        return baseTokenRepository.save(token);
+        baseTokenRepository.save(token);
     }
 
     @Override
@@ -53,5 +49,19 @@ public class TokenServiceImpl implements TokenService {
         int numOfExpired = baseTokenRepository.expire(time);
         log.debug(numOfExpired + " tokens has been updated");
         return numOfExpired;
+    }
+
+    @Override
+    public BaseToken get(String uuid) {
+        val token =  Optional.ofNullable(baseTokenRepository.findOne(uuid))
+                .orElseThrow(EntityNotFoundException::new);
+
+        if(token.getCreatedAt().minusMinutes(10).isBefore(LocalDateTime.now())){
+            invalidate(token);
+            throw new TokenExpiredException();
+        }
+
+        invalidate(token);
+        return token;
     }
 }

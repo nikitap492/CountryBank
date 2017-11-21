@@ -10,15 +10,10 @@ import java.util.Optional;
  */
 public interface TokenService {
 
-
-
-    Optional<BaseToken> byId(String id);
-
     BaseToken create(String username, BaseTokenType tokenType);
-
-    BaseToken invalidate(BaseToken token);
 
     //todo to task
     int checkForExpired();
 
+    BaseToken get(String uuid);
 }
