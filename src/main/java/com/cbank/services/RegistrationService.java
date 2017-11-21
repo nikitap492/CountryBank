@@ -2,7 +2,6 @@ package com.cbank.services;
 
 import com.cbank.domain.Account;
 import com.cbank.domain.RegistrationForm;
-import com.cbank.domain.user.UserProjection;
 
 /**
  * @author Podshivalov N.A.

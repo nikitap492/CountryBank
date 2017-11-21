@@ -1,6 +1,6 @@
 package com.cbank.services;
 
-import com.cbank.domain.Transaction;
+import com.cbank.domain.transaction.Transaction;
 
 import java.math.BigDecimal;
 

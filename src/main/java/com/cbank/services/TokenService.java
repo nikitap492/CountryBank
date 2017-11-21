@@ -1,8 +1,7 @@
 package com.cbank.services;
 
-import com.cbank.domain.security.*;
-
-import java.util.Optional;
+import com.cbank.domain.security.BaseToken;
+import com.cbank.domain.security.BaseTokenType;
 
 /**
  * @author Podshivalov N.A.

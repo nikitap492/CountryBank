@@ -1,7 +1,6 @@
 package com.cbank.services;
 
 import com.cbank.domain.Client;
-import com.cbank.services.PersistableService;
 
 import java.util.Optional;
 
