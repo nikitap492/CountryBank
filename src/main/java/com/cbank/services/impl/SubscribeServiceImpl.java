@@ -4,10 +4,12 @@ package com.cbank.services.impl;
 import com.cbank.domain.Subscriber;
 import com.cbank.repositories.SubscriberRepository;
 import com.cbank.services.SubscribeService;
+import com.cbank.validators.ValidationUtils;
 import lombok.AllArgsConstructor;
 import lombok.val;
 import org.springframework.stereotype.Service;
 
+import javax.validation.ValidationException;
 import java.util.Optional;
 
 /**
@@ -21,6 +23,7 @@ public class SubscribeServiceImpl implements SubscribeService {
 
     @Override
     public Subscriber subscribe(Subscriber subscriber) {
+        ValidationUtils.email(subscriber.getEmail());
         return subscriberRepository.save(subscriber);
     }
 
