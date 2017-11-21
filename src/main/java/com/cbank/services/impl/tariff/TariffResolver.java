@@ -21,7 +21,9 @@ public class TariffResolver implements TariffService{
     public BigDecimal evaluate(Transaction transaction) {
         val tariff = AccountService.GOVERNMENT_ACCOUNT.equals(transaction.getRecipient())
                 ? TariffHolder.BUDGET_TRANSACTION
-                : TariffHolder.GENERAL_TRANSACTION;
+                : AccountService.BANK_ACCOUNT.equals(transaction.getRecipient())
+                    ? TariffHolder.NONE
+                    : TariffHolder.GENERAL_TRANSACTION;
 
         return tariff.evaluate(transaction);
     }

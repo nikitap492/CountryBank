@@ -1,7 +1,9 @@
 package com.cbank.services.impl.tariff;
 
 import com.cbank.domain.Transaction;
+import com.cbank.services.AccountService;
 import com.cbank.services.TariffService;
+import lombok.Getter;
 import lombok.val;
 
 import java.math.BigDecimal;
@@ -37,6 +39,13 @@ public enum  TariffHolder implements TariffService {
                     : amount.compareTo(ONE_THOUSAND) > 0
                         ? commission(amount, 7)
                         : commission(amount, 15);
+        }
+    },
+
+    NONE {
+        @Override
+        public BigDecimal evaluate(Transaction transaction) {
+            return BigDecimal.ZERO;
         }
     }
 

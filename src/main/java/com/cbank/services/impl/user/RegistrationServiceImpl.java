@@ -1,10 +1,11 @@
-package com.cbank.services.impl;
+package com.cbank.services.impl.user;
 
 import com.cbank.domain.Account;
 import com.cbank.domain.RegistrationForm;
 import com.cbank.domain.message.MessageTemplate;
 import com.cbank.domain.security.BaseTokenType;
 import com.cbank.services.*;
+import com.cbank.validators.RegistrationValidator;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -25,10 +26,14 @@ public class RegistrationServiceImpl implements RegistrationService {
     private final ClientService clientService;
     private final AccountService accountService;
     private final MessageService messageService;
+    private final RegistrationValidator registrationValidator;
 
 
     @Override
     public Account register(RegistrationForm form) {
+        registrationValidator.validate(form);
+
+
         val user = userService.save(form.getUsername(), form.getPassword());
         val token = tokenService.create(user.getUsername(), BaseTokenType.REGISTRATION);
 

@@ -17,9 +17,11 @@ public interface UserService extends UserDetailsService, PersistableService<User
 
     Optional<User> byUsername(String username);
 
-    void resetPassword(BaseToken token, String password);
+    void resetPassword(String tokenId, String password);
 
-    void enable(BaseToken token);
+    void passwordToken()
+
+    void enable(String token);
 
     void lock(BaseToken token);
 

@@ -1,4 +1,4 @@
-package com.cbank.services.impl;
+package com.cbank.services.impl.user;
 
 import com.cbank.domain.user.User;
 import com.cbank.domain.security.BaseToken;
@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityExistsException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.Optional;
@@ -41,17 +42,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void resetPassword(BaseToken token, String password) {
-        log.debug("Attempt to reset password by token " + token.getToken());
-        byUsername(token.getUsername())
-                .ifPresent(user -> userRepository.save(setPassword(user, password)));
+    public void resetPassword(String tokenId, String password) {
+        val token = tokenService.get(tokenId);
 
-        tokenService.invalidate(token);
+       byUsername(token.getUsername())
+                .map(user -> userRepository.save(setPassword(user, password)))
+                .orElseThrow(EntityExistsException::new);
+    }
+
+    @Override
+    public void passwordToken() {
+
     }
 
     @Override
     @Transactional
-    public void enable(BaseToken token) {
+    public void enable(String tokenId) {
+        val token = tokenService.get(tokenId);
+
         byUsername(token.getUsername())
                 .ifPresent(user -> {
                     user.setEnabled(true);
@@ -59,7 +67,6 @@ public class UserServiceImpl implements UserService {
                 });
 
         log.debug(token.getUsername() + " was confirmed by token " + token.getToken());
-        tokenService.invalidate(token);
     }
 
     @Override
