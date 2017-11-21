@@ -1,6 +1,8 @@
 package com.cbank.domain.security;
 
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.val;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -9,6 +11,8 @@ import java.util.UUID;
 @MappedSuperclass
 @NoArgsConstructor
 @Data
+@Entity
+@Table(name = "base_token")
 public class BaseToken {
     @Id
     private String token = UUID.randomUUID().toString();
