@@ -29,8 +29,13 @@ public class User implements UserDetails {
 
     @Id
     private Long id;
+
+    @Column(nullable = false, unique = true, updatable = false)
     private String username;
+
+    @Column(nullable = false)
     private String password;
+
     private boolean enabled = false;
     private boolean nonLocked = true;
 
