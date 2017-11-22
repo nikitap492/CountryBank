@@ -6,10 +6,8 @@ import com.cbank.repositories.SubscriberRepository;
 import com.cbank.services.SubscribeService;
 import com.cbank.validators.ValidationUtils;
 import lombok.AllArgsConstructor;
-import lombok.val;
 import org.springframework.stereotype.Service;
 
-import javax.validation.ValidationException;
 import java.util.Optional;
 
 /**
