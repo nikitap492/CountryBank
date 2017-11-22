@@ -7,12 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.val;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.bank.validators.Validator.validateAccount;
-import static com.bank.validators.Validator.validateEmail;
 import static org.springframework.util.StringUtils.hasLength;
 
 
