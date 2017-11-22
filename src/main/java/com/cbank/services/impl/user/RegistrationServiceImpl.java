@@ -5,13 +5,14 @@ import com.cbank.domain.RegistrationForm;
 import com.cbank.domain.message.MessageTemplate;
 import com.cbank.domain.security.BaseTokenType;
 import com.cbank.services.*;
+import com.cbank.utils.MapUtils;
 import com.cbank.validators.RegistrationValidator;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
+import static com.google.common.collect.Maps.immutableEntry;
 
 /**
  * @author Podshivalov N.A.
@@ -44,9 +45,10 @@ public class RegistrationServiceImpl implements RegistrationService {
         accountService.save(account);
 
         messageService.send(client.getEmail(), MessageTemplate.REGISTRATION_CONFIRMATION,
-                Map.of("user", user, "client", client,
-                        "account", account,
-                        "token", token) );
+                MapUtils.from(immutableEntry("user", user),
+                        immutableEntry("client", client),
+                        immutableEntry("account", account),
+                        immutableEntry( "token", token)));
 
         log.debug("Account has been saved successfully: " + account);
         return account;
