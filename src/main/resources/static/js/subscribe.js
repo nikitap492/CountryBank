@@ -3,9 +3,9 @@ $(document).ready(function () {
 });
 
 $("#subscribe-btn").bind("click", function () {
-    var email = $("#subscribe-email").val();
+    let email = $("#subscribe-email").val();
     $.ajax({
-        url: '/api/subscriber/add',
+        url: '/subscribers',
         type: 'post',
         contentType: "application/json",
         datatype: 'json',
@@ -15,17 +15,17 @@ $("#subscribe-btn").bind("click", function () {
         success: function (msg) {
             showOk(msg);
         },
-        error: function (xhr, ajaxOptions, thrownError) {
-            showError(xhr.responseText);
+        error: function (xhr) {
+            showError(xhr.responseJSON.message);
         }
     })
 });
 
 $("#unfollow-btn").bind("click", function () {
-    var email = $("#subscribe-email").val();
+    let email = $("#subscribe-email").val();
     $.ajax({
-        url: '/api/subscriber/delete',
-        type: 'post',
+        url: '/subscribers',
+        type: 'DELETE',
         contentType: "application/json",
         datatype: 'json',
         data: JSON.stringify({
@@ -39,33 +39,35 @@ $("#unfollow-btn").bind("click", function () {
 
 
 function checkIsSubscribed() {
-    var subscribe = $("#subscribe-btn")
-    var unfollow = $("#unfollow-btn");
+    let subscribe = $("#subscribe-btn");
+    let unfollow = $("#unfollow-btn");
     subscribe.hide();
     unfollow.hide();
-    var txt = $(".subscribe-text");
+    let txt = $(".subscribe-text");
     $.ajax({
-        url: '/api/subscriber/check',
-        type: 'get',
+        url: '/subscribers',
+        type: 'GET',
         success: function () {
             unfollow.show();
-            txt.text("You are already subscribed");
+            txt.text("You have already subscribed");
         },
-        error: function (xhr, ajaxOptions, thrownError) {
+        error: function () {
             subscribe.show();
             txt.text("You will know all CB news");
         }
     })
 }
+
+//todo what's about message?
 function showOk(msg) {
-    var img = $(".subscribed");
+    let img = $(".subscribed");
     img.show();
     img.delay(3000).fadeOut(1000);
     checkIsSubscribed();
 }
 
 function showError(msg) {
-    var img = $(".error-img");
+    let img = $(".error-img");
     img.show();
     img.delay(3000).fadeOut(1000);
 }
