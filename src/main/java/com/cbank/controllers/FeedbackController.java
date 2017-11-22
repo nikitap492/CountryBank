@@ -2,7 +2,6 @@ package com.cbank.controllers;
 
 import com.cbank.domain.Client;
 import com.cbank.domain.message.Feedback;
-import com.cbank.services.ClientService;
 import com.cbank.services.MessageService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,10 +14,10 @@ import java.util.Optional;
 @Slf4j
 @RestController
 @AllArgsConstructor
+@AggregationModel
 @RequestMapping("/feedback")
 public class FeedbackController {
     private final MessageService messageService;
-    private ClientService clientService;
 
     @PostMapping
     public ResponseEntity<?> persist(@RequestBody Feedback feedback,

@@ -36,9 +36,6 @@ public class SubscriberController {
         return ResponseEntity.ok(subscribeService.subscribe(toSave));
     }
 
-    /**
-     * Method delete subscribed {@param account}
-     */
     @PreAuthorize("isAuthenticated()")
     @DeleteMapping
     public ResponseEntity<?> deleteSubscriber(@ModelAttribute Client client) {
@@ -47,12 +44,8 @@ public class SubscriberController {
         return ResponseEntity.accepted().build();
     }
 
-    /**
-     * Method check whether {@param account} is subscribed
-     *
-     * @return {@link ResponseEntity<String>} status and message
-     */
     @GetMapping
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<?> exists(@ModelAttribute Client client) {
         return subscribeService.byEmail(client.getEmail())
                 .map((s) -> ResponseEntity.ok().build())
