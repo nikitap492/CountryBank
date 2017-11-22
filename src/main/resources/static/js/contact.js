@@ -1,17 +1,17 @@
 $("#contact-msg").bind("click", function () {
-    var email = $("#contact-email").val();
-    var msg = $("#contact-text").val();
-    var name = $("#contact-name").val();
-    var err = $("#error-msg");
+    let email = $("#contact-email").val();
+    let msg = $("#contact-text").val();
+    let name = $("#contact-name").val();
+    let err = $("#error-msg");
     $.ajax({
-        url: '/api/message/save',
+        url: '/feedback',
         type: 'post',
         contentType: "application/json",
         datatype: 'json',
         data: JSON.stringify({
             email: email,
             name: name,
-            message: msg
+            body: msg
         }),
         success: function () {
             err.text('');
@@ -21,7 +21,7 @@ $("#contact-msg").bind("click", function () {
             }, 4000);
         },
         error: function (xhr, ajaxOptions, thrownError) {
-            err.text(xhr.responseText);
+            err.text(xhr.responseJSON.message);
         }
     })
 });
