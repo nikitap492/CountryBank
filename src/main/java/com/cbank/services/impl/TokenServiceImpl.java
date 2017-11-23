@@ -56,7 +56,7 @@ public class TokenServiceImpl implements TokenService {
         val token =  Optional.ofNullable(baseTokenRepository.findOne(uuid))
                 .orElseThrow(EntityNotFoundException::new);
 
-        if(token.getCreatedAt().minusMinutes(10).isBefore(LocalDateTime.now())){
+        if(token.getCreatedAt().isBefore(LocalDateTime.now().minusMinutes(10))){
             invalidate(token);
             throw new TokenExpiredException();
         }
