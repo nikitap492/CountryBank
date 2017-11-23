@@ -1,6 +1,7 @@
 package com.cbank.domain.user;
 
 import lombok.Data;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.keygen.KeyGenerators;
@@ -19,6 +20,7 @@ import java.util.Collection;
 @Entity
 @Table(name = "users")
 @Data
+@ToString(exclude = {"password", "salt"})
 public class User implements UserDetails {
     private static final StringKeyGenerator keyGenerator = KeyGenerators.string();
 
