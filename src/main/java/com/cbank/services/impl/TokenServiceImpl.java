@@ -29,10 +29,8 @@ public class TokenServiceImpl implements TokenService {
 
     @Override
     public BaseToken create(String username, BaseTokenType tokenType) {
-        val token = BaseToken.of(username, tokenType);
-        baseTokenRepository.save(token);
-        log.debug("Token has been created " + token);
-        return token;
+        log.debug("#create({}, {})", username, tokenType);
+        return  baseTokenRepository.save(BaseToken.of(username, tokenType));
     }
 
     private void invalidate(BaseToken token) {

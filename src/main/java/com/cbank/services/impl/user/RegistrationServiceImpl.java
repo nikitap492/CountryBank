@@ -32,6 +32,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Override
     public Account register(RegistrationForm form) {
+        log.debug("#register({})", form);
         registrationValidator.validate(form);
 
 
@@ -54,6 +55,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         return account;
     }
 
+    //todo
     @Override
     public Account confirm() {
         return null;

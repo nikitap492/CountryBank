@@ -13,5 +13,4 @@ public interface MessageService extends PersistableService<Message> {
 
     Feedback persist(Feedback feedback);
 
-
 }

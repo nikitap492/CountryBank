@@ -20,7 +20,7 @@ class MessageTextTemplateFactory {
     private final TemplateEngine templateEngine;
 
     String create(MessageTemplate template, Map<String, Object> context){
-        val filename = "../templates/" + template.name().toLowerCase();
+        val filename = "../templates/" + template.getFilename();
         return templateEngine.process(filename, new Context(Locale.getDefault(), context));
     }
 
