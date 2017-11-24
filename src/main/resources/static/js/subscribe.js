@@ -1,73 +1,44 @@
-$(document).ready(function () {
-    checkIsSubscribed();
-});
+$(document).ready(() => isSubscribed());
 
-$("#subscribe-btn").bind("click", function () {
-    let email = $("#subscribe-email").val();
-    $.ajax({
+const email = $("#subscribe-email");
+const subscribe = $("#subscribe-btn");
+const unfollow = $("#unfollow-btn");
+const error = $(".error-img");
+const ok = $(".subscribed");
+
+subscribe.bind("click", () => manageSubscriber(POST));
+unfollow.bind("click", () => manageSubscriber(DELETE));
+
+const manageSubscriber = (method) => request({
         url: '/subscribers',
-        type: 'post',
-        contentType: "application/json",
-        datatype: 'json',
-        data: JSON.stringify({
-            email: email
-        }),
-        success: function (msg) {
-            showOk(msg);
-        },
-        error: function (xhr) {
-            showError(xhr.responseJSON.message);
-        }
-    })
-});
-
-$("#unfollow-btn").bind("click", function () {
-    let email = $("#subscribe-email").val();
-    $.ajax({
-        url: '/subscribers',
-        type: 'DELETE',
-        contentType: "application/json",
-        datatype: 'json',
-        data: JSON.stringify({
-            email: email
-        }),
-        success: function () {
-            showOk('Success');
-        }
-    })
-});
+        type: method,
+        data: {email: email.val()}
+    },
+    showOk, showError);
 
 
-function checkIsSubscribed() {
-    let subscribe = $("#subscribe-btn");
-    let unfollow = $("#unfollow-btn");
-    subscribe.hide();
+const isSubscribed = () => {
     unfollow.hide();
-    let txt = $(".subscribe-text");
-    $.ajax({
-        url: '/subscribers',
-        type: 'GET',
-        success: function () {
-            unfollow.show();
-            txt.text("You have already subscribed");
+    subscribe.hide();
+    request(
+        {
+            url: '/subscribers',
+            type: GET
         },
-        error: function () {
-            subscribe.show();
-            txt.text("You will know all CB news");
-        }
-    })
+        () => {unfollow.show()},
+        () => {subscribe.show()}
+    );
+};
+
+function showOk() {
+    error.hide();
+    ok.show();
+    ok.delay(3000).fadeOut(1000);
+    isSubscribed()
 }
 
-//todo what's about message?
-function showOk(msg) {
-    let img = $(".subscribed");
-    img.show();
-    img.delay(3000).fadeOut(1000);
-    checkIsSubscribed();
-}
-
-function showError(msg) {
-    let img = $(".error-img");
-    img.show();
-    img.delay(3000).fadeOut(1000);
+function showError() {
+    ok.hide();
+    error.show();
+    error.delay(3000).fadeOut(1000);
 }
