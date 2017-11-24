@@ -6,16 +6,11 @@ import com.bank.domain.user.User;
 import com.bank.service.AccountService;
 import com.bank.service.BillService;
 import com.bank.service.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -25,29 +20,23 @@ import org.springframework.security.web.RedirectStrategy;
 
 import java.util.Properties;
 
-
-@SpringBootApplication
-@PropertySource(value = "classpath:application.yml")
+@Slf4j
+//@SpringBootApplication
+//@PropertySource(value = "classpath:application.yml")
 @EnableScheduling
+@RequiredArgsConstructor
 public class Application {
 
     @Value("${spring.jpa.hibernate.ddl-auto}")
     private String ddl_auto;
 
-    private static final Logger log = LoggerFactory.getLogger(Application.class);
+    private final UserService userService;
+    private final AccountService accountService;
+    private final BillService billService;
 
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private AccountService accountService;
-
-    @Autowired
-    private BillService billService;
-
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
+   // public static void main(String[] args) {
+        //SpringApplication.run(Application.class, args);
+   // }
 
     @Bean
     public JavaMailSender mailSender(@Value("${spring.mail.host}") String host,

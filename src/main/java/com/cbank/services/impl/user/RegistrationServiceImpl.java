@@ -58,4 +58,11 @@ public class RegistrationServiceImpl implements RegistrationService {
     public Account confirm() {
         return null;
     }
+
+    @Override
+    public boolean check(String usernameOrEmail) {
+        return userService.byUsername(usernameOrEmail)
+                .flatMap(user -> clientService.byUserId(user.getUsername()))
+                .isPresent();
+    }
 }

@@ -1,23 +1,18 @@
 package com.cbank.services.impl.user;
 
 import com.cbank.domain.user.User;
-import com.cbank.domain.security.BaseToken;
 import com.cbank.repositories.UserRepository;
 import com.cbank.services.TokenService;
 import com.cbank.services.UserService;
-import com.google.common.hash.Hashing;
-import com.google.common.io.BaseEncoding;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityExistsException;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
 import java.util.Optional;
 
 /**
@@ -25,6 +20,7 @@ import java.util.Optional;
  * @since 21.11.2017.
  */
 @Slf4j
+@Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
@@ -37,7 +33,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> byUsername(String username) {
-        return null;
+        return userRepository.findByUsername(username);
     }
 
     @Override
@@ -51,13 +47,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void passwordToken() {
-
-    }
-
-    @Override
     @Transactional
     public void enable(String tokenId) {
+        log.debug("#enable({})", tokenId);
         val token = tokenService.get(tokenId);
 
         byUsername(token.getUsername())
@@ -66,23 +58,19 @@ public class UserServiceImpl implements UserService {
                     userRepository.save(user);
                 });
 
-        log.debug(token.getUsername() + " was confirmed by token " + token.getToken());
     }
 
     @Override
-    public void lock(BaseToken token) {
-        val username = token.getUsername();
-        log.debug("Blocking user "  + username );
-        byUsername(username).ifPresent(user -> {
-            user.setNonLocked(false);
-            userRepository.save(user);
-        });
+    public void lock(User user) {
+        log.debug("#lock({})", user);
+        user.setNonLocked(true);
+        save(user);
     }
 
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        log.debug("Trying to find user  : " + username);
+        log.debug("#loadUserByUsername({})", username);
         return byUsername(username)
                 .map(user -> (UserDetails) user)
                 .orElseThrow( () -> new UsernameNotFoundException("User : " + username + " was not found "));

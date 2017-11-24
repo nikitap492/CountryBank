@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.val;
 import org.springframework.mail.SimpleMailMessage;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -20,6 +21,8 @@ public class Message extends Persistable{
 
     private String to;
     private String title;
+
+    @Column(length = Integer.MAX_VALUE)
     private String body;
 
     public SimpleMailMessage toMailMessage(String sender) {

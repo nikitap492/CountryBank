@@ -16,7 +16,7 @@ public class ValidationResult<T> {
         return error;
     }
 
-    void setEntity(T entity) {
+    public void setEntity(T entity) {
         this.entity = entity;
     }
 

@@ -13,4 +13,5 @@ public interface RegistrationService {
 
     Account confirm();
 
+    boolean check(String usernameOrEmail);
 }

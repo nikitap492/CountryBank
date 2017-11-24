@@ -23,10 +23,10 @@ public class RegistrationValidator implements Validator<RegistrationForm> {
     private static final Pattern pattern = Pattern.compile(USERNAME_REGEX);
 
     private static final String NULL = "You have not entered username or email";
-    private static final String SMALL_PASSWORD = "Your password has small length";
+    private static final String SMALL_PASSWORD = "Your password is too short";
     private static final String INCORRECT_USERNAME = "Incorrect username";
-    private static final String USERNAME_ALREADY_EXIST = "Username already had been registered";
-    private static final String SMALL_ADDRESS_OR_NAME = "Address or Name has small length";
+    private static final String USERNAME_ALREADY_EXIST = "Username is already taken";
+    private static final String SMALL_ADDRESS_OR_NAME = "Address or Name is too short";
 
     private final UserService userService;
 
@@ -41,11 +41,11 @@ public class RegistrationValidator implements Validator<RegistrationForm> {
         val email = form.getEmail();
         ValidationUtils.email(email);
         if (username == null) return NULL;
-        if (!isAlreadyExist(username)) return USERNAME_ALREADY_EXIST;
+        if (isAlreadyExist(username)) return USERNAME_ALREADY_EXIST;
         if (!pattern.matcher(username).matches()) return INCORRECT_USERNAME;
         if (!validatePassword(form.getPassword()))  return SMALL_PASSWORD;
-        if (hasLength(form.getAddress()) && form.getAddress().length() > 5)  return SMALL_ADDRESS_OR_NAME;
-        if (hasLength(form.getName()) && form.getName().length() > 5)  return SMALL_ADDRESS_OR_NAME;
+        if (hasLength(form.getAddress()) && form.getAddress().length() < 5)  return SMALL_ADDRESS_OR_NAME;
+        if (hasLength(form.getName()) && form.getName().length() < 3)  return SMALL_ADDRESS_OR_NAME;
         return null;
     }
 

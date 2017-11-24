@@ -2,6 +2,7 @@ package com.cbank.domain;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +17,7 @@ import java.util.Random;
 @Entity
 @Table(name = "accounts")
 @EqualsAndHashCode(callSuper = false)
+@NoArgsConstructor
 public class Account extends Persistable{
     private static final Random random = new Random();
 
