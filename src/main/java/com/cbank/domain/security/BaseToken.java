@@ -16,7 +16,7 @@ public class BaseToken {
     @Id
     private String token = UUID.randomUUID().toString();
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String username;
 
     @Column(nullable = false)
