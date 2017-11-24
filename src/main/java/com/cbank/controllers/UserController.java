@@ -59,7 +59,7 @@ public class UserController {
 
     @PostMapping(value = "/confirmation")
     public ResponseEntity<?> confirm(@RequestParam String token) {
-        userService.enable(token);
+        registrationService.confirm(token);
         return ResponseEntity.ok().build();
     }
 

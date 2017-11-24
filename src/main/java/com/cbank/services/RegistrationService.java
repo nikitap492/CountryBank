@@ -11,7 +11,7 @@ public interface RegistrationService {
 
     Account register(RegistrationForm form);
 
-    Account confirm();
+    void confirm(String token);
 
     boolean check(String usernameOrEmail);
 }

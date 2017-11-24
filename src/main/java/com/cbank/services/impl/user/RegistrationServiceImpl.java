@@ -55,10 +55,9 @@ public class RegistrationServiceImpl implements RegistrationService {
         return account;
     }
 
-    //todo
     @Override
-    public Account confirm() {
-        return null;
+    public void confirm(String token) {
+        userService.enable(token);
     }
 
     @Override
