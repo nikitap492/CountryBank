@@ -10,7 +10,9 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum  MessageTemplate {
-    REGISTRATION_CONFIRMATION("You are welcomed to Country Bank!");
+    REGISTRATION_CONFIRMATION("You are welcomed to Country Bank!", "registration"),
+    ACCESS_RECOVERY("Recovery of bank access", "recovery" );
 
     public final String title;
+    public final String filename;
 }

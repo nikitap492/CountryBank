@@ -1,6 +1,7 @@
 package com.cbank.controllers;
 
 import com.cbank.domain.RegistrationForm;
+import com.cbank.services.ClientService;
 import com.cbank.services.RegistrationService;
 import com.cbank.services.UserService;
 import lombok.AllArgsConstructor;
@@ -24,11 +25,12 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private final UserService userService;
     private final RegistrationService registrationService;
+    private final ClientService clientService;
 
 
     @PostMapping(value = "/registration")
     public ResponseEntity<?> addNewUser(@RequestBody RegistrationForm form) {
-        log.debug("Trying to register new client : " + form);
+        log.debug("#addNewUser({})", form);
         return ResponseEntity.ok().body(registrationService.register(form));
     }
 
@@ -49,20 +51,13 @@ public class UserController {
     }
 
     @GetMapping(value = "/password")
-    public ResponseEntity<?> forget(@RequestParam String login) {
-        log.debug("Trying to find " + login);
-        userService.byUsername(login)
-                .ifPresent(userService::passwordToken);
+    public ResponseEntity<?> forget(@RequestParam String loginOrEmail) {
+        log.debug("#forget({})", loginOrEmail);
+        clientService.accessRecovery(loginOrEmail);
         return ResponseEntity.accepted().build();
     }
-/*
 
-    private String getResetPasswordText(ResetPasswordToken token) {
-        return "Country bank is greeting to you\nPlease, click the link http://localhost:8000/reset_password?token=" + token.getToken() + " for reset password";
-    }
-*/
-
-    @PostMapping(value = "/confirm")
+    @PostMapping(value = "/confirmation")
     public ResponseEntity<?> confirm(@RequestParam String token) {
         userService.enable(token);
         return ResponseEntity.ok().build();

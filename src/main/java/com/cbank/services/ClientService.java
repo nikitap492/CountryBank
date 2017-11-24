@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface ClientService extends PersistableService<Client>{
 
     Optional<Client> byUserId(String username);
+
+    void accessRecovery(String loginOrEmail);
 }
