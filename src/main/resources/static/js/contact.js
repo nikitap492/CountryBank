@@ -1,27 +1,31 @@
-$("#contact-msg").bind("click", function () {
-    let email = $("#contact-email").val();
-    let msg = $("#contact-text").val();
-    let name = $("#contact-name").val();
-    let err = $("#error-msg");
-    $.ajax({
-        url: '/feedback',
-        type: 'post',
-        contentType: "application/json",
-        datatype: 'json',
-        data: JSON.stringify({
-            email: email,
-            name: name,
-            body: msg
-        }),
-        success: function () {
+const contactEmail = $("#contact-email");
+const messageBody = $("#contact-text");
+const contactName = $("#contact-name");
+const err = $("#error-msg");
+const contactSuccess =  $("#contact-success");
+const messageSendButton = $("#contact-msg");
+
+
+messageSendButton.bind("click", function () {
+    addMessage(contactEmail.val(), contactName.val(), messageBody.val()(
+        () => {
             err.text('');
-            $("#contact-success").show();
+            contactSuccess.show();
             window.setTimeout(function () {
-                window.location.replace("/");
+                redirect("/");
             }, 4000);
         },
-        error: function (xhr, ajaxOptions, thrownError) {
-            err.text(xhr.responseJSON.message);
-        }
-    })
+        (xhr) => err.text(xhr.responseJSON.message)
+    ))
 });
+
+const addMessage = (email, name, body) => (success, error) =>
+    request({
+        url: '/feedback',
+        type: POST,
+        data: {
+            email: email,
+            name: name,
+            body: body
+        }
+    }, success, error);
