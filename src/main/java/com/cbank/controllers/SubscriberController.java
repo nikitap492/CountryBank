@@ -40,14 +40,14 @@ public class SubscriberController {
     @DeleteMapping
     public ResponseEntity<?> deleteSubscriber(@ModelAttribute Client client) {
         log.debug("Deleting subscriber by client: " + client);
-        subscribeService.unsubscribe(Subscriber.of(client.getEmail()));
+        subscribeService.unsubscribe(client.getEmail());
         return ResponseEntity.accepted().build();
     }
 
     @GetMapping
-    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<?> exists(@ModelAttribute Client client) {
-        return subscribeService.byEmail(client.getEmail())
+        return Optional.ofNullable(client)
+                .flatMap((c) -> subscribeService.byEmail(c.getEmail()))
                 .map((s) -> ResponseEntity.ok().build())
                 .orElse(ResponseEntity.notFound().build());
     }

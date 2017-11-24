@@ -13,5 +13,5 @@ public interface SubscribeService {
 
     Optional<Subscriber> byEmail(String email);
 
-    Subscriber unsubscribe(Subscriber subscriber);
+    void unsubscribe(String email) ;
 }

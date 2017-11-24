@@ -22,7 +22,8 @@ public class SubscribeServiceImpl implements SubscribeService {
     @Override
     public Subscriber subscribe(Subscriber subscriber) {
         ValidationUtils.email(subscriber.getEmail());
-        return subscriberRepository.save(subscriber);
+        return subscriberRepository.findByEmail(subscriber.getEmail())
+                .orElseGet(() -> subscriberRepository.save(subscriber));
     }
 
     @Override
@@ -31,8 +32,7 @@ public class SubscribeServiceImpl implements SubscribeService {
     }
 
     @Override
-    public Subscriber unsubscribe(Subscriber subscriber) {
-        subscriberRepository.delete(subscriber);
-        return subscriber;
+    public void unsubscribe(String email) {
+        subscriberRepository.deleteByEmail(email);
     }
 }
