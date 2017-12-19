@@ -1,10 +1,7 @@
 package com.cbank.domain.message;
 
 import com.cbank.domain.Persistable;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.val;
+import lombok.*;
 import org.springframework.mail.SimpleMailMessage;
 
 import javax.persistence.Column;
@@ -15,7 +12,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "messages")
 @Data
-@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Message extends Persistable{
 

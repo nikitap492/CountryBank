@@ -13,6 +13,7 @@ import javax.persistence.MappedSuperclass;
 @Data
 @MappedSuperclass
 public class Persistable {
+
     @Id
     @GeneratedValue
     private Long id;

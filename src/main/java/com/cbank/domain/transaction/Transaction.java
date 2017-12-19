@@ -1,9 +1,7 @@
 package com.cbank.domain.transaction;
 
 import com.cbank.domain.Persistable;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -13,6 +11,8 @@ import java.time.LocalDateTime;
 @Table(name = "transactions")
 @EqualsAndHashCode(callSuper = false)
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class Transaction extends Persistable {
 
