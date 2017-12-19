@@ -1,6 +1,7 @@
 package com.cbank.services;
 
 import com.cbank.domain.transaction.Transaction;
+import com.cbank.domain.transaction.TransactionAccountProjection;
 
 import java.util.Collection;
 
@@ -12,5 +13,5 @@ public interface TransactionService {
 
     Transaction create(Transaction transaction);
 
-    Collection<Transaction> byAccount(String accountNum);
+    Collection<TransactionAccountProjection> byAccount(String accountNum);
 }

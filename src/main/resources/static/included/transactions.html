@@ -11,6 +11,8 @@
                             <img th:case="${T(com.cbank.domain.transaction.TransactionDirection).IN}"
                                  src="../images/arrow-up_green.png"/>
                         </div>
+                        <div><p th:text="${(transaction.direction == T(com.cbank.domain.transaction.TransactionDirection).IN ? 'Payer ' : 'Recipient ')
+                         + transaction.accountNum}"></p></div>
                         <div class="col-md-2">
                             <h4 th:text="'Amount : ' + ${transaction.amount}"></h4>
                         </div>

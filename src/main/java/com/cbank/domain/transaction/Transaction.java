@@ -3,7 +3,9 @@ package com.cbank.domain.transaction;
 import com.cbank.domain.Persistable;
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -21,11 +23,6 @@ public class Transaction extends Persistable {
 
     @Column(nullable = false)
     private String recipient;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    @Builder.Default
-    private TransactionDirection direction = TransactionDirection.OUT;
 
     @Column(nullable = false)
     private BigDecimal amount;
