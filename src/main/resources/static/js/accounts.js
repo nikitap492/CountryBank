@@ -4,7 +4,7 @@ const makeNewAccount = () => showConfirmation(() =>
     request({
         url: "/accounts",
         type: POST,
-    }, () => showResult("#accounts", "6543") ,
+    }, () => showResult("#accounts", "Account was created successfully") ,
         (xhr) => showResult("#accounts", xhr.responseJSON.message)));
 
 const markAccountAsCurrent = () => showConfirmation(() =>
