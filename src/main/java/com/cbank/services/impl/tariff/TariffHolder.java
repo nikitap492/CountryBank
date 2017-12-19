@@ -11,7 +11,6 @@ import java.math.BigDecimal;
  * @since 21.11.2017.
  */
 public enum  TariffHolder implements TariffService {
-
     BUDGET_TRANSACTION {
 
         @Override
@@ -24,9 +23,10 @@ public enum  TariffHolder implements TariffService {
     }, GENERAL_TRANSACTION {
         private final BigDecimal FIFTY = BigDecimal.valueOf(50);
         private final BigDecimal ONE_THOUSAND = BigDecimal.valueOf(1000);
+        private final BigDecimal ONE_HUNDRED = new BigDecimal(100);
 
         private BigDecimal commission(BigDecimal amount, int rate){
-            return amount.multiply(BigDecimal.valueOf(rate));
+            return amount.multiply(BigDecimal.valueOf(rate).divide(ONE_HUNDRED, BigDecimal.ROUND_CEILING));
         }
 
         @Override
