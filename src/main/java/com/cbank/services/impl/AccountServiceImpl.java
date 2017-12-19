@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.Collection;
 import java.util.Optional;
 
 /**
@@ -58,10 +59,19 @@ public class AccountServiceImpl implements AccountService {
                 .payer(current.getNum())
                 .amount(NEW_ACCOUNT_PRICE)
                 .recipient(BANK_ACCOUNT)
-                .details("The payment is for account opening")
+                .details("Account opening fee")
                 .build();
 
         transactionService.create(transaction);
-        return  accountRepository.save(new Account(current.getClientId()));
+        val persited =   accountRepository.save(new Account(current.getClientId()));
+
+        current.setCurrent(Boolean.FALSE);
+        accountRepository.save(current);
+        return persited;
+    }
+
+    @Override
+    public Collection<Account> byClient(Long clientId) {
+        return accountRepository.findAllByClientId(clientId);
     }
 }

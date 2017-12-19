@@ -19,7 +19,7 @@ public class BalanceServiceImpl implements BalanceService {
     @Override
     public BigDecimal balance(String accountNum) {
         return transactionRepository.findAllByAccountNum(accountNum).stream()
-                .map(tr -> tr.getPayer().equals(accountNum) ? tr.getAmount() : tr.getAmount().negate())
+                .map(tr -> tr.getRecipient().equals(accountNum) ? tr.getAmount() : tr.getAmount().negate())
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }

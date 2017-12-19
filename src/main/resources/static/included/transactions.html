@@ -1,0 +1,31 @@
+<div th:fragment="statement">
+    <div th:unless="${#lists.isEmpty(transactions)}">
+        <h2 class="title">Account's transactions</h2>
+        <ul th:each="transaction : ${transactions}">
+            <li>
+                <div class="row">
+                    <div class="transaction">
+                        <div th:switch="${transaction.direction}" class="col-md-2">
+                            <img th:case="${T(com.cbank.domain.transaction.TransactionDirection).OUT}"
+                                 src="../images/arrow-down_red.png"/>
+                            <img th:case="${T(com.cbank.domain.transaction.TransactionDirection).IN}"
+                                 src="../images/arrow-up_green.png"/>
+                        </div>
+                        <div class="col-md-2">
+                            <h4 th:text="'Amount : ' + ${transaction.amount}"></h4>
+                        </div>
+                        <div class="col-md-3">
+                            <h4 th:text="${transaction.createdAt}"></h4>
+                        </div>
+                        <div class="col-md-5">
+                            <h4 th:text="${transaction.details}"></h4>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div th:if="${#lists.isEmpty(transactions)}">
+        <h2 class="title">Account has no transaction</h2>
+    </div>
+</div>

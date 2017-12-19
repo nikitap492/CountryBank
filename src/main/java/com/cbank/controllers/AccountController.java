@@ -4,6 +4,7 @@ package com.cbank.controllers;
 import com.cbank.domain.Account;
 import com.cbank.services.AccountService;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,12 +27,17 @@ public class AccountController {
         );
     }
 
-    @PatchMapping(value = "/current")
-    public ResponseEntity<?> setCurrent(@RequestParam String accountNum,
+    @PatchMapping
+    public ResponseEntity<?> setCurrent(@RequestBody MarkAsCurrentRequest request,
                                         @ModelAttribute("account") Account current) {
         return ResponseEntity.ok(
-                accountService.asCurrent(current, accountNum)
+                accountService.asCurrent(current, request.accountNum)
         );
+    }
+
+    @Data
+    private static class MarkAsCurrentRequest{
+        private String accountNum;
     }
 
 

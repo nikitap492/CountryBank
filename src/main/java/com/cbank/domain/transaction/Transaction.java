@@ -31,7 +31,7 @@ public class Transaction extends Persistable {
     private BigDecimal amount;
 
     @Builder.Default
-    private LocalDateTime createAt = LocalDateTime.now();
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     private String details;
 }

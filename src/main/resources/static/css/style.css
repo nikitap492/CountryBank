@@ -64,7 +64,7 @@ section {
 }
 
 #credit, #transfer, #pay, #result, #sign_up, #congratulation,
-#error, #movements, #confirmation, #deposit, #sign_in, #forget {
+#error, #statement, #confirmation, #deposit, #sign_in, #forget {
     display: none;
 }
 
@@ -126,7 +126,7 @@ form {
     border: 1px solid #6c7c6e !important;
 }
 
-#subscribe, #movements, footer {
+#subscribe, #statement, footer {
     background-color: #121116;
     color: #ffffff;
 }
@@ -657,7 +657,7 @@ Result section
 /* ==========================================================================
 Private section
 ========================================================================== */
-#bills div,
+#accounts div,
 #account div {
     animation-duration: 2s;
     -webkit-animation-duration: 2s;
@@ -667,53 +667,53 @@ Private section
     padding-bottom: 0;
 }
 
-#bills {
+#accounts {
     padding-top: 0;
 }
 
-.bill {
+.account {
     padding: 10px;
     position: relative;
     padding-bottom: 300px;
 }
 
-.bill img {
+.account img {
     position: absolute;
     left: 0;
     top: 0;
 }
 
-.bill h4 {
+.account h4 {
     position: absolute;
     z-index: 10;
     top: 220px;
     left: 20px;
 }
 
-.bill h4 strong {
+.account h4 strong {
     font-weight: 700;
     font-size: 50px;
 }
 
-.bill .num {
+.account .num {
     color: #fff;
     top: 120px;
     left: 15px
 }
 
-.bill .current {
+.account .current {
     color: #2b2b2b;
     position: absolute;
     top: 205px;
     left: 275px;
 }
 
-.movement {
+.transaction {
     background: #121116;
     border-radius: 30px;
 }
 
-.bill_controller {
+.account_controller {
     cursor: pointer;
     padding-top: 100px;
 }

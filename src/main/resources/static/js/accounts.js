@@ -11,7 +11,7 @@ const markAccountAsCurrent = () => showConfirmation(() =>
     request({
             url: "/accounts",
             type: PATCH,
-            data: $("#account-num").text()
+            data: {accountNum : $("#account-num").text()}
         },
         () => redirect('/private'),
         () => redirect('/error')

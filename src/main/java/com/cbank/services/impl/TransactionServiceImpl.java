@@ -50,7 +50,7 @@ public class TransactionServiceImpl implements TransactionService {
             val commission = Transaction.builder()
                     .payer(payer)
                     .recipient(AccountService.BANK_ACCOUNT)
-                    .createAt(LocalDateTime.now())
+                    .createdAt(LocalDateTime.now())
                     .amount(byTariff)
                     .details("Commission for transaction " + transaction.getId())
                     .build();

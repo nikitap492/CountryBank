@@ -3,6 +3,7 @@ package com.cbank.services;
 import com.cbank.domain.Account;
 
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.Optional;
 
 /**
@@ -19,4 +20,6 @@ public interface AccountService extends PersistableService<Account> {
     Account asCurrent(Account current, String accountNum);
 
     Account create(Account current);
+
+    Collection<Account> byClient(Long clientId);
 }
