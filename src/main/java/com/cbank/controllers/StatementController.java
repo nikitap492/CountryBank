@@ -23,8 +23,8 @@ public class StatementController {
 
     @GetMapping
     public String movements(@PathVariable String accountNum, Model model) {
-        model.addAttribute("movements", transactionService.byAccount(accountNum));
-        return "included/movements :: movementsList";
+        model.addAttribute("transactions", transactionService.byAccount(accountNum));
+        return "included/transactions :: statement";
     }
 
 

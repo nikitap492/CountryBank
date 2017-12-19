@@ -1,6 +1,11 @@
 package com.cbank.controllers;
 
+import com.cbank.domain.Client;
+import com.cbank.services.AccountService;
+import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
@@ -8,7 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 
 @Controller
+@AllArgsConstructor
 public class NavigationController {
+    private final AccountService accountService;
 
     @GetMapping("/")
     public String init() {
@@ -43,6 +50,13 @@ public class NavigationController {
     @GetMapping("/confirm")
     public String confirm() {
         return "confirm";
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/private")
+    public String dbo(Client client, Model model) {
+        model.addAttribute("accounts", accountService.byClient(client.getId()));
+        return "private";
     }
 
 }
