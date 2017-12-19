@@ -5,17 +5,17 @@
 
 <section class="navbar navbar-fixed-top custom-navbar" th:include="included/navbar"></section>
 
-<section id="account">
+<section id="client">
     <div class="container wow animated bounceIn">
         <div class="row">
             <div class="col-sm-12 col-md-5">
-                <input type="text" id="name" th:placeholder="${account.name}" class="sign-input" readonly="readonly"/>
+                <input type="text" id="name" th:placeholder="${client.name}" class="sign-input" readonly="readonly"/>
             </div>
             <div class="col-md-2">
                 <a href="/contact"><i class="fa-envelope-o fa fa-5x big_scale_animated"></i></a>
             </div>
             <div class="col-sm-12 col-md-5">
-                <input type="text" id="address" th:placeholder="${account.address}" class="sign-input"
+                <input type="text" id="address" th:placeholder="${client.address}" class="sign-input"
                        readonly="readonly"/>
             </div>
 
@@ -23,39 +23,39 @@
     </div>
 </section>
 
-<section id="bills">
+<section id="accounts">
     <div class="container">
         <div class="row">
             <div class="wow bounceInRight animated ">
-                <ul th:each="bill : ${bills}">
+                <ul th:each="account : ${accounts}">
                     <li class="col-sm-8 col-sm-offset-2 col-md-offset-1 col-md-4 col-md-offset-1 scale_animated">
-                        <div class="bill"
-                             th:onclick="'lookupMovements(\'' + ${bill.uuid} + '\', ' + ${bill.getCurrent()} + ')'">
+                        <div class="account"
+                             th:onclick="'statement(\'' + ${account.num} + '\', ' + ${account.getCurrent()} + ')'">
                             <img src="images/credit-card.png" class="main-img"/>
                             <div>
-                                <h4 class="num" th:text="'Bill : ' + ${bill.uuid}"></h4>
+                                <h4 class="num" th:text="'Account : ' + ${account.num}"></h4>
                             </div>
-                            <h4><strong th:text="${bill.money}"></strong></h4>
-                            <i th:if="${bill.getCurrent()}" class="fa fa-check fa-5x current"></i>
+                            <!--h4><strong th:text="${account.amount}"></strong></h4>--> <!-- todo balance -->
+                            <i th:if="${account.getCurrent()}" class="fa fa-check fa-5x current"></i>
                         </div>
                     </li>
                 </ul>
             </div>
             <div class="col-sm-12 col-md-offset-4 col-md-4">
-                <i class="fa fa-plus-circle fa-5x bill_controller big_scale_animated" id="open-bill-btn"></i>
+                <i class="fa fa-plus-circle fa-5x _controller big_scale_animated" id="open-account-btn"></i>
             </div>
         </div>
     </div>
 </section>
 <section id="result" th:include="included/result"></section>
 
-<section id="movements">
+<section id="statement">
     <div>
-        <h1>Bill</h1>
+        <h1>Account</h1>
         <hr/>
-        <h2 class="title" id="bill-uuid"></h2>
+        <h2 class="title" id="account-num"></h2>
         <div>
-            <button id="current-setter-btn" class="btn btn-white" onclick="setCurrent()">Set As Current</button>
+            <button id="current-setter-btn" class="btn btn-white" onclick="markAccountAsCurrent()">Set As Current</button>
         </div>
         <hr/>
     </div>
@@ -68,6 +68,8 @@
 <script src="js/jquery-1.11.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/auth.js"></script>
+<script src="js/accounts.js"></script>
+<script src="js/request.js"></script>
 <script src="js/common.js"></script>
 
 </body>
