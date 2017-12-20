@@ -12,6 +12,6 @@ import java.util.Collection;
  */
 public interface TransactionRepository extends JpaRepository<Transaction, Long>{
 
-    @Query("select t from Transaction t where t.payer = ?1 or t.recipient = ?2")
+    @Query("select t from Transaction t where t.payer = ?1 or t.recipient = ?1")
     Collection<Transaction> findAllByAccountNum(String accountNum);
 }
