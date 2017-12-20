@@ -16,8 +16,8 @@ const commit = (accountNum, amount, details) => {
                 details: details
             }
         },
-        (data) =>  showResult("#transfer", data),
-        (err) => showResult("#transfer", err.responseText)
+        (data) =>  showResult("#transfer", "Transaction was successfully saved"),
+        (err) => showResult("#transfer", err.responseJSON.message)
     )
 };
 
@@ -26,6 +26,11 @@ $("#commit").bind("click", function () {
     let amount = $("#amount").val();
     let details = $("#details").val();
     showConfirmation(() => commit(accountNum, amount, details));
+});
+
+$("#commitPayment").bind("click", function () {
+    let amount = $("#paymentAmount").val();
+    showConfirmation(() => commit(governmentAccountNum, amount));
 });
 
 const statement = (accountNum, flag) => {
@@ -51,4 +56,6 @@ const balance  = (accountNum) => {
         },
         (data) =>  balanceHolder.text(data.balance), (err) => {console.log(err.text)}
     )
-}
+};
+
+const governmentAccountNum = "9999999999999999";
