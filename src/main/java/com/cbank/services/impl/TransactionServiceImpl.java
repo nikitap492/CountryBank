@@ -1,6 +1,8 @@
 package com.cbank.services.impl;
 
+import com.cbank.domain.Account;
 import com.cbank.domain.transaction.Transaction;
+import com.cbank.domain.transaction.TransactionAccountProjection;
 import com.cbank.exceptions.InsufficientFundsException;
 import com.cbank.repositories.TransactionRepository;
 import com.cbank.services.AccountService;
@@ -16,6 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Collection;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * @author Podshivalov N.A.
@@ -46,7 +50,7 @@ public class TransactionServiceImpl implements TransactionService {
             throw new InsufficientFundsException();
 
         transactionRepository.save(transaction);
-        if (byTariff.compareTo(BigDecimal.ZERO) > 0){
+        if (byTariff.compareTo(BigDecimal.ZERO) > 0) {
             val commission = Transaction.builder()
                     .payer(payer)
                     .recipient(AccountService.BANK_ACCOUNT)
@@ -62,7 +66,23 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public Collection<Transaction> byAccount(String accountNum) {
-        return transactionRepository.findAllByAccountNum(accountNum);
+    @Transactional
+    public Transaction creditWithdraw(Account account, BigDecimal amount) {
+        val transaction = Transaction.builder()
+                .payer(account.getNum())
+                .recipient(AccountService.BANK_ACCOUNT)
+                .createdAt(LocalDateTime.now())
+                .amount(amount)
+                .details("The credit's fee")
+                .build();
+
+        return transactionRepository.save(transaction);
+    }
+
+    @Override
+    public Collection<TransactionAccountProjection> byAccount(String accountNum) {
+        return transactionRepository.findAllByAccountNum(accountNum).stream()
+                .map(tr -> TransactionAccountProjection.from(tr, accountNum))
+                .collect(toList());
     }
 }
