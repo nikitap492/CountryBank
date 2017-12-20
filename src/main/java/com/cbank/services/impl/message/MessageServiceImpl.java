@@ -37,12 +37,7 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public Message send(String recipient, MessageTemplate template, Map<String, Object> context) {
         log.debug("#send({},{},{})", recipient, template, context);
-
-        val message = Message.builder()
-                .to(recipient)
-                .title(template.getTitle())
-                .body(templateFactory.create(template, context))
-                .build();
+        val message = new Message(recipient, template.getTitle(), templateFactory.create(template, context));
 
         mailSender.send(
                 save(message).toMailMessage(from)
