@@ -71,21 +71,19 @@
             <div class="col-md-6 col-sm-12">
                 <form class="wow fadeInUp" data-wow-delay="0.6s">
                     <h2 class="heading bold">Transfer information</h2>
-                    <p>Please, enter all information for transfer</p>
+                    <p>Please, enter all information to make transfer</p>
                     <div class="col-md-12 col-sm-12">
-                        <input type="text" class="form-control" placeholder="Account" name="account" id="transfer_uuid"/>
+                        <input type="text" class="form-control" placeholder="Account" name="account" id="accountNum"/>
                     </div>
                     <div class="col-md-12 col-sm-12 ">
-                        <input type="number" class="form-control" placeholder="Quantity" name="quantity"
-                               id="transfer_quantity"/>
+                        <input type="number" class="form-control" placeholder="Amount" name="amount" id="amount"/>
                     </div>
                     <div class="col-md-12 col-sm-12">
-                        <textarea class="form-control" placeholder="Message" rows="5" name="message"
-                                  id="transfer_message"></textarea>
+                        <textarea class="form-control" placeholder="Message" rows="5" name="message" id="details"></textarea>
                     </div>
                 </form>
                 <div class="col-md-offset-4 col-md-8 col-sm-offset-4 col-sm-8">
-                    <button class="btn btn-on-white scale_animated" id="save_transfer">Save Transfer</button>
+                    <button class="btn btn-on-white scale_animated" id="commit">Save</button>
                 </div>
             </div>
         </div>
@@ -109,12 +107,12 @@
                     <h3>Do you want to stay alive? You should pay your debts</h3>
                     <p>Money will be transferred on the central government account. 1% commission</p>
                     <div class="col-md-12 col-sm-12 ">
-                        <input type="number" class="form-control" placeholder="Quantity" name="quantity"
-                               id="pay_quantity"/>
+                        <input type="number" class="form-control" placeholder="Amount" name="amount"
+                               id="paymentAmount"/>
                     </div>
                 </form>
                 <div class="col-md-offset-4 col-md-8 col-sm-offset-4 col-sm-8">
-                    <button class="btn btn-on-white scale_animated" id="save_pay">Save Payment</button>
+                    <button class="btn btn-on-white scale_animated" id="commitPayment">Save Payment</button>
                 </div>
             </div>
         </div>
@@ -140,8 +138,11 @@
 <script src="js/jquery-1.11.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script sec:authorize="isAnonymous()" src="js/anon.js"></script>
-<script sec:authorize="isAuthenticated()" src="js/auth.js"></script>
+<script sec:authorize="isAuthenticated()" src="js/offer.js"></script>
 <script src="js/common.js"></script>
+<script src="js/transaction.js"></script>
+<script src="js/credit.js"></script>
+<script src="js/request.js"></script>
 
 
 </body>
