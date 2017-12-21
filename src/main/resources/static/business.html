@@ -85,8 +85,8 @@
             <div class="col-md-6  col-sm-12">
                 <h2>The most protected bank in the world!</h2>
                 <h4>Put your money and do not worry that you may be robbed</h4>
-                <input type="number" class="form-control" placeholder="Money" id="deposit_amount"/>
-                <input type="number" class="form-control" placeholder="Number of months" id="deposit_months"/>
+                <input type="number" class="form-control" placeholder="Money" id="depositAmount"/>
+                <input type="number" class="form-control" placeholder="Number of months" id="depositMonths"/>
                 <button class="btn btn-on-white scale_animated" id="save_deposit">Save Deposit</button>
             </div>
         </div>
@@ -104,13 +104,13 @@
 <section id="confirmation" th:include="included/confirm" sec:authorize="isAuthenticated()"></section>
 <footer id="footer" th:include="included/footer"></footer>
 
-<script src="js/jquery-1.11.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="js/library/jquery-1.11.1.min.js"></script>
+<script src="js/library/bootstrap.min.js"></script>
 <script src="js/subscribe.js"></script>
 <script sec:authorize="isAuthenticated()" src="js/offer.js"></script>
 <script sec:authorize="isAuthenticated()" src="js/credit.js"></script>
 <script sec:authorize="isAuthenticated()" src="js/offer.js"></script>
-<script sec:authorize="isAnonymous()" src="js/anon.js"></script>
+<script sec:authorize="isAnonymous()" src="js/user.js"></script>
 <script src="js/common.js"></script>
 <script src="js/request.js"></script>
 
