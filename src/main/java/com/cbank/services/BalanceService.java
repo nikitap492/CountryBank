@@ -15,4 +15,6 @@ public interface BalanceService {
     }
 
     BigDecimal balance(String accountNum);
+
+    BigDecimal balance(Long accountId);
 }

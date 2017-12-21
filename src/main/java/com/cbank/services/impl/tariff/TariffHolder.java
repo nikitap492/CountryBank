@@ -26,7 +26,7 @@ public enum  TariffHolder implements TariffService {
         private final BigDecimal ONE_HUNDRED = new BigDecimal(100);
 
         private BigDecimal commission(BigDecimal amount, int rate){
-            return amount.multiply(BigDecimal.valueOf(rate).divide(ONE_HUNDRED, BigDecimal.ROUND_CEILING));
+            return amount.multiply(BigDecimal.valueOf(rate).divide(ONE_HUNDRED, 2, BigDecimal.ROUND_CEILING));
         }
 
         @Override

@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
+import static com.cbank.domain.credit.CreditType.CREDITS;
+
 @Component
 @AllArgsConstructor
 public class CreditValidator implements Validator<Credit> {
@@ -35,7 +37,7 @@ public class CreditValidator implements Validator<Credit> {
     public void validate(Credit credit) {
         val amount = credit.getInitialAmount();
 
-        val maxLimit = creditRepository.findAllByAccountId(credit.getAccountId()).stream()
+        val maxLimit = creditRepository.findAllByAccountIdAndTypeIn(credit.getAccountId(), CREDITS).stream()
                 .map(Credit::getInitialAmount)
                 .reduce(credit.getInitialAmount(), BigDecimal::add);
 

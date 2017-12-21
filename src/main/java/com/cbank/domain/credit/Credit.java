@@ -26,4 +26,8 @@ public class Credit extends Persistable{
     private Integer numOfWithdraws;
     private BigDecimal monthlySum;
 
+    public String getTypeString(){
+        return type.getDirection().toString().toLowerCase();
+    }
+
 }
