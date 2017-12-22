@@ -23,20 +23,20 @@ public class ValidationUtils {
     private static final Pattern accountPattern = Pattern.compile(ACCOUNT_REGEX);
 
     public static void email(String email) {
-        if (!emailPattern.matcher(email).matches()) throw new ValidationException("The email is incorrect");
+        if (email == null || !emailPattern.matcher(email).matches()) throw new ValidationException("The email is incorrect");
     }
 
     public static void name(String name) {
-        if (!namePattern.matcher(name).matches()) throw new ValidationException("The name is incorrect or too short");
+        if (name == null ||!namePattern.matcher(name).matches()) throw new ValidationException("The name is incorrect or too short");
     }
 
     public static void account(String account) {
-        if (!accountPattern.matcher(account).matches())
+        if (account == null || !accountPattern.matcher(account).matches())
             throw new ValidationException(String.format("The account %s is incorrect", account));
     }
 
     public static void zeroAmount(BigDecimal amount) {
-        if (amount.compareTo(BigDecimal.ZERO) <= 0)
+        if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0)
             throw new ValidationException("Amount should be great than 0");
     }
 

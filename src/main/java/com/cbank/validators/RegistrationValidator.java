@@ -44,8 +44,8 @@ public class RegistrationValidator implements Validator<RegistrationForm> {
         if (isAlreadyExist(username)) return USERNAME_ALREADY_EXIST;
         if (!pattern.matcher(username).matches()) return INCORRECT_USERNAME;
         if (!validatePassword(form.getPassword()))  return SMALL_PASSWORD;
-        if (hasLength(form.getAddress()) && form.getAddress().length() < 5)  return SMALL_ADDRESS_OR_NAME;
-        if (hasLength(form.getName()) && form.getName().length() < 3)  return SMALL_ADDRESS_OR_NAME;
+        if (!hasLength(form.getAddress()) || form.getAddress().length() < 5)  return SMALL_ADDRESS_OR_NAME;
+        if (!hasLength(form.getName()) || form.getName().length() < 3)  return SMALL_ADDRESS_OR_NAME;
         return null;
     }
 

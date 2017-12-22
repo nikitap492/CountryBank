@@ -8,7 +8,7 @@ import spock.lang.Specification
  * @author Podshivalov N.A. 
  * @since 22.12.2017.
  */
-class FeedbackValidatorTest extends Specification {
+class FeedbackValidatorUnitTest extends Specification {
     def feedbackValidator = new FeedbackValidator()
 
     def "validate: throw validation exception"() {
