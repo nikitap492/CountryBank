@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void lock(User user) {
         log.debug("#lock({})", user);
-        user.setNonLocked(true);
+        user.setNonLocked(false);
         save(user);
     }
 

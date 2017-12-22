@@ -1,5 +1,6 @@
 package com.cbank.services.impl.message;
 
+import com.cbank.config.MailProperties;
 import com.cbank.domain.message.Feedback;
 import com.cbank.domain.message.Message;
 import com.cbank.domain.message.MessageTemplate;
@@ -10,7 +11,6 @@ import com.cbank.validators.FeedbackValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
@@ -29,20 +29,18 @@ public class MessageServiceImpl implements MessageService {
     private final FeedbackValidator feedbackValidator;
     private final FeedbackRepository feedbackRepository;
     private final MessageRepository messageRepository;
+    private final MailProperties mailProperties;
 
-
-    @Value("${spring.mail.username}")
-    private String from;
 
     @Override
     public Message send(String recipient, MessageTemplate template, Map<String, Object> context) {
         log.debug("#send({},{},{})", recipient, template, context);
         val message = new Message(recipient, template.getTitle(), templateFactory.create(template, context));
+        save(message);
 
-        mailSender.send(
-                save(message).toMailMessage(from)
-        );
-
+        if (mailProperties.getEnable()){
+            mailSender.send(message.toMailMessage(mailProperties.getUsername()));
+        }
         return message;
     }
 

@@ -17,7 +17,10 @@ import javax.persistence.Table;
 @EqualsAndHashCode(callSuper = true)
 public class Message extends Persistable{
 
+    @Column(name = "recipient", nullable = false)
     private String to;
+
+    @Column(nullable = false)
     private String title;
 
     @Column(length = Integer.MAX_VALUE)
