@@ -7,7 +7,6 @@ import com.cbank.repositories.ClientRepository;
 import com.cbank.services.ClientService;
 import com.cbank.services.MessageService;
 import com.cbank.services.TokenService;
-import com.cbank.services.UserService;
 import com.cbank.utils.MapUtils;
 import lombok.AllArgsConstructor;
 import lombok.val;
@@ -26,7 +25,6 @@ import static com.google.common.collect.Maps.immutableEntry;
 @AllArgsConstructor
 public class ClientServiceImpl implements ClientService {
     private final ClientRepository clientRepository;
-    private final UserService userService;
     private final TokenService tokenService;
     private final MessageService messageService;
 
@@ -42,16 +40,15 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public void accessRecovery(String loginOrEmail) {
-        val client =  userService.byUsername(loginOrEmail)
-                .flatMap(user -> clientRepository.findByUserId(loginOrEmail))
+        val client = clientRepository.findByUserId(loginOrEmail)
                 .orElseGet(() -> clientRepository.findByEmail(loginOrEmail)
                         .orElseThrow(EntityNotFoundException::new)); //java 9 Optional#or
 
         val token = tokenService.create(client.getUserId(), BaseTokenType.RESET_PASSWORD);
         messageService.send(client.getEmail(), MessageTemplate.ACCESS_RECOVERY,
                 MapUtils.from(
-                    immutableEntry("token", token),
-                    immutableEntry("client", client)
+                        immutableEntry("token", token),
+                        immutableEntry("client", client)
                 )
         );
 
