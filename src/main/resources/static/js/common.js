@@ -1,5 +1,5 @@
-var $footer = $("#footer");
-var sec = 1000;
+let $footer = $("#footer");
+let sec = 1000;
 
 $(window).bind("load", function () {
     positionFooter();
@@ -48,3 +48,5 @@ function fadeOut(item, time, delay) {
 function fadeIn(item, time, delay) {
     item.delay(delay).fadeIn(time);
 }
+
+const redirect = url => window.location.replace(url);

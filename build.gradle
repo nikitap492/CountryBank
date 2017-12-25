@@ -3,7 +3,7 @@ version '1.0'
 
 buildscript {
     dependencies {
-        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.4.1.RELEASE'
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.5.4.RELEASE"
     }
     repositories {
         mavenCentral()
@@ -12,32 +12,50 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'jacoco'
-apply plugin: 'spring-boot'
+apply plugin: 'org.springframework.boot'
 
 bootRun {
     addResources = true
+}
+
+bootRepackage{
+    excludeDevtools = false
 }
 
 repositories {
     mavenCentral()
 }
 
-sourceCompatibility = 9
-targetCompatibility = 9
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
+def spockVersion = '1.1-groovy-2.4'
+def springVersion = '1.5.4.RELEASE'
 
 dependencies {
-    compile 'org.springframework.boot:spring-boot-starter-web:1.4.1.RELEASE'
-    compile 'org.springframework.boot:spring-boot-starter-data-jpa:1.4.1.RELEASE'
-    compile 'org.springframework.boot:spring-boot-starter-thymeleaf:1.4.1.RELEASE'
-    compile 'org.springframework.boot:spring-boot-starter-test:1.4.1.RELEASE'
-    compile 'org.springframework.boot:spring-boot-starter-security:1.4.1.RELEASE'
-    compile 'org.springframework.boot:spring-boot-starter-mail:1.4.1.RELEASE'
+    compile "org.springframework.boot:spring-boot-starter-web:${springVersion}"
+    compile "org.springframework.boot:spring-boot-starter-data-jpa:${springVersion}"
+    compile "org.springframework.boot:spring-boot-starter-thymeleaf:${springVersion}"
+    compile "org.springframework.boot:spring-boot-starter-test:${springVersion}"
+    compile "org.springframework.boot:spring-boot-starter-security:${springVersion}"
+    compile "org.springframework.boot:spring-boot-starter-mail:${springVersion}"
+    compile "org.springframework.boot:spring-boot-devtools:${springVersion}"
+
     compile 'com.h2database:h2:1.4.193'
     compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4:2.1.2.RELEASE'
+    compile 'org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.0.RELEASE'
     compileOnly 'org.projectlombok:lombok:1.16.18'
     compile 'com.google.guava:guava:23.4-jre'
+    compile 'org.postgresql:postgresql:9.4.1212.jre7'
+
+    testCompile "org.springframework.boot:spring-boot-test:${springVersion}"
+    testCompile group: 'net.bytebuddy', name: 'byte-buddy', version: '1.7.9'
+    testCompile 'org.codehaus.groovy:groovy-all'
+    testCompile "org.spockframework:spock-core:1.1-groovy-2.4"
+    testCompile "org.spockframework:spock-spring:${spockVersion}"
+
 }
+
 check.dependsOn jacocoTestReport
 
 

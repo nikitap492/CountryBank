@@ -1,8 +1,8 @@
-var s_up = $("#sign_up");
-var s_in = $("#sign_in");
-var err = $("#error");
-var con = $("#congratulation");
-var forget = $("#forget");
+const s_up = $("#sign_up");
+const s_in = $("#sign_in");
+const err = $("#error");
+const con = $("#congratulation");
+const forget = $("#forget");
 var s_f = true;
 
 function loadPage() {
@@ -10,89 +10,83 @@ function loadPage() {
 }
 
 function showSignIn(time) {
-        s_f = true;
-        s_in.delay(time).fadeIn(sec, positionFooter);
+    s_f = true;
+    s_in.delay(time).fadeIn(sec, positionFooter);
 }
 
 $("#registration_btn").bind("click", function (e) {
     e.preventDefault();
-    var username = $("#username").val();
-    var password = $("#password").val();
-    var email = $("#email").val();
-    var name = $("#name").val();
-    var address = $("#address").val();
-    $.ajax({
-        url: '/registration',
-        contentType: 'application/json',
-        type: 'post',
-        data: JSON.stringify({
-            username: username,
-            password: password,
-            email: email,
-            name: name,
-            address: address
-        }),
-        success: function () {
+    let username = $("#username").val();
+    let password = $("#password").val();
+    let email = $("#email").val();
+    let name = $("#name").val();
+    let address = $("#address").val();
+
+    request({
+            url: '/users/registration',
+            type: POST,
+            data: {
+                username: username,
+                password: password,
+                email: email,
+                name: name,
+                address: address
+            }
+        },
+        () => {
             s_up.fadeOut(sec);
             con.delay(sec).fadeIn(sec, positionFooter);
         },
-        error: function (xhr) {
+        (err) => {
             s_up.fadeOut(sec);
-            showError(xhr.responseText)
-        }
-    });
-
+            showError(err.responseJSON.message)
+        })
 });
 
 $("#forget_btn").bind("click", function () {
-    var loginOrEmail = $("#email_or_login").val();
-    var info = $("#info-message");
-    $.ajax({
-        url: '/api/user/forget?loginOrEmail=' + loginOrEmail,
-        type: 'post',
-        success: function (text) {
+    let loginOrEmail = $("#email_or_login").val();
+    let info = $("#info-message");
+    request({
+            url: '/users/password?loginOrEmail=' + loginOrEmail,
+            type: GET,
+        },
+        (text) => {
             showResult("#forget", text);
         },
-        error: function (xhr) {
-            showResult("#forget", xhr.responseText);
+        (err) => {
+            showResult("#forget", err.responseJSON.message);
         }
-    });
+    )
 });
 
 $("#reset_btn").bind("click", function () {
-    var password = $("#password").val();
-    $.ajax({
-        url: window.location.href,
-        contentType: 'application/json',
-        type: 'post',
-        data: JSON.stringify({
-            password: password
-        }),
-        success: function (text) {
-            showResult("#reset", text);
+    let password = $("#password").val();
+    request({
+            url: "/users/password",
+            type: POST,
+            data: {password: password}
         },
-        error: function (xhr) {
-            showResult("#reset", xhr.responseText);
-        }
-    });
+        (text) => showResult("#reset", text),
+        (err) => showResult("#reset", err.responseJSON.message)
+    )
 });
 
-$("#confirm_btn").bind("click", function () {
-    $.ajax({
-        url: window.location.href,
-        contentType: 'application/json',
-        type: 'post',
-        success: function (text) {
+$("#confirm_btn").bind("click", () =>
+    request({
+            url: window.location.href,
+            type: POST
+        },
+        (text) => {
             showResult("#confirm", text);
         },
-        error: function (xhr) {
-            showResult("#confirm", xhr.responseText);
+        (err) => {
+            showResult("#confirm", err.responseJSON.message);
         }
-    });
-});
+    )
+);
 
 function showResult(id, text) {
-    var result = $("#result");
+    let result = $("#result");
     $(id).fadeOut(sec);
     result.delay(sec).fadeIn(sec, positionFooter);
     $("#result_ans").html(text);
@@ -133,7 +127,7 @@ $("#error-btn-yes").bind("click", function () {
 });
 
 function validateText(val, id) {
-    var hint = $('#' + id + '-hint');
+    let hint = $('#' + id + '-hint');
     hint.removeClass("inv");
     if (val.length >= 5) {
         hint.removeClass("fa-close");
@@ -145,7 +139,7 @@ function validateText(val, id) {
 }
 
 function validateConfirmPass() {
-    var hint = $("#confirm-password-hint");
+    let hint = $("#confirm-password-hint");
     hint.removeClass("inv");
     if ($("#password").val() == $("#confirm-password").val()) {
         hint.removeClass("fa-close");
@@ -157,25 +151,24 @@ function validateConfirmPass() {
 }
 
 function validateUser(val, id) {
-    var hint = $('#' + id + '-hint');
+    let hint = $('#' + id + '-hint');
     hint.removeClass("inv");
     hint.removeClass("fa-check");
     hint.removeClass("fa-close");
     hint.addClass("fa-spinner fa-spin");
     if (val.length >= 4) {
-        $.ajax({
-            url: '/api/user/check?val=' + val,
-            type: 'get',
-            contentType: 'application/json',
-            dataType: 'json',
-            success: function (ans) {
-                if (ans) {
-                    hint.addClass("fa-close");
-                } else hint.addClass("fa-check");
+        request({
+                url: '/users/registration?usernameOrEmail=' + val,
+                type: GET
+            }, (ans) => {
+                hint.addClass("fa-check");
                 hint.removeClass("fa-spinner fa-spin")
-
+            },
+            () => {
+                hint.addClass("fa-close");
+                hint.removeClass("fa-spinner fa-spin")
             }
-        });
+        )
     } else {
         hint.addClass("fa-close");
         hint.removeClass("fa-spinner fa-spin")
@@ -187,8 +180,8 @@ function validateUser(val, id) {
  */
 
 $(document).ready(function () {
-    var str = window.location.search.substring(1);
-    var pair = str.split("=");
+    let str = window.location.search.substring(1);
+    let pair = str.split("=");
     if (pair[0] == 'error' && pair[1].toLowerCase() == 'wrong') {
         $("#error-login-msg").show();
     }
