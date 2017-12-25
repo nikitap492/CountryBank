@@ -16,10 +16,10 @@ import java.util.Map;
  */
 @Component
 @AllArgsConstructor
-class MessageTextTemplateFactory {
+class MessageTextTemplateFactoryImpl implements MessageTemplateFactory {
     private final TemplateEngine templateEngine;
 
-    String create(MessageTemplate template, Map<String, Object> context){
+    public String create(MessageTemplate template, Map<String, Object> context){
         val filename = "../templates/" + template.getFilename();
         return templateEngine.process(filename, new Context(Locale.getDefault(), context));
     }

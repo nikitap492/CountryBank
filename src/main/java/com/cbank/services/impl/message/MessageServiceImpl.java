@@ -25,7 +25,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class MessageServiceImpl implements MessageService {
     private final JavaMailSender mailSender;
-    private final MessageTextTemplateFactory templateFactory;
+    private final MessageTemplateFactory templateFactory;
     private final FeedbackValidator feedbackValidator;
     private final FeedbackRepository feedbackRepository;
     private final MessageRepository messageRepository;

@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Country Bank</title>
+</head>
+<body>
+<p>Please, click <a th:href="${'http://localhost:8000/forgot?token=' + token.getToken()}"> the link </a>  to change your password</p>
+</body>
+</html>
