@@ -17,7 +17,7 @@ class RegistrationServiceImplTest extends Specification {
     def clientService = Mock(ClientService)
     def accountService = Mock(AccountService)
     def messageService = Mock(MessageService)
-    def registrationValidator = Mock(RegistrationValidator)
+    def registrationValidator = new RegistrationValidator(userService)
 
     def registrationService = new RegistrationServiceImpl(userService, tokenService,
             clientService, accountService, messageService, registrationValidator)

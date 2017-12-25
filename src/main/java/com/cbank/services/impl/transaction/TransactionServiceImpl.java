@@ -77,7 +77,7 @@ public class TransactionServiceImpl implements TransactionService {
                 .payer(sides.getFirst())
                 .recipient(sides.getSecond())
                 .amount(credit.getMonthlySum())
-                .details(String.format("The %s's fee", credit.getTypeString()))
+                .details(String.format("The %s's monthly payment", credit.getTypeString()))
                 .build();
 
         return transactionRepository.save(transaction);
@@ -87,6 +87,12 @@ public class TransactionServiceImpl implements TransactionService {
     public Transaction credit(Account account, Credit credit) {
         val direction = credit.getType().getDirection();
         val sides = resolveSides(direction, account.getNum(), false);
+        val amount = credit.getInitialAmount();
+
+        if (direction == CreditDirection.DEPOSIT && balanceService.balance(sides.getFirst()).compareTo(amount) < 0){
+            throw new InsufficientFundsException();
+        }
+
         val transaction = Transaction.builder()
                 .payer(sides.getFirst())
                 .recipient(sides.getSecond())
