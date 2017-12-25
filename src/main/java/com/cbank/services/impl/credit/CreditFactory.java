@@ -35,7 +35,7 @@ public class CreditFactory {
         val rate = type.getPercent();
         val months = new BigDecimal(numOfMonths);
         val initialPerMonth = initialAmount.divide(months, 2, ROUND_CEILING);
-        return initialPerMonth.multiply(rate).add(initialPerMonth);
+        return initialPerMonth.multiply(rate);
     }
 
 

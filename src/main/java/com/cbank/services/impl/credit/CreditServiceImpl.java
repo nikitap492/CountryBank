@@ -38,7 +38,7 @@ public class CreditServiceImpl implements CreditService {
         val account = accountRepository.findOne(credit.getAccountId());
         transactionService.creditWithdraw(account, credit);
 
-        if(LocalDateTime.now().isBefore(credit.getClosedAt())){
+        if(LocalDateTime.now().isAfter(credit.getClosedAt())){
             credit.setState(CreditState.CLOSED);
             creditRepository.save(credit);
         }
