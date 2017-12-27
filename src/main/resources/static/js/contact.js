@@ -7,7 +7,7 @@ const messageSendButton = $("#contact-msg");
 
 
 messageSendButton.bind("click", function () {
-    addMessage(contactEmail.val(), contactName.val(), messageBody.val()(
+    addMessage(contactEmail.val(), contactName.val(), messageBody.val())(
         () => {
             err.text('');
             contactSuccess.show();
@@ -16,7 +16,7 @@ messageSendButton.bind("click", function () {
             }, 4000);
         },
         (xhr) => err.text(xhr.responseJSON.message)
-    ))
+    )
 });
 
 const addMessage = (email, name, body) => (success, error) =>

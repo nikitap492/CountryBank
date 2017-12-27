@@ -12,14 +12,14 @@ import java.util.regex.Pattern;
  */
 public class ValidationUtils {
 
-    private static final String EMAIL_REGEX = "[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" +
+    private static final String EMAIL_REGEX = "[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@" +
             "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     private static final Pattern emailPattern = Pattern.compile(EMAIL_REGEX);
 
     private static final String NAME_REGEX = "^[a-zA-Z_ ]{5,}";
     private static final Pattern namePattern = Pattern.compile(NAME_REGEX);
 
-    private static final String ACCOUNT_REGEX = "([0-9]{16})$";
+    private static final String ACCOUNT_REGEX = "^[0-9]{16}$";
     private static final Pattern accountPattern = Pattern.compile(ACCOUNT_REGEX);
 
     public static void email(String email) {

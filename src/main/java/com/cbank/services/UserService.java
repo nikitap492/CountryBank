@@ -9,9 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
-/**
- * {@link com.bank.service.impl.PersistenceUserDetailService}
- */
+
 public interface UserService extends UserDetailsService, PersistableService<User> {
 
     Optional<User> byUsername(String username);

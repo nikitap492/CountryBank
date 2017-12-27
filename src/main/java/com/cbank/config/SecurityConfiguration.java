@@ -28,8 +28,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-            .antMatchers("/", "/sign", "/images/**", "/js/**",
-                    "/css/**", "/messages/**", "/subscribers/**", "/fonts/**").permitAll()
+            .antMatchers("/", "/sign", "/images/**", "/js/**", "/users/**", "/feedback/**",
+                    "/confirm/**", "/forgot/**",
+                    "/css/**", "/messages/**", "/subscribers/**", "/fonts/**", "/contact/**").permitAll()
             .anyRequest().authenticated()
         .and()
         .formLogin()
@@ -51,7 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(authenticationProvider);
     }
 

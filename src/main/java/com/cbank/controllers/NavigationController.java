@@ -42,7 +42,7 @@ public class NavigationController {
         return "sign";
     }
 
-    @GetMapping("/reset_password")
+    @GetMapping("/forgot")
     public String reset() {
         return "reset";
     }
