@@ -15,7 +15,7 @@ import static com.cbank.domain.credit.CreditDirection.DEPOSIT;
 @Getter
 @RequiredArgsConstructor
 public enum CreditType {
-    PERSONAL_CREDIT(9, CREDIT), BUSINESS_CREDIT(15, CREDIT), BUSINESS_DEPOSIT(3, DEPOSIT);
+    PERSONAL_CREDIT(9, CREDIT), BUSINESS_CREDIT(15, CREDIT), BUSINESS_DEPOSIT(4, DEPOSIT);
 
     public static final Set<CreditType> CREDITS = Sets.immutableEnumSet(PERSONAL_CREDIT, BUSINESS_CREDIT);
 

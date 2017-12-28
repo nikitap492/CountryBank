@@ -58,16 +58,20 @@ public class UserController {
     }
 
     @PostMapping(value = "/confirmation")
-    public ResponseEntity<?> confirm(@RequestParam String token) {
-        registrationService.confirm(token);
+    public ResponseEntity<?> confirm(@RequestBody ConfirmationRequest request) {
+        registrationService.confirm(request.token);
         return ResponseEntity.ok().build();
     }
 
 
-    @Data
     @ToString(exclude = "password")
-    private static class ResetPasswordRequest{
+    private static class ResetPasswordRequest {
         private String password;
+        private String token;
+    }
+
+    @Data
+    private static class ConfirmationRequest{
         private String token;
     }
 

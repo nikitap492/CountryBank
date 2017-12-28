@@ -27,18 +27,11 @@ function resize() {
         .resize(positionFooter);
 }
 
-function animate(item, time, anim, delay) {
-    if(arguments.length == 3){
-        start(0);
-    }else if (arguments.length == 4) {
-        start(delay)
-    }
-    function start(delay){
-        $.when(anim(item, time, delay)).then(function () {
-            positionFooter();
-            resize();
-        });
-    }
+function animate(item, time, anim, delay = 0) {
+    $.when(anim(item, time, delay)).then(function () {
+        positionFooter();
+        resize();
+    });
 }
 
 function fadeOut(item, time, delay) {
@@ -50,3 +43,16 @@ function fadeIn(item, time, delay) {
 }
 
 const redirect = url => window.location.replace(url);
+
+
+function getQueryVariable(variable) {
+    let query = window.location.search.substring(1);
+    let vars = query.split("&");
+    for (var i = 0; i < vars.length; i++) {
+        let pair = vars[i].split("=");
+        if (pair[0] === variable) {
+            return pair[1];
+        }
+    }
+    return (false);
+}

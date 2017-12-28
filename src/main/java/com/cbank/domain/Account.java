@@ -1,5 +1,6 @@
 package com.cbank.domain;
 
+import com.cbank.utils.RandomUtils;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -7,7 +8,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.util.Random;
 
 /**
  * @author Podshivalov N.A.
@@ -19,7 +19,6 @@ import java.util.Random;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 public class Account extends Persistable{
-    private static final Random random = new Random();
 
     @Column(nullable = false)
     private Long clientId;
@@ -34,11 +33,8 @@ public class Account extends Persistable{
 
     public Account(Long clientId) {
         this.clientId = clientId;
-        this.num = generateAccountNum();
+        this.num = RandomUtils.generateAccountNum();
         this.current = Boolean.TRUE;
     }
 
-    private String generateAccountNum(){
-        return "" + ((long) (random.nextDouble() * 10000000000000000L));
-    }
 }

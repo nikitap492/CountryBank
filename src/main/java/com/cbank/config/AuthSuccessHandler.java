@@ -11,7 +11,6 @@ import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -27,18 +26,13 @@ class AuthSuccessHandler implements AuthenticationSuccessHandler {
     private final RedirectStrategy redirectStrategy;
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         authenticationService.success(authentication.getName());
         val session = request.getSession();
         session.setMaxInactiveInterval(SESSION_TIME);
         redirectStrategy.sendRedirect(request, response, "/");
-        clearRequest(request);
+        session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
         log.debug("Authentication was successful for " + authentication.getName());
     }
 
-    private void clearRequest(HttpServletRequest request){
-        val session = request.getSession(false);
-        if (session == null) return;
-        session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
-    }
 }
